@@ -16,18 +16,22 @@ class App extends Component {
 		})
 	};
 
+	handleSubmit(event) {
+		event.preventDefault();
+	}
+
 	render() {
 		return (
 			<div className="app">
 				<h1 className="app-title">Countdown {this.state.deadline}</h1>
 				<Clock deadline={this.state.deadline}/>
-				<div>
+				<form onSubmit={this.handleSubmit}>
 					<input
 						type="text"
 						placeholder="New date"
 						onChange={ (event) => this.setState({ newDeadline: event.target.value }) }/>
 					<button onClick={ () => { this.changeDeadline() } }>Submit</button>
-				</div>
+				</form>
 			</div>
 		)
 	}

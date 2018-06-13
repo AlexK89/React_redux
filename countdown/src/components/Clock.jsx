@@ -22,6 +22,10 @@ class Clock extends Component {
 		}, 1000);
 	}
 
+	leading0(num, unit = '') {
+		return (num === 1) ? `${num} ${unit}` : `${num} ${unit}s`
+	}
+
 	getTimeUntil(deadline) {
 		const time = Date.parse(deadline) - Date.parse(new Date());
 		const seconds = Math.floor((time / 1000) % 60);
@@ -41,10 +45,10 @@ class Clock extends Component {
 		return (
 			<div>
 				<h2 className="clock">
-					<span className="clock-days">{this.state.days} days </span>
-					<span className="clock-hours">{this.state.hours} hours </span>
-					<span className="clock-minutes">{this.state.minutes} minutes </span>
-					<span className="clock-seconds">{this.state.seconds} seconds </span>
+					<span className="clock-days">{this.leading0(this.state.days, 'day')} </span>
+					<span className="clock-hours">{this.leading0(this.state.hours, 'hour')} </span>
+					<span className="clock-minutes">{this.leading0(this.state.minutes, 'minute')} </span>
+					<span className="clock-seconds">{this.leading0(this.state.seconds, 'second')} </span>
 				</h2>
 			</div>
 		)
