@@ -15,6 +15,7 @@ body {
 	background-color: #ddd;
 }
 .app {
+	min-width: 800px;
 	background-color: #fff;
 	text-align: center;
 	font-size: 1em;
