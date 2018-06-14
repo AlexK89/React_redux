@@ -9,38 +9,50 @@ class App extends React.Component {
 		super(props);
 
 		this.state = {
-			query: ''
+			query: '',
+			artist: null
 		}
 	}
 
-	setQuery() {
-		this.setState({
-			query: this.state.inputValue
-		})
-	}
 
 	handleSubmit(event) {
 		event.preventDefault();
+
+		const BASE_URL = 'https://api.spotify.com/v1/search?';
+		const FETCH = `${BASE_URL}q=${this.state.query}&type=artist&limit=1`;
+		const token = 'BQA4dYNhE9YXMSh5ZIVsZtbRuCeOc6hI4S67jKrCq2FBd0kTLdqU5A0Uy3cn11jtLtsPuMwTi_mkbQjCa75eXZkJsbYJrdnwe4qgvgfp-dRvRjkTLzEkBxolvmmUyfeFMj133EktkQhPoOG5TR0w6HXSL2okv-miyWl0';
+
+		fetch(FETCH, {
+			method: 'GET',
+			headers: {
+				'Authorization': `Bearer ${token}`
+			}
+		})
+		.then(result => result.json())
+		.then(json => {
+			const artist = json.artists.items[0];
+			console.log(artist);
+			this.setState({artist})
+		});
 	}
 
 	render() {
 		return (
 			<div className={'music-master'}>
 				<h1 className="music_master__title">Music Master</h1>
-				<form onSubmit={this.handleSubmit}>
+				<form onSubmit={(event) => this.handleSubmit(event)}>
 					<input
 						type="text"
 						placeholder='Search an artist'
-						onChange={ event => this.setState({ inputValue: event.target.value }) }/>
-					<button onClick={ () => { this.setQuery() } }>
+						onChange={event => this.setState({query: event.target.value})}/>
+					<button type="submit">
 						<Glyphicon glyph="search"></Glyphicon>
 					</button>
 				</form>
 				<div className="music_master__result">
-					<Profile/>
+					<Profile artist={this.state.artist}/>
 					<Gallery/>
 				</div>
-				<h1>{this.state.query}</h1>
 			</div>
 		)
 	}
