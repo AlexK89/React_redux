@@ -10,7 +10,8 @@ class App extends React.Component {
 
 		this.state = {
 			query: '',
-			artist: null
+			artist: null,
+			tracks: null
 		}
 	}
 
@@ -19,21 +20,41 @@ class App extends React.Component {
 		event.preventDefault();
 
 		const BASE_URL = 'https://api.spotify.com/v1/search?';
-		const FETCH = `${BASE_URL}q=${this.state.query}&type=artist&limit=1`;
-		const token = 'BQBBMD22JP44jNwbOFO1ob8ZgxW-OVaAoKpzElkKvWiQnGNdo3coHMfQhzL8wVzFGi7ZlKL8sfIEczhhAbuv3Qh3l2YA_kxYhV-6GUBXynlbKFPr0kiQt-PSgzH2gyBu_KxzZNdNOqjWokLNY0bmIjCoE131iJ_CN62e';
+		let FETCH = `${BASE_URL}q=${this.state.query}&type=artist&limit=1`;
+		const TOP_TRACKS = 'https://api.spotify.com/v1/artists';
+		const access_token = 'BQB-MyIbWs1-Y6f9d0MIaVK58KUco62FsKNH8zdJ1rvf2dwZgF382uFVIC6FN60ikszsM1Hzy8YSHeeirD61fDEiRtV0A1S3B1xA6Z1C_oavpGRKM8YXT0T7FFbYwKel5v-41Ov9vq61Z1OYLhG6orsOj-JLBWeQMSLs';
 
 		fetch(FETCH, {
 			method: 'GET',
 			headers: {
-				'Authorization': `Bearer ${token}`
+				'Authorization': `Bearer ${access_token}`
 			}
 		})
 			.then(result => result.json())
 			.then(json => {
 				if (!json.error) {
 					const artist = json.artists.items[0];
-					console.log(artist);
-					this.setState({artist})
+					console.log('Artists: ', artist);
+					this.setState({artist});
+
+					FETCH = `${TOP_TRACKS}/${artist.id}/top-tracks?country=GB`;
+
+					fetch(FETCH, {
+						method: 'GET',
+						headers: {
+							'Authorization': `Bearer ${access_token}`
+						}
+					})
+						.then(result => result.json())
+						.then(json => {
+							if (!json.error) {
+								const tracks = json.tracks;
+								console.log('Tracks: ',tracks);
+								this.setState({tracks});
+							}
+						})
+
+
 				} else {
 					this.setState({artist: null})
 				}
@@ -59,7 +80,7 @@ class App extends React.Component {
 							?
 								<div>
 									<Profile artist={this.state.artist}/>
-									<Gallery/>
+									<Gallery tracks={this.state.tracks}/>
 								</div>
 							: <div></div>
 
