@@ -3,7 +3,54 @@ body {
 	padding: 5%;
 }
 
-.music-master {
-	text-align: center;
+.music_master {
 	font-size: 1.5em;
+}
+
+.music_master__title {
+	text-align: center;
+}
+
+.music_master form {
+	text-align: center;
+}
+
+.music_master__result {
+	padding: 2em 0;
+}
+
+/*Profile*/
+
+.profile {
+	display: flex;
+	justify-content: center;
+}
+
+.profile__image {
+	overflow: hidden;
+	width: 150px;
+	height: 150px;
+	border-radius: 50%;
+	background: #000;
+}
+
+.profile__image img {
+	float: left;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.profile__content {
+	padding: 0 2em;
+}
+
+.profile__content__name {
+	font-size: 2em;
+}
+
+.profile__content__followers,
+.profile__content__genres {
+	font-size: 1em;
+	margin: 0;
 }

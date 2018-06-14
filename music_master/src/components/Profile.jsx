@@ -4,9 +4,7 @@ class Profile extends React.Component {
 	constructor(props) {
 		super(props);
 
-		this.state = {
-
-		}
+		this.state = {}
 	}
 
 	render() {
@@ -15,24 +13,26 @@ class Profile extends React.Component {
 			images: [{url: ''}],
 			genres: [],
 			followers: {
-				total: ''
+				total: 0
 			}
 		};
 		artist = this.props.artist !== null ? this.props.artist : artist;
 
 		return (
-			<div className="music_master__result__profile">
-				<div className="music_master__result__profile__image">
+			<div className="profile">
+				<div className="profile__image">
 					<img src={artist.images[0].url} alt={artist.name}/>
 				</div>
-				<h4 className="music_master__result__profile__name">{artist.name}</h4>
-				<div className='music_master__result__profile__genres'>
-					{artist.genres.map((genre, key) => {
-						genre = (genre !== artist.genres[artist.genres.length - 1]) ? `${genre}, ` : `${genre}`;
-						return (<span key={key}>{genre}</span>);
-					})}
+				<div className="profile__content">
+					<h4 className="profile__content__name">{artist.name}</h4>
+					<p className="profile__content__followers">{artist.followers.total} followers</p>
+					<p className='profile__content__genres'>
+						{artist.genres.map((genre, key) => {
+							genre = (genre !== artist.genres[artist.genres.length - 1]) ? `${genre}, ` : `${genre}`;
+							return (<span key={key}>{genre}</span>);
+						})}
+					</p>
 				</div>
-				<p>{artist.followers.total}</p>
 			</div>
 		)
 	}

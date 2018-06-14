@@ -20,7 +20,7 @@ class App extends React.Component {
 
 		const BASE_URL = 'https://api.spotify.com/v1/search?';
 		const FETCH = `${BASE_URL}q=${this.state.query}&type=artist&limit=1`;
-		const token = 'BQA4dYNhE9YXMSh5ZIVsZtbRuCeOc6hI4S67jKrCq2FBd0kTLdqU5A0Uy3cn11jtLtsPuMwTi_mkbQjCa75eXZkJsbYJrdnwe4qgvgfp-dRvRjkTLzEkBxolvmmUyfeFMj133EktkQhPoOG5TR0w6HXSL2okv-miyWl0';
+		const token = 'BQBBMD22JP44jNwbOFO1ob8ZgxW-OVaAoKpzElkKvWiQnGNdo3coHMfQhzL8wVzFGi7ZlKL8sfIEczhhAbuv3Qh3l2YA_kxYhV-6GUBXynlbKFPr0kiQt-PSgzH2gyBu_KxzZNdNOqjWokLNY0bmIjCoE131iJ_CN62e';
 
 		fetch(FETCH, {
 			method: 'GET',
@@ -28,17 +28,21 @@ class App extends React.Component {
 				'Authorization': `Bearer ${token}`
 			}
 		})
-		.then(result => result.json())
-		.then(json => {
-			const artist = json.artists.items[0];
-			console.log(artist);
-			this.setState({artist})
-		});
+			.then(result => result.json())
+			.then(json => {
+				if (!json.error) {
+					const artist = json.artists.items[0];
+					console.log(artist);
+					this.setState({artist})
+				} else {
+					this.setState({artist: null})
+				}
+			});
 	}
 
 	render() {
 		return (
-			<div className={'music-master'}>
+			<div className="music_master">
 				<h1 className="music_master__title">Music Master</h1>
 				<form onSubmit={(event) => this.handleSubmit(event)}>
 					<input
@@ -50,8 +54,16 @@ class App extends React.Component {
 					</button>
 				</form>
 				<div className="music_master__result">
-					<Profile artist={this.state.artist}/>
-					<Gallery/>
+					{
+						this.state.artist
+							?
+								<div>
+									<Profile artist={this.state.artist}/>
+									<Gallery/>
+								</div>
+							: <div></div>
+
+					}
 				</div>
 			</div>
 		)
