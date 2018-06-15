@@ -17,7 +17,9 @@ class Gallery extends React.Component {
 											<img src={track.album.images[0].url} alt={track.name}/>
 										</div>
 										<div className="gallery__track__description">
-											<h6 className="gallery__track__description__title">{track.name}</h6>
+											<h4 className="gallery__track__description__title">{track.name}</h4>
+											<p>{track.album.name}</p>
+											<p>{Math.floor(track.duration_ms / 600, 2) / 100}</p>
 										</div>
 									</div>
 								)
