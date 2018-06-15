@@ -22,7 +22,7 @@ class App extends React.Component {
 		const BASE_URL = 'https://api.spotify.com/v1/search?';
 		let FETCH = `${BASE_URL}q=${this.state.query}&type=artist&limit=1`;
 		const TOP_TRACKS = 'https://api.spotify.com/v1/artists';
-		const access_token = 'BQB-MyIbWs1-Y6f9d0MIaVK58KUco62FsKNH8zdJ1rvf2dwZgF382uFVIC6FN60ikszsM1Hzy8YSHeeirD61fDEiRtV0A1S3B1xA6Z1C_oavpGRKM8YXT0T7FFbYwKel5v-41Ov9vq61Z1OYLhG6orsOj-JLBWeQMSLs';
+		const access_token = 'BQDItJhK8EDI4wK_4YGVvCGq4_GjMIgyPySruO6MPAHwIwWPnYJWNjw6-6-xbVOCeHrQV9IhFmIxjpinkytei0XYN5FPrGFmFJuRMjhQA_SmorwctCVN-UXhsgdXOrLmA6rulKfqG9febWeESNAL45swuKnCOJ2oZHBP';
 
 		fetch(FETCH, {
 			method: 'GET',
@@ -32,9 +32,9 @@ class App extends React.Component {
 		})
 			.then(result => result.json())
 			.then(json => {
-				if (!json.error) {
+				if (!json.error && json.artists.items.length) {
 					const artist = json.artists.items[0];
-					console.log('Artists: ', artist);
+					console.log('Artists: ', json.artists.items.length);
 					this.setState({artist});
 
 					FETCH = `${TOP_TRACKS}/${artist.id}/top-tracks?country=GB`;
@@ -83,7 +83,6 @@ class App extends React.Component {
 									<Gallery tracks={this.state.tracks}/>
 								</div>
 							: <div></div>
-
 					}
 				</div>
 			</div>
