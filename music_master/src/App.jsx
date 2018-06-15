@@ -22,7 +22,7 @@ class App extends React.Component {
 		const BASE_URL = 'https://api.spotify.com/v1/search?';
 		let FETCH = `${BASE_URL}q=${this.state.query}&type=artist&limit=1`;
 		const TOP_TRACKS = 'https://api.spotify.com/v1/artists';
-		const access_token = 'BQBTD-0woYxp5NzjnYhQacRbKP721FB6lfwavLkxdCCxsBitg2_OnIRLB-kr0yMWiSHe0a7oUDDPRvCjhdZJJmbW7F5r5dp3ZbGH28_E88XXxMHi-MiprizMsVQgC_f1LG_PUacb-jb7TJ3ZL1wCiuCzsoiWhpPNEeYe';
+		const access_token = 'BQBvyOl0IfO_TMRiVahdwcDYTpUEq8-RPbLvG06FjgzZXzBkRLtIqEFfp-PRisLSJJfaZOa6SvhbBHqB9Vfi1-FDuOwXjYgv3QYJta9L1cWGjJecLCb3LhHpRZCCZBJ54FNrm3h5bGJoOyoUsdo8ipxIj4jOMot4Hvks';
 
 		fetch(FETCH, {
 			method: 'GET',
