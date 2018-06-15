@@ -82,7 +82,7 @@ class App extends React.Component {
 									<Profile artist={this.state.artist}/>
 									<Gallery tracks={this.state.tracks}/>
 								</div>
-							: <div></div>
+							: ''
 					}
 				</div>
 			</div>
