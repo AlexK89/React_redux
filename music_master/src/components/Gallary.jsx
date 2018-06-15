@@ -49,7 +49,7 @@ class Gallery extends React.Component {
 						?
 							tracks.map((track, k) => {
 								return (
-									<div key={k} className="gallery__track" onClick={() => this.playAudio(track.preview_url)}>
+									<div key={k} className={`gallery__track ${(this.state.playingUrl === track.preview_url) ? 'active_track' : ''}`} onClick={() => this.playAudio(track.preview_url)}>
 										<div className="gallery__track__image">
 											<img src={track.album.images[0].url} alt={track.name}/>
 										</div>
