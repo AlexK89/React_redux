@@ -2,6 +2,12 @@ import React from 'react';
 import '../App.css';
 
 class Gallery extends React.Component {
+	playAudio(previewUrl) {
+		let audio = new Audio(previewUrl);
+
+		audio.play();
+	}
+
 	render() {
 		const tracks = this.props.tracks;
 
@@ -12,7 +18,7 @@ class Gallery extends React.Component {
 						?
 							tracks.map((track, k) => {
 								return (
-									<div key={k} className="gallery__track">
+									<div key={k} className="gallery__track" onClick={() => this.playAudio(track.preview_url)}>
 										<div className="gallery__track__image">
 											<img src={track.album.images[0].url} alt={track.name}/>
 										</div>

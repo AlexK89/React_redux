@@ -73,7 +73,7 @@ body {
 
 .gallery__track {
 	display: flex;
-
+	align-items: center;
 	width: 30%;
 	min-width: 340px;
 	padding: 1em 20px;
