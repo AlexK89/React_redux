@@ -53,8 +53,14 @@ class Gallery extends React.Component {
 										<div className="gallery__track__image">
 											<img src={track.album.images[0].url} alt={track.name}/>
 											<div className="gallery__track__image__play">
-												<div className="gallery__track__image__play__inner">
-													&#9654;
+												<div className={`gallery__track__image__play__inner ${this.state.playingUrl === track.preview_url && this.state.playing ? 'active_track' : ''}`}>
+													{
+														this.state.playingUrl === track.preview_url && this.state.playing
+														?
+															<span>| |</span>
+														:
+															<span>&#9654;</span>
+													}
 												</div>
 											</div>
 										</div>
