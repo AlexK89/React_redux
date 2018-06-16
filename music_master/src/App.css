@@ -94,6 +94,7 @@ body {
 	overflow: hidden;
 	width: 120px;
 	height: 120px;
+	position: relative;
 }
 
 .gallery__track__image img {
@@ -101,6 +102,35 @@ body {
 	height: 100%;
 	object-fit: cover;
 	border-radius: 2px;
+}
+
+.gallery__track__image__play {
+	position: absolute;
+	z-index: 10;
+	height: 100%;
+	width: 100%;
+	top: 0;
+	left: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.gallery__track__image__play__inner {
+	font-size: 2em;
+	background: rgba(0, 0, 0, .8);
+	width: 60px;
+	height: 60px;
+	border-radius: 50%;
+	text-align: center;
+	padding: 12px 21px;
+	opacity: 0;
+	transition: .3s;
+}
+
+.gallery__track:hover .gallery__track__image__play__inner {
+	opacity: 1;
+	color: #fff;
 }
 
 .gallery__track__description {

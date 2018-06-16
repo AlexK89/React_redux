@@ -52,6 +52,11 @@ class Gallery extends React.Component {
 									<div key={k} className={`gallery__track ${(this.state.playingUrl === track.preview_url) ? 'active_track' : ''}`} onClick={() => this.playAudio(track.preview_url)}>
 										<div className="gallery__track__image">
 											<img src={track.album.images[0].url} alt={track.name}/>
+											<div className="gallery__track__image__play">
+												<div className="gallery__track__image__play__inner">
+													&#9654;
+												</div>
+											</div>
 										</div>
 										<div className="gallery__track__description">
 											<h4 className="gallery__track__description__title">{track.name}</h4>
