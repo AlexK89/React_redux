@@ -12,11 +12,11 @@ class App extends React.Component {
 							className="form-control"
 							placeholder={"I have to..."}
 						/>
-						<button
-							className={"btn btn-success"}>
-							Add reminder
-						</button>
 					</div>
+					<button
+						className={"btn btn-success"}>
+						Add reminder
+					</button>
 				</div>
 			</div>
 		)
