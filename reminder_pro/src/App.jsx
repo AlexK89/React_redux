@@ -12,7 +12,8 @@ class App extends React.Component {
 		}
 	}
 
-	setReminder() {
+	setReminder(event) {
+		event.preventDefault();
 		console.log('this: ', this);
 		this.props.addReminder(this.state.text);
 	}
@@ -21,7 +22,7 @@ class App extends React.Component {
 		return (
 			<div className="app">
 				<h1 className="app__title">Reminder Pro</h1>
-				<div className="form-inline">
+				<form className="form-inline">
 					<div className="form-group">
 						<input
 							type="text"
@@ -32,10 +33,10 @@ class App extends React.Component {
 					</div>
 					<button
 						className={"btn btn-success"}
-						onClick={() => this.setReminder()}>
+						onClick={(event) => this.setReminder(event)}>
 						Add reminder
 					</button>
-				</div>
+				</form>
 			</div>
 		)
 	};
