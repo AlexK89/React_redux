@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { addReminder } from "./actions";
+import './index.css';
 
 class App extends React.Component {
 	constructor(props) {
@@ -16,6 +17,24 @@ class App extends React.Component {
 		event.preventDefault();
 		console.log('this: ', this);
 		this.props.addReminder(this.state.text);
+	}
+
+	renderReminders() {
+		const { reminders } = this.props;
+		return (
+			<ul className={'list-group col0-sm-4 reminders'}>
+				{
+					reminders.map(reminder => {
+							return (
+								<li key={reminder.id} className={'list-group-item'}>
+									{reminder.text}
+								</li>
+							)
+						}
+					)
+				}
+			</ul>
+		)
 	}
 
 	render() {
@@ -37,6 +56,7 @@ class App extends React.Component {
 						Add reminder
 					</button>
 				</form>
+				{ this.renderReminders() }
 			</div>
 		)
 	};
@@ -46,4 +66,11 @@ const mapDispatchToProps = (dispatch) => {
 	return bindActionCreators({addReminder}, dispatch);
 };
 
-export default connect(null, mapDispatchToProps)(App);
+const mapStateToProps = (state) => {
+		console.log('state: ', state);
+		return {
+			reminders: state
+		}
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
