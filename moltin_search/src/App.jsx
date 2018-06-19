@@ -15,33 +15,37 @@ class App extends React.Component {
         this.state = {
             data: null,
             pagination: 2,
-            pageNumber: 0,
-            offset: null,
-            allProducts: 0
+            pageNumber: 0
         }
     }
 
     componentDidMount() {
         console.log('hello');
         this.pagination(0);
+
     }
 
     fetchData = () => {
-        Moltin.Products.All()
+        Moltin.Products.Limit().Offset().All()
             .then(products => {
                 console.log('Products: ', products);
                 this.setState({
                     data: products.data,
-                    allProducts: products.meta.results.all
+                    pagination: 2,
+                    pageNumber: -2,
                 });
             });
     };
 
-    pagination = (pageNumber) => {
+    pagination = (step) => {
+        const pageNumber = this.state.pageNumber + step;
+
         Moltin.Products.Limit(this.state.pagination).Offset(pageNumber)
             .All()
             .then(products => {
-                if ((products.data).length) {
+                if ((products.data).length && pageNumber >= 0) {
+                    console.log(products.data);
+                    console.log(pageNumber);
                     this.setState({
                         data: products.data,
                         pageNumber
@@ -51,16 +55,11 @@ class App extends React.Component {
     };
 
     nextPage = () => {
-        const pageNumber = this.state.pageNumber + 2;
-
-        this.pagination(pageNumber);
-
+        this.pagination(2);
     };
 
     previousPage = () => {
-        const pageNumber = this.state.pageNumber - 2;
-
-        this.pagination(pageNumber);
+        this.pagination(-2);
     };
 
     render() {
