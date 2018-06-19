@@ -105,7 +105,7 @@ class App extends React.Component {
 								)
 							})
 							:
-							<div>empty</div>
+							''
 					}
 				</div>
 			</div>
