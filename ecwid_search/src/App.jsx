@@ -1,12 +1,7 @@
 import React from 'react';
-import {gateway as MoltinGateway} from '@moltin/sdk'
 import './App.css';
-
-const Moltin = MoltinGateway({
-    client_id: 'nkwIbpJD7aegsLyRdnw7ny7Mo1BuvpDIFto08ZOSTd'
-});
-
-Moltin.Authenticate();
+import { Categories } from './components/Categories.jsx';
+import { Products } from './components/Products.jsx';
 
 class App extends React.Component {
     constructor(props) {
@@ -15,56 +10,43 @@ class App extends React.Component {
         this.state = {
             data: null,
             pagination: 2,
-            pageNumber: 0
+            pageNumber: 0,
+            selectedCategory: {
+                name: ''
+            },
         }
     }
 
+    updateSelectedCategory(selectedCategory) {
+        this.setState({
+            selectedCategory
+        })
+    }
+
     componentDidMount() {
-        console.log('hello');
-        this.pagination(0);
 
     }
 
+    componentDidUpdate() {
+
+    }
     fetchData = () => {
-        Moltin.Products.Limit().Offset().All()
-            .then(products => {
-                console.log('Products: ', products);
-                this.setState({
-                    data: products.data,
-                    pagination: 2,
-                    pageNumber: -2,
-                });
-            });
+
     };
 
     pagination = (step) => {
-        const pageNumber = this.state.pageNumber + step;
 
-        Moltin.Products.Limit(this.state.pagination).Offset(pageNumber)
-            .All()
-            .then(products => {
-                if ((products.data).length && pageNumber >= 0) {
-                    console.log(products.data);
-                    console.log(pageNumber);
-                    this.setState({
-                        data: products.data,
-                        pageNumber
-                    });
-                }
-            })
     };
 
     nextPage = () => {
-        this.pagination(2);
+
     };
 
     previousPage = () => {
-        this.pagination(-2);
+
     };
 
     render() {
-        let data = this.state.data;
-
         return (
             <div>
                 <div className="buttons">
@@ -72,20 +54,13 @@ class App extends React.Component {
                     <button onClick={this.previousPage}>Previous</button>
                     <button onClick={this.nextPage}>Next</button>
                 </div>
-                <div className="items">
+                <div className="content">
+                    <Categories updateCategory = {this.updateSelectedCategory.bind(this)}/>
                     {
-                        data
-                            ?
-                            data.map((item, key) => {
-                                return (
-                                    <div className={'item'} key={key}>
-                                        <p>Name: {item.name}</p>
-                                        <p>Description: {item.description}</p>
-                                        <p>SKU: {item.sku}</p>
-                                    </div>
-                                )
-                            })
-                            :
+                        (this.state.selectedCategory)
+                        ?
+                            <Products category={this.state.selectedCategory}/>
+                        :
                             ''
                     }
                 </div>
