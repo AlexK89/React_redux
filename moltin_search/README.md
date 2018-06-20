@@ -1,3 +1,14 @@
+* Project closed *
+
+Moltin issues:
+
+- no filtering by price
+- .Sort method doest work("is not a function")
+- after first use of any filters they persist and you need to pass 0 params to set as a default
+
+====================================
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
