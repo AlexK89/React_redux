@@ -1,4 +1,4 @@
-* Project closed *
+*Project closed*
 
 Moltin issues:
 
