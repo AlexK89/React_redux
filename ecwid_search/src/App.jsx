@@ -57,7 +57,6 @@ class App extends React.Component {
                 });
             }
 
-
             if (!this.state.selectedPriceLimits.min) {
                 this.setState({
                     selectedPriceLimits: {
@@ -91,10 +90,8 @@ class App extends React.Component {
         this.getProducts(this.state.selectedCategory, this.state.keyWord, priceLimits);
     }
 
-    sortedPrices(priceArray = [4, 5, 2, 8, 123, 35, 37, 5653, 2, 44]) {
-        priceArray = priceArray.sort((a, b) => {
-            return a - b
-        });
+    sortedPrices(priceArray = [0,0]) {
+        priceArray = priceArray.sort((a, b) => (a - b));
         return {
             min: priceArray.shift(),
             max: priceArray.pop()
