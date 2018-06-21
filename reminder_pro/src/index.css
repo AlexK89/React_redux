@@ -30,3 +30,12 @@ button {
 .reminders {
 	width: 100%;
 }
+
+.reminders__item {
+	display: flex;
+	justify-content: space-between;
+}
+
+.delete-button {
+	cursor: pointer;
+}
