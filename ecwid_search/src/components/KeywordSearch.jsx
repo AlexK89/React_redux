@@ -13,6 +13,7 @@ export class KeywordSearch extends React.Component {
     searchByKeyword(event) {
         event.preventDefault();
         this.props.updateKeyword(this.state.keyWord);
+        document.getElementById('keywordInput').value = '';
     }
 
     render() {
@@ -20,6 +21,7 @@ export class KeywordSearch extends React.Component {
             <div className="keyword_search">
                 <form onSubmit={(event) => this.searchByKeyword(event)}>
                     <input
+                        id={"keywordInput"}
                         type="text"
                         onChange={(event) => {this.setState({keyWord: event.target.value})}}/>
                     <button>Search</button>

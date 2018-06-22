@@ -10,11 +10,11 @@ import {Products} from './components/Products.jsx';
 const resetParams = {
     priceLimits: {
         min: 0,
-        max: 0
+        max: 3000
     },
     selectedPriceLimits: {
         min: 0,
-        max: 0
+        max: 3000
     },
     selectedCategory: null,
     products: null,
@@ -35,7 +35,7 @@ class App extends React.Component {
     }
 
     getCategories() {
-        categoriesQuery(this.state.priceLimits, this.state.keyword, this.state.selectedCategory)
+        categoriesQuery(this.state.selectedPriceLimits, this.state.keyword, this.state.selectedCategory)
             .then(response => response.json())
             .then(json => {
                 this.setState({
@@ -46,17 +46,17 @@ class App extends React.Component {
 
     getProducts(selectedCategory = this.state.selectedCategory,
                 keyWord = this.state.keyword,
-                priceLimits = this.state.selectedPriceLimits,
+                selectedPriceLimits = this.state.selectedPriceLimits,
                 offset = this.state.offset,
                 productsPerPage = this.state.productsPerPage) {
-        productQuery(selectedCategory, keyWord, priceLimits, offset, productsPerPage)
+        productQuery(selectedCategory, keyWord, selectedPriceLimits, offset, productsPerPage)
             .then(response => response.json())
             .then(json => {
                 this.setState({
                     products: json,
                     productsAmount: json.total
                 });
-                this.extractPrices();
+                // this.extractPrices();
             });
     }
 
@@ -74,11 +74,11 @@ class App extends React.Component {
             let prices = this.state.products.items.map(item => item.price);
             let extrems = this.sortedPrices(prices);
 
-            if(!this.state.priceLimits.max) {
-                this.setState({
-                    priceLimits: extrems
-                });
-            }
+            // if(!this.state.priceLimits.max) {
+            //     this.setState({
+            //         priceLimits: extrems
+            //     });
+            // }
 
             if (!this.state.selectedPriceLimits.min) {
                 this.setState({
@@ -102,7 +102,7 @@ class App extends React.Component {
     resetQuery() {
         this.setState({
             ...resetParams,
-            keyWord: ''
+            keyword: ''
         }, () => {
             this.getProducts();
         });
@@ -122,6 +122,7 @@ class App extends React.Component {
             selectedPriceLimits: priceLimits,
             offset: 0,
         }, () => {
+            console.log(this.state.selectedPriceLimits);
             this.getProducts(this.state.selectedCategory, this.state.keyword, this.state.selectedPriceLimits, this.state.offset);
         });
     }
@@ -157,14 +158,12 @@ class App extends React.Component {
             this.setState({
                 offset: this.state.offset + this.state.productsPerPage
             }, () => {
-                console.log(this.state.offset);
                 this.getProducts();
             });
         }
     }
 
     render() {
-        console.log(this.state.products);
         return (
             <div>
                 <div className="buttons">

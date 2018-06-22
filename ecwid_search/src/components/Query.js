@@ -1,11 +1,11 @@
 import {token} from '../token';
 
-export const productQuery = (selectedCategory, keyWord, priceLimits, offset, productsPerPage) => {
+export const productQuery = (selectedCategory, keyWord, selectedPriceLimits, offset, productsPerPage) => {
     const offsetSlug = `offset=${offset}&`;
     const productsPerPageSlug = `limit=${productsPerPage}&`;
     const keyWordSlug = (keyWord) ? (`keyword=${keyWord}&`) : '';
     const selectedCategorySlug = (selectedCategory) ? (`&category=${selectedCategory.id}&withSubcategories=true&`) : '';
-    const priceLimitsSlug = (priceLimits && priceLimits.min && priceLimits.max) ? (`priceFrom=${priceLimits.min}&priceTo=${priceLimits.max}&`) : '';
+    const priceLimitsSlug = (selectedPriceLimits && selectedPriceLimits.max) ? (`priceFrom=${selectedPriceLimits.min}&priceTo=${selectedPriceLimits.max}&`) : '';
     const url = `${token.url}products?${offsetSlug}${productsPerPageSlug}${keyWordSlug}${priceLimitsSlug}${selectedCategorySlug}${token.key}`;
     console.log(url);
     return fetch(url, {
