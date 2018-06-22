@@ -5,6 +5,7 @@ import {RangeSlider} from './components/Slider.jsx';
 import {KeywordSearch} from './components/KeywordSearch.jsx';
 import {Categories} from './components/Categories.jsx';
 import {Products} from './components/Products.jsx';
+import {SortBy} from './components/SortBy.jsx';
 
 // Reset params for App object
 const resetParams = {
@@ -20,7 +21,8 @@ const resetParams = {
     products: null,
     offset: 0,
     productsPerPage: 2,
-    productsAmount: 0
+    productsAmount: 0,
+    sortBy: 'RELEVANCE'
 };
 
 class App extends React.Component {
@@ -48,8 +50,9 @@ class App extends React.Component {
                 keyWord = this.state.keyword,
                 selectedPriceLimits = this.state.selectedPriceLimits,
                 offset = this.state.offset,
-                productsPerPage = this.state.productsPerPage) {
-        productQuery(selectedCategory, keyWord, selectedPriceLimits, offset, productsPerPage)
+                productsPerPage = this.state.productsPerPage,
+                sortBy = this.state.sortBy) {
+        productQuery(selectedCategory, keyWord, selectedPriceLimits, offset, productsPerPage, sortBy)
             .then(response => response.json())
             .then(json => {
                 this.setState({
@@ -113,7 +116,7 @@ class App extends React.Component {
             selectedCategory,
             offset: 0,
         }, () => {
-            this.getProducts(this.state.selectedCategory, this.state.keyword, this.state.selectedPriceLimits, this.state.offset);
+            this.getProducts();
         });
     }
 
@@ -122,8 +125,7 @@ class App extends React.Component {
             selectedPriceLimits: priceLimits,
             offset: 0,
         }, () => {
-            console.log(this.state.selectedPriceLimits);
-            this.getProducts(this.state.selectedCategory, this.state.keyword, this.state.selectedPriceLimits, this.state.offset);
+            this.getProducts();
         });
     }
 
@@ -133,7 +135,16 @@ class App extends React.Component {
             offset: 0,
             keyword
         }, () => {
-            this.getProducts(null, this.state.keyword, null, this.state.offset);
+            this.getProducts();
+        });
+    }
+
+    updateSortBy(option) {
+        this.setState({
+            sortBy: option
+        }, () => {
+            console.log(option);
+            this.getProducts();
         });
     }
 
@@ -176,6 +187,7 @@ class App extends React.Component {
                     <RangeSlider limits={this.state.priceLimits}
                                  selectedPriceRange={this.state.selectedPriceLimits}
                                  updatePriceRange={this.updatePriceRange.bind(this)}/>
+                    <SortBy sortBy={this.updateSortBy.bind(this)}/>
                 </div>
                 <div className="content">
                     <Categories
