@@ -1,32 +1,38 @@
 import React from 'react';
 import './App.css';
 import {productQuery, categoriesQuery} from './components/Query.js';
+import {RangeSlider} from './components/Slider.jsx';
+import {KeywordSearch} from './components/KeywordSearch.jsx';
 import {Categories} from './components/Categories.jsx';
 import {Products} from './components/Products.jsx';
-import {RangeSlider} from './components/Slider.jsx';
+
+// Reset params for App object
+const resetParams = {
+    priceLimits: {
+        min: 0,
+        max: 0
+    },
+    selectedPriceLimits: {
+        min: 0,
+        max: 0
+    },
+    selectedCategory: null,
+    products: null,
+};
 
 class App extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            priceLimits: {
-                min: 0,
-                max: 0
-            },
-            selectedPriceLimits: {
-                min: 0,
-                max: 0
-            },
-            keyWord: '',
-            selectedCategory: null,
-            products: null,
+            ...resetParams,
+            keyword: '',
             categories: {}
         }
     }
 
     getCategories() {
-        categoriesQuery(this.state.priceLimits, this.state.keyWord, this.state.selectedCategory)
+        categoriesQuery(this.state.priceLimits, this.state.keyword, this.state.selectedCategory)
             .then(response => response.json())
             .then(json => {
                 this.setState({
@@ -35,7 +41,7 @@ class App extends React.Component {
             })
     }
 
-    getProducts(selectedCategory = this.state.selectedCategory, keyWord = this.state.keyWord, priceLimits = this.state.selectedPriceLimits) {
+    getProducts(selectedCategory = this.state.selectedCategory, keyWord = this.state.keyword, priceLimits = this.state.selectedPriceLimits) {
         productQuery(selectedCategory, keyWord, priceLimits)
             .then(response => response.json())
             .then(json => {
@@ -75,6 +81,12 @@ class App extends React.Component {
         }
     }
 
+    resetQuery() {
+        this.setState({
+            ...resetParams,
+        });
+        this.getProducts(null, null, null);
+    }
     updateSelectedCategory(selectedCategory) {
         this.setState({
             selectedCategory
@@ -86,8 +98,15 @@ class App extends React.Component {
         this.setState({
             selectedPriceLimits: priceLimits
         });
+        this.getProducts(this.state.selectedCategory, this.state.keyword, priceLimits);
+    }
 
-        this.getProducts(this.state.selectedCategory, this.state.keyWord, priceLimits);
+    updateKeyword(keyword) {
+        this.setState({
+            ...resetParams,
+            keyword
+        });
+        this.getProducts(null, keyword, null);
     }
 
     sortedPrices(priceArray = [0,0]) {
@@ -111,10 +130,11 @@ class App extends React.Component {
         return (
             <div>
                 <div className="buttons">
-                    <button onClick={this.fetchData}>Get Data</button>
+                    <button onClick={() => this.resetQuery()}>Get Data</button>
                     <button onClick={this.previousPage}>Previous</button>
                     <button onClick={this.nextPage}>Next</button>
                 </div>
+                <KeywordSearch updateKeyword={this.updateKeyword.bind(this)}/>
                 <div className="slider">
                     <RangeSlider limits={this.state.priceLimits}
                                  selectedPriceRange={this.state.selectedPriceLimits}
