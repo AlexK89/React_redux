@@ -9,7 +9,7 @@ export class Products extends React.Component {
                     this.props.products
                     ?
                         this.props.products.map((product, key) => {
-                            const image = (product.galleryImages[0]) ? product.galleryImages[0].url : '';
+                            const image = (product.hdThumbnailUrl) ? product.hdThumbnailUrl : '';
                             return (
                                 <div key={key} className={"products__product"}>
                                     <p><strong>Product name:</strong></p>
