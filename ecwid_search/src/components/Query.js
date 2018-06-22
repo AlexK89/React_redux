@@ -1,10 +1,12 @@
 import {token} from '../token';
 
-export const productQuery = (selectedCategory, keyWord, priceLimits) => {
-    const selectedCategorySlug = (selectedCategory) ? (`&category=${selectedCategory.id}&withSubcategories=true&`) : '';
+export const productQuery = (selectedCategory, keyWord, priceLimits, offset, productsPerPage) => {
+    const offsetSlug = `offset=${offset}&`;
+    const productsPerPageSlug = `limit=${productsPerPage}&`;
     const keyWordSlug = (keyWord) ? (`keyword=${keyWord}&`) : '';
+    const selectedCategorySlug = (selectedCategory) ? (`&category=${selectedCategory.id}&withSubcategories=true&`) : '';
     const priceLimitsSlug = (priceLimits && priceLimits.min && priceLimits.max) ? (`priceFrom=${priceLimits.min}&priceTo=${priceLimits.max}&`) : '';
-    const url = `${token.url}products?${keyWordSlug}${priceLimitsSlug}${selectedCategorySlug}${token.key}`;
+    const url = `${token.url}products?${offsetSlug}${productsPerPageSlug}${keyWordSlug}${priceLimitsSlug}${selectedCategorySlug}${token.key}`;
     console.log(url);
     return fetch(url, {
         method: 'GET',
