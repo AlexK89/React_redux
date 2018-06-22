@@ -18,6 +18,9 @@ const resetParams = {
     },
     selectedCategory: null,
     products: null,
+    offset: 0,
+    productsPerPage: 2,
+    productsAmount: 0
 };
 
 class App extends React.Component {
@@ -41,15 +44,29 @@ class App extends React.Component {
             })
     }
 
-    getProducts(selectedCategory = this.state.selectedCategory, keyWord = this.state.keyword, priceLimits = this.state.selectedPriceLimits) {
-        productQuery(selectedCategory, keyWord, priceLimits)
+    getProducts(selectedCategory = this.state.selectedCategory,
+                keyWord = this.state.keyword,
+                priceLimits = this.state.selectedPriceLimits,
+                offset = this.state.offset,
+                productsPerPage = this.state.productsPerPage) {
+        productQuery(selectedCategory, keyWord, priceLimits, offset, productsPerPage)
             .then(response => response.json())
             .then(json => {
                 this.setState({
-                    products: json
+                    products: json,
+                    productsAmount: json.total
                 });
                 this.extractPrices();
             });
+    }
+
+    // Extracting prices
+    sortedPrices(priceArray = [0,0]) {
+        priceArray = priceArray.sort((a, b) => (a - b));
+        return {
+            min: priceArray.shift(),
+            max: priceArray.pop()
+        };
     }
 
     extractPrices() {
@@ -81,40 +98,42 @@ class App extends React.Component {
         }
     }
 
+    //Reset query
     resetQuery() {
         this.setState({
             ...resetParams,
+            keyWord: ''
+        }, () => {
+            this.getProducts();
         });
-        this.getProducts(null, null, null);
     }
+
     updateSelectedCategory(selectedCategory) {
         this.setState({
-            selectedCategory
+            selectedCategory,
+            offset: 0,
+        }, () => {
+            this.getProducts(this.state.selectedCategory, this.state.keyword, this.state.selectedPriceLimits, this.state.offset);
         });
-        this.getProducts(selectedCategory);
     }
 
     updatePriceRange(priceLimits) {
         this.setState({
-            selectedPriceLimits: priceLimits
+            selectedPriceLimits: priceLimits,
+            offset: 0,
+        }, () => {
+            this.getProducts(this.state.selectedCategory, this.state.keyword, this.state.selectedPriceLimits, this.state.offset);
         });
-        this.getProducts(this.state.selectedCategory, this.state.keyword, priceLimits);
     }
 
     updateKeyword(keyword) {
         this.setState({
             ...resetParams,
+            offset: 0,
             keyword
+        }, () => {
+            this.getProducts(null, this.state.keyword, null, this.state.offset);
         });
-        this.getProducts(null, keyword, null);
-    }
-
-    sortedPrices(priceArray = [0,0]) {
-        priceArray = priceArray.sort((a, b) => (a - b));
-        return {
-            min: priceArray.shift(),
-            max: priceArray.pop()
-        };
     }
 
     componentDidMount() {
@@ -122,17 +141,36 @@ class App extends React.Component {
         this.getProducts();
     }
 
-    componentDidUpdate() {
+    // Navigation
+    previousPage() {
+        if ((this.state.offset - this.state.productsPerPage) >= 0) {
+            this.setState({
+                offset: this.state.offset - this.state.productsPerPage
+            }, () => {
+                this.getProducts();
+            });
+        }
+    }
 
+    nextPage() {
+        if ((this.state.offset + this.state.productsPerPage) < (this.state.productsAmount)) {
+            this.setState({
+                offset: this.state.offset + this.state.productsPerPage
+            }, () => {
+                console.log(this.state.offset);
+                this.getProducts();
+            });
+        }
     }
 
     render() {
+        console.log(this.state.products);
         return (
             <div>
                 <div className="buttons">
                     <button onClick={() => this.resetQuery()}>Get Data</button>
-                    <button onClick={this.previousPage}>Previous</button>
-                    <button onClick={this.nextPage}>Next</button>
+                    <button onClick={() => this.previousPage()}>Previous</button>
+                    <button onClick={() => this.nextPage()}>Next</button>
                 </div>
                 <KeywordSearch updateKeyword={this.updateKeyword.bind(this)}/>
                 <div className="slider">
