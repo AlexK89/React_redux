@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { addReminder } from "./actions";
+import { addReminder, deleteReminder } from "./actions";
 import './index.css';
 
 class App extends React.Component {
@@ -13,10 +13,15 @@ class App extends React.Component {
 		}
 	}
 
-	setReminder(event) {
+	addReminder(event) {
 		event.preventDefault();
 		console.log('this: ', this);
 		this.props.addReminder(this.state.text);
+	}
+
+	deleteReminder(id) {
+		console.log('App delete reminder id: ', id);
+		this.props.deleteReminder(id);
 	}
 
 	renderReminders() {
@@ -26,8 +31,12 @@ class App extends React.Component {
 				{
 					reminders.map(reminder => {
 							return (
-								<li key={reminder.id} className={'list-group-item'}>
-									{reminder.text}
+								<li key={reminder.id} className={'list-group-item reminders__item'}>
+									<span>{reminder.text}</span>
+									<span className="delete-button"
+										  onClick={() => {this.deleteReminder(reminder.id)}}>
+										&#x2715;
+									</span>
 								</li>
 							)
 						}
@@ -52,7 +61,7 @@ class App extends React.Component {
 					</div>
 					<button
 						className={"btn btn-success"}
-						onClick={(event) => this.setReminder(event)}>
+						onClick={(event) => this.addReminder(event)}>
 						Add reminder
 					</button>
 				</form>
@@ -63,7 +72,7 @@ class App extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch) => {
-	return bindActionCreators({addReminder}, dispatch);
+	return bindActionCreators({addReminder, deleteReminder}, dispatch);
 };
 
 const mapStateToProps = (state) => {
