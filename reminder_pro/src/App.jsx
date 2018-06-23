@@ -16,7 +16,7 @@ class App extends React.Component {
     addReminder(event) {
         event.preventDefault();
         console.log('this: ', this);
-        this.props.addReminder(this.state.text);
+        this.props.addReminder(this.state.text, this.state.dueDate);
     }
 
     deleteReminder(id) {
@@ -60,8 +60,9 @@ class App extends React.Component {
                             placeholder={"I have to..."}
                             onChange={event => this.setState({text: event.target.value})}
                         />
-                        <input  type="date"
+                        <input  type="datetime-local"
                                 className={"form-control"}
+                                onChange={(event) => (this.setState({dueDate: event.target.value}))}
                         />
                     </div>
                     <div className={"submit_button_wrapper"}>
