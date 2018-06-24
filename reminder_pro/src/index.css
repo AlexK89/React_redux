@@ -37,6 +37,10 @@ button {
     justify-content: center;
 }
 
+.submit_button_wrapper button {
+    margin: 10px;
+}
+
 .reminders {
     width: 100%;
 }
