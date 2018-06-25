@@ -37,11 +37,14 @@ class App extends React.Component {
     }
 
     getCategories() {
-        categoriesQuery(this.state.selectedPriceLimits, this.state.keyword, this.state.selectedCategory)
+        categoriesQuery()
             .then(response => response.json())
             .then(json => {
+                console.log('Categories:');
+                console.log(json._embedded);
+                console.log('===================');
                 this.setState({
-                    categories: json
+                    categories: json._embedded
                 })
             })
     }
@@ -55,53 +58,56 @@ class App extends React.Component {
         productQuery(selectedCategory, keyWord, selectedPriceLimits, offset, productsPerPage, sortBy)
             .then(response => response.json())
             .then(json => {
+                console.log('Products:');
+                console.log(json._embedded);
+                console.log('===================');
                 this.setState({
-                    products: json,
-                    productsAmount: json.total
+                    products: json._embedded,
+                    productsAmount: json.length
                 });
                 // this.extractPrices();
             });
     }
-
-    // Extracting prices
-    sortedPrices(priceArray = [0,0]) {
-        priceArray = priceArray.sort((a, b) => (a - b));
-        return {
-            min: priceArray.shift(),
-            max: priceArray.pop()
-        };
-    }
-
-    extractPrices() {
-        if (this.state.products) {
-            let prices = this.state.products.items.map(item => item.price);
-            let extrems = this.sortedPrices(prices);
-
-            // if(!this.state.priceLimits.max) {
-            //     this.setState({
-            //         priceLimits: extrems
-            //     });
-            // }
-
-            if (!this.state.selectedPriceLimits.min) {
-                this.setState({
-                    selectedPriceLimits: {
-                        min: extrems.min
-                    }
-                });
-            }
-
-            if (!this.state.selectedPriceLimits.max) {
-                this.setState({
-                    selectedPriceLimits: {
-                        max: extrems.max
-                    }
-                });
-            }
-        }
-    }
-
-    //Reset query
+    //
+    // // Extracting prices
+    // sortedPrices(priceArray = [0,0]) {
+    //     priceArray = priceArray.sort((a, b) => (a - b));
+    //     return {
+    //         min: priceArray.shift(),
+    //         max: priceArray.pop()
+    //     };
+    // }
+    //
+    // extractPrices() {
+    //     if (this.state.products) {
+    //         let prices = this.state.products.items.map(item => item.price);
+    //         let extrems = this.sortedPrices(prices);
+    //
+    //         // if(!this.state.priceLimits.max) {
+    //         //     this.setState({
+    //         //         priceLimits: extrems
+    //         //     });
+    //         // }
+    //
+    //         if (!this.state.selectedPriceLimits.min) {
+    //             this.setState({
+    //                 selectedPriceLimits: {
+    //                     min: extrems.min
+    //                 }
+    //             });
+    //         }
+    //
+    //         if (!this.state.selectedPriceLimits.max) {
+    //             this.setState({
+    //                 selectedPriceLimits: {
+    //                     max: extrems.max
+    //                 }
+    //             });
+    //         }
+    //     }
+    // }
+    //
+    // //Reset query
     resetQuery() {
         this.setState({
             ...resetParams,
@@ -116,63 +122,64 @@ class App extends React.Component {
             selectedCategory,
             offset: 0,
         }, () => {
+            console.log(selectedCategory);
             this.getProducts();
         });
     }
-
-    updatePriceRange(priceLimits) {
-        this.setState({
-            selectedPriceLimits: priceLimits,
-            offset: 0,
-        }, () => {
-            this.getProducts();
-        });
-    }
-
-    updateKeyword(keyword) {
-        this.setState({
-            ...resetParams,
-            offset: 0,
-            keyword
-        }, () => {
-            this.getProducts();
-        });
-    }
-
-    updateSortBy(option) {
-        this.setState({
-            sortBy: option
-        }, () => {
-            console.log(option);
-            this.getProducts();
-        });
-    }
-
+    //
+    // updatePriceRange(priceLimits) {
+    //     this.setState({
+    //         selectedPriceLimits: priceLimits,
+    //         offset: 0,
+    //     }, () => {
+    //         this.getProducts();
+    //     });
+    // }
+    //
+    // updateKeyword(keyword) {
+    //     this.setState({
+    //         ...resetParams,
+    //         offset: 0,
+    //         keyword
+    //     }, () => {
+    //         this.getProducts();
+    //     });
+    // }
+    //
+    // updateSortBy(option) {
+    //     this.setState({
+    //         sortBy: option
+    //     }, () => {
+    //         console.log(option);
+    //         this.getProducts();
+    //     });
+    // }
+    //
     componentDidMount() {
         this.getCategories();
         this.getProducts();
     }
-
-    // Navigation
-    previousPage() {
-        if ((this.state.offset - this.state.productsPerPage) >= 0) {
-            this.setState({
-                offset: this.state.offset - this.state.productsPerPage
-            }, () => {
-                this.getProducts();
-            });
-        }
-    }
-
-    nextPage() {
-        if ((this.state.offset + this.state.productsPerPage) < (this.state.productsAmount)) {
-            this.setState({
-                offset: this.state.offset + this.state.productsPerPage
-            }, () => {
-                this.getProducts();
-            });
-        }
-    }
+    //
+    // // Navigation
+    // previousPage() {
+    //     if ((this.state.offset - this.state.productsPerPage) >= 0) {
+    //         this.setState({
+    //             offset: this.state.offset - this.state.productsPerPage
+    //         }, () => {
+    //             this.getProducts();
+    //         });
+    //     }
+    // }
+    //
+    // nextPage() {
+    //     if ((this.state.offset + this.state.productsPerPage) < (this.state.productsAmount)) {
+    //         this.setState({
+    //             offset: this.state.offset + this.state.productsPerPage
+    //         }, () => {
+    //             this.getProducts();
+    //         });
+    //     }
+    // }
 
     render() {
         return (
@@ -182,13 +189,13 @@ class App extends React.Component {
                     <button onClick={() => this.previousPage()}>Previous</button>
                     <button onClick={() => this.nextPage()}>Next</button>
                 </div>
-                <KeywordSearch updateKeyword={this.updateKeyword.bind(this)}/>
-                <div className="slider">
-                    <RangeSlider limits={this.state.priceLimits}
-                                 selectedPriceRange={this.state.selectedPriceLimits}
-                                 updatePriceRange={this.updatePriceRange.bind(this)}/>
-                    <SortBy sortBy={this.updateSortBy.bind(this)}/>
-                </div>
+                {/*<KeywordSearch updateKeyword={this.updateKeyword.bind(this)}/>*/}
+                {/*<div className="slider">*/}
+                    {/*<RangeSlider limits={this.state.priceLimits}*/}
+                                 {/*selectedPriceRange={this.state.selectedPriceLimits}*/}
+                                 {/*updatePriceRange={this.updatePriceRange.bind(this)}/>*/}
+                    {/*<SortBy sortBy={this.updateSortBy.bind(this)}/>*/}
+                {/*</div>*/}
                 <div className="content">
                     <Categories
                         categories={this.state.categories}
