@@ -18,7 +18,7 @@ export class Categories extends React.Component {
                                     className={'categories__item'}
                                     key={key}
                                     onClick={() => this.showCategoryItems(item)}>
-                                    {item.name}
+                                    {item.code}
                                 </li>
                             )
                         })
