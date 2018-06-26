@@ -1,11 +1,12 @@
 import React from 'react';
 import './App.css';
-import {productQuery, categoriesQuery} from './components/Query.js';
-import {RangeSlider} from './components/Slider.jsx';
-import {KeywordSearch} from './components/KeywordSearch.jsx';
+import {productQuery, categoriesQuery, familiesQuery} from './components/Query.js';
+import {convertToTree} from './components/convertToTree.js';
+// import {RangeSlider} from './components/Slider.jsx';
+// import {KeywordSearch} from './components/KeywordSearch.jsx';
+// import {SortBy} from './components/SortBy.jsx';
 import {Categories} from './components/Categories.jsx';
 import {Products} from './components/Products.jsx';
-import {SortBy} from './components/SortBy.jsx';
 
 // Reset params for App object
 const resetParams = {
@@ -18,6 +19,7 @@ const resetParams = {
         max: 3000
     },
     selectedCategory: null,
+    selectedFamily: null,
     products: null,
     offset: 0,
     productsPerPage: 2,
@@ -40,27 +42,23 @@ class App extends React.Component {
         categoriesQuery()
             .then(response => response.json())
             .then(json => {
-                console.log('Categories:');
-                console.log(json._embedded);
-                console.log('===================');
+                let categoriesTree = convertToTree(json._embedded.items);
                 this.setState({
-                    categories: json._embedded
+                    categories: categoriesTree
                 })
             })
     }
 
     getProducts(selectedCategory = this.state.selectedCategory,
+                selectedFamily = this.state.selectedFamily,
                 keyWord = this.state.keyword,
                 selectedPriceLimits = this.state.selectedPriceLimits,
                 offset = this.state.offset,
                 productsPerPage = this.state.productsPerPage,
                 sortBy = this.state.sortBy) {
-        productQuery(selectedCategory, keyWord, selectedPriceLimits, offset, productsPerPage, sortBy)
+        productQuery(selectedCategory, selectedFamily, keyWord, selectedPriceLimits, offset, productsPerPage, sortBy)
             .then(response => response.json())
             .then(json => {
-                console.log('Products:');
-                console.log(json._embedded);
-                console.log('===================');
                 this.setState({
                     products: json._embedded,
                     productsAmount: json.length
@@ -107,7 +105,7 @@ class App extends React.Component {
     //     }
     // }
     //
-    // //Reset query
+    //Reset query
     resetQuery() {
         this.setState({
             ...resetParams,
@@ -122,11 +120,10 @@ class App extends React.Component {
             selectedCategory,
             offset: 0,
         }, () => {
-            console.log(selectedCategory);
             this.getProducts();
         });
     }
-    //
+
     // updatePriceRange(priceLimits) {
     //     this.setState({
     //         selectedPriceLimits: priceLimits,
@@ -189,13 +186,13 @@ class App extends React.Component {
                     <button onClick={() => this.previousPage()}>Previous</button>
                     <button onClick={() => this.nextPage()}>Next</button>
                 </div>
-                {/*<KeywordSearch updateKeyword={this.updateKeyword.bind(this)}/>*/}
-                {/*<div className="slider">*/}
-                    {/*<RangeSlider limits={this.state.priceLimits}*/}
-                                 {/*selectedPriceRange={this.state.selectedPriceLimits}*/}
-                                 {/*updatePriceRange={this.updatePriceRange.bind(this)}/>*/}
-                    {/*<SortBy sortBy={this.updateSortBy.bind(this)}/>*/}
-                {/*</div>*/}
+                {/*/!*<KeywordSearch updateKeyword={this.updateKeyword.bind(this)}/>*!/*/}
+                {/*/!*<div className="slider">*!/*/}
+                    {/*/!*<RangeSlider limits={this.state.priceLimits}*!/*/}
+                                 {/*/!*selectedPriceRange={this.state.selectedPriceLimits}*!/*/}
+                                 {/*/!*updatePriceRange={this.updatePriceRange.bind(this)}/>*!/*/}
+                    {/*/!*<SortBy sortBy={this.updateSortBy.bind(this)}/>*!/*/}
+                {/*/!*</div>*!/*/}
                 <div className="content">
                     <Categories
                         categories={this.state.categories}

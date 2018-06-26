@@ -20,7 +20,7 @@ categories.get('/:destination', (req, res) => {
 
     apiResponse = request('GET', `http://34.247.49.79/api/rest/v1/${req.params.destination}?${qStr}`, {
         headers: {
-            'Authorization': 'Bearer ZDdlNTNjMmIxYmE5OGYwMmU1MTE2MWUwYTIxZDRmMTdmMDBkMjIzZWI2YzEyMGQ2NTNhODlhNTcwYWZjM2M3NQ'
+            'Authorization': 'Bearer NWQ2NDIzYzE3NmU4MGQxZmU2OWNjZTNmMjQxODc2MzIxNjUyNjg5MmZiZTgyODcwODc4NDY2NDgzOWIzNzc0ZQ'
         }
     });
     apiResponse = apiResponse.getBody().toString();

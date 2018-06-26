@@ -3,26 +3,32 @@ import React from 'react';
 export class Categories extends React.Component {
 
     showCategoryItems(category = {}) {
+        console.log(category);
         this.props.updateCategory(category);
     }
 
+
+
     render() {
+        const data = this.props.categories;
+
         return (
-            <ul className="categories">
+            <ul>
                 {
-                    this.props.categories.items
-                        ?
-                        (this.props.categories.items).map((item, key) => {
-                            return (
-                                <li
-                                    className={'categories__item'}
-                                    key={key}
-                                    onClick={() => this.showCategoryItems(item)}>
-                                    {item.code}
+                    Object.keys(data).length
+                    ?
+                        data.map((category, key) =>(
+                                <li key={key}>
+                                    <span onClick={() => {this.showCategoryItems(category)}}>{ category.code }</span>
+                                    { category.children.length > 0 &&
+                                    <Categories categories={category.children} />
+                                    }
                                 </li>
                             )
-                        })
-                        : ''
+                        )
+                    :
+                        ""
+
                 }
             </ul>
         )
