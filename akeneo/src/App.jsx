@@ -3,7 +3,7 @@ import './App.css';
 import {productQuery, categoriesQuery, familiesQuery} from './components/Query.js';
 import {convertToTree} from './components/convertToTree.js';
 // import {RangeSlider} from './components/Slider.jsx';
-// import {KeywordSearch} from './components/KeywordSearch.jsx';
+import {KeywordSearch} from './components/KeywordSearch.jsx';
 // import {SortBy} from './components/SortBy.jsx';
 import {Categories} from './components/Categories.jsx';
 import {Products} from './components/Products.jsx';
@@ -132,16 +132,16 @@ class App extends React.Component {
     //         this.getProducts();
     //     });
     // }
-    //
-    // updateKeyword(keyword) {
-    //     this.setState({
-    //         ...resetParams,
-    //         offset: 0,
-    //         keyword
-    //     }, () => {
-    //         this.getProducts();
-    //     });
-    // }
+
+    updateKeyword(keyword) {
+        this.setState({
+            ...resetParams,
+            offset: 0,
+            keyword
+        }, () => {
+            this.getProducts();
+        });
+    }
     //
     // updateSortBy(option) {
     //     this.setState({
@@ -186,7 +186,7 @@ class App extends React.Component {
                     <button onClick={() => this.previousPage()}>Previous</button>
                     <button onClick={() => this.nextPage()}>Next</button>
                 </div>
-                {/*/!*<KeywordSearch updateKeyword={this.updateKeyword.bind(this)}/>*!/*/}
+                <KeywordSearch updateKeyword={this.updateKeyword.bind(this)}/>
                 {/*/!*<div className="slider">*!/*/}
                     {/*/!*<RangeSlider limits={this.state.priceLimits}*!/*/}
                                  {/*/!*selectedPriceRange={this.state.selectedPriceLimits}*!/*/}
