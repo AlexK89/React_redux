@@ -1,12 +1,19 @@
-export const productQuery = (selectedCategory, selectedFamily, keyWord, selectedPriceLimits, offset, productsPerPage, sortBy) => {
-    const selectedCategorySlug = (selectedCategory) ? (`"categories":[{"operator":"IN","value":["${selectedCategory.code}"]}]`) : '';
-    const selectedFamilySlug = (selectedFamily) ? (`"family":[{"operator":"IN","value":["${selectedFamily.code}"]}],`) : '';
-    const offsetSlug = `offset=${offset}&`;
-    const productsPerPageSlug = `limit=${productsPerPage}&`;
-    const keyWordSlug = (keyWord) ? (`keyword=${keyWord}&`) : '';
-    const priceLimitsSlug = (selectedPriceLimits && selectedPriceLimits.max) ? (`priceFrom=${selectedPriceLimits.min}&priceTo=${selectedPriceLimits.max}&`) : '';
+export const productQuery = (selectedCategory, keyWord, selectedPriceLimits, pageNumber, productsPerPage, sortBy) => {
+    console.log(productsPerPage);
+    const selectedCategorySlug = (selectedCategory) && (`"categories":[{"operator":"IN","value":["${selectedCategory.code}"]}]`);
+    const keyWordSlug = (keyWord) && (`"identifier":[{"operator": "CONTAINS","value":"${keyWord}"}]`);
+    const priceLimitsSlug = (selectedPriceLimits && selectedPriceLimits.max) && (`"Price": [{"operator": ">=", "value": {"amount": "${selectedPriceLimits.min}", "currency": "${selectedPriceLimits.currency}"}},{"operator": "<=","value": {"amount": "${selectedPriceLimits.max}","currency": "${selectedPriceLimits.currency}"}}]`);
+    const pageNumberSlug = pageNumber ? `&page=${pageNumber}` : '';
+    const productsPerPageSlug = productsPerPage ? `&limit=${productsPerPage}` : '';
     const sortBySlug = `sortBy=${sortBy}&`;
-    const url = `http://localhost:3000/products?search={${selectedCategorySlug}${selectedFamilySlug}}`;
+    const params = () => {
+        let param = [selectedCategorySlug, keyWordSlug, priceLimitsSlug];
+
+        return param.filter(item => item).join(',')
+    };
+
+
+    const url = `http://localhost:3000/products?search={${params()}}${pageNumberSlug}${productsPerPageSlug}`;
     console.log(url);
     return fetch(url, {
         method: 'GET',
