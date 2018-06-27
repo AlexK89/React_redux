@@ -2,6 +2,10 @@
     box-sizing: border-box;
 }
 
+.no-list-style {
+    list-style: none;
+}
+
 .buttons {
     display: flex;
     justify-content: center;
@@ -67,10 +71,6 @@ button:active {
     background: aliceblue;
     margin: 20px 0;
     padding: 15px;
-}
-
-.categories__item:first-child {
-    margin: 0;
 }
 
 .products {

@@ -1,10 +1,10 @@
 import React from 'react';
 import './App.css';
-import {productQuery, categoriesQuery, familiesQuery} from './components/Query.js';
+import {productQuery, categoriesQuery} from './components/Query.js';
 import {convertToTree} from './components/convertToTree.js';
-// import {RangeSlider} from './components/Slider.jsx';
+import {RangeSlider} from './components/Slider.jsx';
 import {KeywordSearch} from './components/KeywordSearch.jsx';
-// import {SortBy} from './components/SortBy.jsx';
+import {SortBy} from './components/SortBy.jsx';
 import {Categories} from './components/Categories.jsx';
 import {Products} from './components/Products.jsx';
 
@@ -12,16 +12,18 @@ import {Products} from './components/Products.jsx';
 const resetParams = {
     priceLimits: {
         min: 0,
-        max: 3000
+        max: 3000,
+        currency: "GBP"
     },
     selectedPriceLimits: {
         min: 0,
-        max: 3000
+        max: 3000,
+        currency: "GBP"
     },
     selectedCategory: null,
     selectedFamily: null,
     products: null,
-    offset: 0,
+    pageNumber: 1,
     productsPerPage: 2,
     productsAmount: 0,
     sortBy: 'RELEVANCE'
@@ -50,13 +52,12 @@ class App extends React.Component {
     }
 
     getProducts(selectedCategory = this.state.selectedCategory,
-                selectedFamily = this.state.selectedFamily,
                 keyWord = this.state.keyword,
                 selectedPriceLimits = this.state.selectedPriceLimits,
-                offset = this.state.offset,
+                offset = this.state.pageNumber,
                 productsPerPage = this.state.productsPerPage,
                 sortBy = this.state.sortBy) {
-        productQuery(selectedCategory, selectedFamily, keyWord, selectedPriceLimits, offset, productsPerPage, sortBy)
+        productQuery(selectedCategory, keyWord, selectedPriceLimits, offset, productsPerPage, sortBy)
             .then(response => response.json())
             .then(json => {
                 this.setState({
@@ -124,14 +125,14 @@ class App extends React.Component {
         });
     }
 
-    // updatePriceRange(priceLimits) {
-    //     this.setState({
-    //         selectedPriceLimits: priceLimits,
-    //         offset: 0,
-    //     }, () => {
-    //         this.getProducts();
-    //     });
-    // }
+    updatePriceRange(priceLimits) {
+        this.setState({
+            selectedPriceLimits: priceLimits,
+            offset: 0,
+        }, () => {
+            this.getProducts();
+        });
+    }
 
     updateKeyword(keyword) {
         this.setState({
@@ -142,43 +143,44 @@ class App extends React.Component {
             this.getProducts();
         });
     }
-    //
-    // updateSortBy(option) {
-    //     this.setState({
-    //         sortBy: option
-    //     }, () => {
-    //         console.log(option);
-    //         this.getProducts();
-    //     });
-    // }
-    //
+
+    updateSortBy(option) {
+        this.setState({
+            sortBy: option
+        }, () => {
+            console.log(option);
+            this.getProducts();
+        });
+    }
+
     componentDidMount() {
         this.getCategories();
         this.getProducts();
     }
-    //
-    // // Navigation
-    // previousPage() {
-    //     if ((this.state.offset - this.state.productsPerPage) >= 0) {
-    //         this.setState({
-    //             offset: this.state.offset - this.state.productsPerPage
-    //         }, () => {
-    //             this.getProducts();
-    //         });
-    //     }
-    // }
-    //
-    // nextPage() {
-    //     if ((this.state.offset + this.state.productsPerPage) < (this.state.productsAmount)) {
-    //         this.setState({
-    //             offset: this.state.offset + this.state.productsPerPage
-    //         }, () => {
-    //             this.getProducts();
-    //         });
-    //     }
-    // }
+
+    // Navigation
+    previousPage() {
+        if ((this.state.pageNumber - 1) > 0) {
+            this.setState({
+                pageNumber: this.state.pageNumber - 1
+            }, () => {
+                this.getProducts();
+            });
+        }
+    }
+
+    nextPage() {
+        if (Object.keys(this.state.products.items).length) {
+            this.setState({
+                pageNumber: this.state.pageNumber + 1
+            }, () => {
+                this.getProducts();
+            });
+        }
+    }
 
     render() {
+        // console.log(this.state.products);
         return (
             <div>
                 <div className="buttons">
@@ -187,12 +189,17 @@ class App extends React.Component {
                     <button onClick={() => this.nextPage()}>Next</button>
                 </div>
                 <KeywordSearch updateKeyword={this.updateKeyword.bind(this)}/>
-                {/*/!*<div className="slider">*!/*/}
-                    {/*/!*<RangeSlider limits={this.state.priceLimits}*!/*/}
-                                 {/*/!*selectedPriceRange={this.state.selectedPriceLimits}*!/*/}
-                                 {/*/!*updatePriceRange={this.updatePriceRange.bind(this)}/>*!/*/}
-                    {/*/!*<SortBy sortBy={this.updateSortBy.bind(this)}/>*!/*/}
-                {/*/!*</div>*!/*/}
+                <div className="slider">
+                    <RangeSlider limits={this.state.priceLimits}
+                                 selectedPriceRange={this.state.selectedPriceLimits}
+                                 updatePriceRange={this.updatePriceRange.bind(this)}/>
+                    <SortBy sortBy={this.updateSortBy.bind(this)}/>
+                </div>
+                {
+                    (this.state.keyword) && (
+                        <p>Search phrase: {this.state.keyword}</p>
+                    )
+                }
                 <div className="content">
                     <Categories
                         categories={this.state.categories}
