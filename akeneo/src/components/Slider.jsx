@@ -3,20 +3,11 @@ import React from 'react';
 import Slider from 'rc-slider';
 
 export class RangeSlider extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            selectedRange: {
-                min: 0,
-                max: 0
-            }
-        }
-    }
-
     handleChange = (priceLimits) => {
         const limits = {
             min: priceLimits[0],
             max: priceLimits[1],
+            currency: this.props.limits.currency
         };
         this.props.updatePriceRange(limits);
     };
