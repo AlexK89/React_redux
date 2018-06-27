@@ -23,10 +23,12 @@ export class Categories extends React.Component {
                     Object.keys(categories).length
                     ?
                         categories.map((category, key) =>(
-                            <li key={key}>
-                                <span onClick={() => {this.showCategoryItems(category)}}>
-                                    { category.code }
-                                </span>
+                            <li key={key} className={!category.parent ? "no-list-style" : ""}>
+                                { category.parent &&
+                                     <p onClick={() => {this.showCategoryItems(category)}} className={"categories__item"}>
+                                         {category.code}
+                                     </p>
+                                }
                                 { category.children.length > 0 && this.test(category.children) }
                             </li>
                         ))
