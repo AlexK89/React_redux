@@ -1,5 +1,5 @@
 export const productQuery = (selectedCategory, keyWord, selectedPriceLimits, pageNumber, productsPerPage, sortBy) => {
-    console.log(productsPerPage);
+    // console.log(productsPerPage);
     const selectedCategorySlug = (selectedCategory) && (`"categories":[{"operator":"IN","value":["${selectedCategory.code}"]}]`);
     const keyWordSlug = (keyWord) && (`"identifier":[{"operator": "CONTAINS","value":"${keyWord}"}]`);
     const priceLimitsSlug = (selectedPriceLimits && selectedPriceLimits.max) && (`"Price": [{"operator": ">=", "value": {"amount": "${selectedPriceLimits.min}", "currency": "${selectedPriceLimits.currency}"}},{"operator": "<=","value": {"amount": "${selectedPriceLimits.max}","currency": "${selectedPriceLimits.currency}"}}]`);
