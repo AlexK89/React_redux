@@ -13,15 +13,9 @@ class GoalList extends React.Component {
 
     componentDidMount() {
         goalRef.on('value', snap => {
-            // console.log(snap);
             snap.forEach(goal => {
                 let goalObject = goal.val();
-                    // console.log(goalObject);
-            } )
-            // snap.map(goal => {
-            //     let goalObject = goal.val();
-            //     console.log(goalObject);
-            // })
+            })
         })
     }
 
