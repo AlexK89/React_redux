@@ -11,8 +11,10 @@ import SignUp from './components/SignUp.jsx';
 firebaseApp.auth().onAuthStateChanged(user => {
     if (user) {
         console.log('user signed in ', user);
+        browserHistory.push('/app');
     } else {
         console.log('user has signed in or still needs to sign in. ');
+        browserHistory.replace('/signIn');
     }
 });
 
