@@ -45,7 +45,6 @@ export class AddGoal extends React.Component {
 }
 
 function mapStateToProps(state) {
-    console.log("new state: ", state);
     const { email } = state;
     return {
         email

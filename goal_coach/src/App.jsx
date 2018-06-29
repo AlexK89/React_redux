@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { firebaseApp } from "./firebase";
-import { AddGoal } from './components/AddGoal.jsx';
+import AddGoal from './components/AddGoal.jsx';
 
 export class App extends React.Component {
     signOut () {
