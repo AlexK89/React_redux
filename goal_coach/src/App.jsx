@@ -1,6 +1,4 @@
 import React from 'react';
-import SignIn from './components/SignIn.jsx';
-import SignUp from './components/SignUp.jsx';
 
 export default class App extends React.Component {
     constructor(props){
@@ -13,8 +11,7 @@ export default class App extends React.Component {
     render() {
         return (
             <div>
-                <SignIn />
-                <SignUp />
+
             </div>
         )
     }
