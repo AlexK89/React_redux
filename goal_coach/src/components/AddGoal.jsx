@@ -5,7 +5,7 @@ import { goalRef } from "../firebase";
 export class AddGoal extends React.Component {
     constructor(props) {
         super(props);
-        console.log(props);
+
         this.state = {
             title: ''
         }
@@ -14,9 +14,8 @@ export class AddGoal extends React.Component {
     addGoal(event) {
         event.preventDefault();
 
-        console.log(this.props);
         const { title } = this.state;
-        const { email } = this.props;
+        const { email } = this.props.user;
 
         goalRef.push({email,title});
     }
@@ -45,9 +44,9 @@ export class AddGoal extends React.Component {
 }
 
 function mapStateToProps(state) {
-    const { email } = state;
+    const { user } = state;
     return {
-        email
+        user
     }
 }
 

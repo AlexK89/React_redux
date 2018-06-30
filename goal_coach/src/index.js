@@ -4,7 +4,7 @@ import { createStore } from 'redux';
 import { Provider} from 'react-redux';
 import { firebaseApp } from './firebase.js';
 import {logUser} from "./actions";
-import reducer from './reducers/reducer_user';
+import reducer from './reducers/index';
 
 import {Router, Route, browserHistory} from 'react-router';
 import './index.css';
@@ -16,12 +16,10 @@ const store = createStore(reducer);
 
 firebaseApp.auth().onAuthStateChanged(user => {
     if (user) {
-        console.log('user signed in ', user);
         const { email } = user;
         store.dispatch(logUser(email));
         browserHistory.push('/app');
     } else {
-        console.log('user has signed out or still needs to sign in. ');
         browserHistory.replace('/signIn');
     }
 });
