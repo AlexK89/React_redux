@@ -12,7 +12,7 @@ class GoalList extends React.Component {
 	componentDidMount() {
 		goalRef.on('value', snap => {
 			let goals = [];
-			
+
 			snap.forEach(goal => {
 				const {email, title} = goal.val();
 

@@ -4,7 +4,7 @@ import { createStore } from 'redux';
 import { Provider} from 'react-redux';
 import { firebaseApp } from './firebase.js';
 import {logUser} from "./actions";
-import reducer from './reducers';
+import reducer from './reducers/reducer_user';
 
 import {Router, Route, browserHistory} from 'react-router';
 import './index.css';
