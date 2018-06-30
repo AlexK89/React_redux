@@ -1,31 +1,33 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { goalRef } from "../firebase";
+import {connect} from 'react-redux';
+import {goalRef} from "../firebase";
 
 class GoalList extends React.Component {
-    constructor(props) {
-        super(props);
+	constructor(props) {
+		super(props);
 
-        this.state = {
+		this.state = {}
+	}
 
-        }
-    }
+	componentDidMount() {
+		goalRef.on('value', snap => {
+			let goals = [];
+			
+			snap.forEach(goal => {
+				const {email, title} = goal.val();
 
-    componentDidMount() {
-        goalRef.on('value', snap => {
-            snap.forEach(goal => {
-                let goalObject = goal.val();
-            })
-        })
-    }
+				goals.push({email, title});
+			})
+		})
+	}
 
-    render() {
-        return(
-            <ul className="goal_list">
+	render() {
+		return (
+			<ul className="goal_list">
 
-            </ul>
-        )
-    }
+			</ul>
+		)
+	}
 }
 
 export default GoalList;
