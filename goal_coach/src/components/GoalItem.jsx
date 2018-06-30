@@ -13,18 +13,19 @@ class GoalItem extends React.Component {
 	}
 
 	render() {
-
 		return (
-			
+			<li className="list-group-item">{this.props.goal.title}</li>
 		)
 	}
 }
 
-function mapStateToProps(state) {
-	const { goals } = state;
-	return {
-		goals
-	}
-}
+export default GoalItem;
 
-export default connect(mapStateToProps, { setGoals })(GoalItem);
+// function mapStateToProps(state) {
+// 	const { goals } = state;
+// 	return {
+// 		goals
+// 	}
+// }
+//
+// export default connect(mapStateToProps, { setGoals })(GoalItem);

@@ -12,3 +12,7 @@ body {
 label {
     margin: 0 0.5em;
 }
+
+.goals_list {
+    margin-top: 2em;
+}
