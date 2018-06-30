@@ -24,11 +24,24 @@ class GoalList extends React.Component {
 	}
 
 	render() {
-		console.log('this.props.goals: ', this.props.goals);
-		return (
-			<ul className="goal_list">
+		const goals = this.props.goals;
 
-			</ul>
+		//after reloading page shows only first goal => by adding one more goal it show all goals ???
+		console.log('this.props.goals: ', goals);
+		console.log('this.props.goals.length: ', goals.length);
+		return (
+			<div className="goals_list">
+				{
+					goals &&
+						<ul>
+							{ goals.map((goal, key) => {
+								return (
+									<li key={key}>{goal.title}</li>
+								)
+							})}
+						</ul>
+				}
+			</div>
 		)
 	}
 }
