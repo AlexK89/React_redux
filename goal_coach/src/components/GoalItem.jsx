@@ -28,7 +28,7 @@ class GoalItem extends React.Component {
 		return (
 			<li className="goals_list_item list-group-item">
 				<span>{this.props.goal.title}</span>
-				<em> added by {this.props.user.email}</em>
+				<em> added by {this.props.goal.email}</em>
 				<button
 					onClick={() => this.completeGoal()}
 					className="btn btn-sm btn-success">
