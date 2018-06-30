@@ -12,9 +12,12 @@ export class App extends React.Component {
 	render() {
 		return (
 			<div>
-				<h1>Goals</h1>
+				<h1>Goal Coach</h1>
 				<AddGoal/>
+				<hr/>
+				<h2>Goals list</h2>
 				<GoalList/>
+				<hr/>
 				<button
 					className="btn btn-danger"
 					onClick={() => this.signOut()}>

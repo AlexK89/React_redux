@@ -1,18 +1,25 @@
 body {
-    margin: 0;
-    padding: 30px;
-    font-family: sans-serif;
+	margin: 0;
+	padding: 30px;
+	font-family: sans-serif;
 }
 
 /*SignUp*/
 .form-group {
-    margin: 0 1em;
+	margin: 0 1em;
 }
 
 label {
-    margin: 0 0.5em;
+	margin: 0 0.5em;
 }
 
 .goals_list {
-    margin-top: 2em;
+	margin-top: 2em;
+}
+
+.goals_list_item {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	transition: .3s;
 }
