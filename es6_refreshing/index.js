@@ -29,3 +29,12 @@ const filter = (...args) => {
 };
 
 filter(...numbers, ...newNumbers);
+
+// Destructuring
+
+const [a, b] = numbers;
+console.log(`Destructured array: ${a}, ${b}`);
+
+const {name, age} = newUsers;
+
+console.log(`Destructured object: name: ${name}, age: ${age}`);
