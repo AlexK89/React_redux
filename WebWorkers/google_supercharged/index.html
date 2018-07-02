@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style type="text/css">
+        #add_file_input {
+            width: 0px;
+            height: 0px;
+            overflow: hidden;
+        }
+
+        #add_file_input:focus + label {
+            outline: 2px solid #523dff;
+        }
+
+        #add_file_input + label {
+            display: inline-block;
+            background-color: #dcd8ff;
+            font-family: sans-serif;
+            padding: 0.5em;
+            font-size: 1.3em;
+        }
+    </style>
+    <title>WebWorkers | Google</title>
+</head>
+<body>
+    <div class="add_file">
+        <input
+                type="file"
+                accept="image/*"
+                name="input"
+                id="add_file_input">
+        <label for="add_file_input">Choose file</label>
+    </div>
+</body>
+</html>
