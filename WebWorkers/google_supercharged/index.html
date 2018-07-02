@@ -32,5 +32,36 @@
                 id="add_file_input">
         <label for="add_file_input">Choose file</label>
     </div>
+    <canvas id="preview"></canvas>
+    <script type="text/javascript">
+        const input = document.getElementById('add_file_input');
+        const preview = document.getElementById('preview');
+        const previewCtx = preview.getContext('2d');
+        const fileReader = new FileReader();
+        const image = new Image();
+
+        const applyFilters = () => {
+            
+        };
+
+        image.addEventListener('load', (e) => {
+            preview.width = image.width;
+            preview.height = image.height;
+            previewCtx.drawImage(image, 0, 0);
+            applyFilter()
+        });
+
+        fileReader.addEventListener('load', (e) => {
+            const base64 = e.target.result;
+            image.src = base64;
+            console.log(e);
+        });
+
+        input.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+
+            fileReader.readAsDataURL(file);
+        })
+    </script>
 </body>
 </html>
