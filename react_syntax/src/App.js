@@ -8,7 +8,7 @@ class App extends Component {
       <div className="App">
         <h1>React app</h1>
         <p>This is works</p>
-        <Person/>
+    <Person age={Math.floor(Math.random() * 100)}/>
       </div>
     );
 
