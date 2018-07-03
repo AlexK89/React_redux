@@ -12,14 +12,23 @@ class App extends Component {
     }
 
     render() {
+        //Inline styling
+        const style = {
+            backgroundColor: '#eee',
+            padding: '1em',
+            cursor: 'pointer'
+        }
+
         return (<div className="App">
             <h1>React app</h1>
             <p>This is works</p>
-            <button onClick={() => this.switchNameHandler('Kristina')}>Change name</button>
-            <Person
-                switchNameHandler = {this.switchNameHandler}
-                name={this.state.name}
-                age={Math.floor(Math.random() * 100)}>
+            <button
+                style={style}
+                onClick={() => this.switchNameHandler('Kristina')}
+                >
+                    Change name
+                </button>
+            <Person switchNameHandler={this.switchNameHandler} name={this.state.name} age={Math.floor(Math.random() * 100)}>
                 Text nested to component
             </Person>
         </div>);
