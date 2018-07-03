@@ -3,14 +3,13 @@ import './Person.scss';
 
 export const Person = (props) => {
     return (
-        <div
-            onClick = {props.click}
-            className='Person'>
-            <p>I am a {props.name}! I am {props.age} years old</p>
+        <div className='Person'>
+            <p>{props.personId}</p>
+            <p onClick = {props.click}>I am a {props.name}! I am {props.age} years old</p>
             {/* Rendering nested HTML from parrent component */}
             <p>{props.children}</p>
             <input
-                onChange={(event) => props.switchNameHandler(event.target.value)}
+                onChange={(event) => props.switchNameHandler(event.target.value, props.personId)}
                 type="text"
                 placeholder='name'
             />

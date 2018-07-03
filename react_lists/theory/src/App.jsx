@@ -11,12 +11,20 @@ class App extends Component {
         showPerson: false
     };
 
-    switchNameHandler = (name) => {
+    switchNameHandler = (name, id) => {
+        // Getting person with selected id and save this person into new variable
+        const personIndex = this.state.persons.findIndex(person => person.id === id);
+        const person = {...this.state.persons[personIndex]};
+
+        // Changing name for selected person
+        person.name = name;
+
+        // Create new array of persons and update person with selected id
+        const persons = [...this.state.persons];
+        persons[personIndex] = person;
+        
         this.setState({
-            persons: [
-                {name, age: 29},
-                {name: 'Khrystyna', age: 30},
-            ]
+            persons
         })
     }
 
@@ -49,7 +57,8 @@ class App extends Component {
                         return (
                             <Person
                                 key={person.id}
-                                click={() => this.deletePersonHandler(index)}
+                                personId={person.id}
+                                click={() => this.deletePersonHandler(person.id)}
                                 switchNameHandler={this.switchNameHandler}
                                 name={person.name}
                                 age={person.age} />
