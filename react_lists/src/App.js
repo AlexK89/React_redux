@@ -1,21 +1,43 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
+import React, {Component} from 'react';
+import {Person} from './Person/Person';
 import './App.css';
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-    );
-  }
+    state = {
+        name: 'Alex',
+        showPersons: false
+    };
+
+    switchNameHandler = (name) => {
+        this.setState({name})
+    }
+
+    togglePersonsHandler = () => {
+        this.setState({
+            showPersons: !this.state.showPersons
+        })
+    }
+
+    render() {
+
+        return (<div className="App">
+            <h1>React app</h1>
+            <p>This is works</p>
+            <button onClick={this.togglePersonsHandler}>
+                Change Person
+            </button>
+
+            {
+                this.state.showPersons &&
+                <Person switchNameHandler={this.switchNameHandler} name={this.state.name} age={Math.floor(Math.random() * 100)}>
+                    Text nested to component
+                </Person>
+            }
+
+        </div>);
+
+        // return React.createElement('div', null, React.createElement('h1', {className: 'App'}, 'React app'));
+    }
 }
 
 export default App;
