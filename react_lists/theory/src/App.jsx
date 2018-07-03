@@ -5,8 +5,8 @@ import './App.scss';
 class App extends Component {
     state = {
         persons: [
-            {name: 'Alex', age: 29},
-            {name: 'Khrystyna', age: 30},
+            {id: 1, name: 'Alex', age: 29},
+            {id: 2, name: 'Khrystyna', age: 30},
         ],
         showPerson: false
     };
@@ -21,7 +21,8 @@ class App extends Component {
     }
 
     deletePersonHandler = (index) => {
-        const persons = this.state.persons;
+        //to not mutate original array as arrays works by refferance
+        const persons = [...this.state.persons];
         persons.splice(index, 1);
 
         this.setState({
@@ -44,11 +45,11 @@ class App extends Component {
 
                 {
                     this.state.showPerson &&
-                    this.state.persons.map((person, key) => {
+                    this.state.persons.map((person, index) => {
                         return (
                             <Person
-                                key={key}
-                                click={() => this.deletePersonHandler(key)}
+                                key={person.id}
+                                click={() => this.deletePersonHandler(index)}
                                 switchNameHandler={this.switchNameHandler}
                                 name={person.name}
                                 age={person.age} />
