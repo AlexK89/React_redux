@@ -22,7 +22,7 @@ class App extends Component {
         // Create new array of persons and update person with selected id
         const persons = [...this.state.persons];
         persons[personIndex] = person;
-        
+
         this.setState({
             persons
         })
