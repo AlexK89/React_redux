@@ -2,20 +2,18 @@ import React from 'react';
 import './CharComponent.scss';
 
 export const CharComponent = (props) => {
-    let letters = [];
 
-    for(let char of props.inputText) {
-        letters.push(char);
-    }
     return (
         <div className="letters">
             {
-                letters.length
+                props.letters.length
                     ?
-                        letters.map((char, key) => {
-                            console.log(Boolean(letters.length));
+                        props.letters.map((char, key) => {
                             return (
-                                <div className="letters__item" key={key}>{char}</div>
+                                <div
+                                    onClick={() => props.removeChar(key)}
+                                    className="letters__item"
+                                    key={key}>{char}</div>
                             )
                         })
                     : ''

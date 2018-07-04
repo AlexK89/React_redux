@@ -6,17 +6,37 @@ import './App.scss';
 class App extends Component {
     state = {
         inputText: '',
-        inputTextLength: 0
+        inputTextLength: 0,
+        letters: []
     }
 
     changeInput = (inputText) => {
+        const letters = [];
+        for(let char of inputText) {
+            letters.push(char);
+        }
         this.setState({
             inputText,
-            inputTextLength: inputText.length
+            inputTextLength: inputText.length,
+            letters
         });
     }
 
+    removeChar = (index) => {
+        let letters = this.state.inputText.split('');
+        letters.splice(index, 1);
+
+        let inputText = letters.join('');
+
+        this.setState({
+            inputText,
+            letters
+        })
+
+    }
+
     render() {
+        console.log(this.state.inputText);
         return (
             <div className="App">
                 <div className="input_group">
@@ -25,11 +45,14 @@ class App extends Component {
                         onChange={(event) => {this.changeInput(event.target.value)}}
                         type="text"
                         id="input_text"
+                        value={this.state.inputText}
                     />
                 </div>
                 <Validation
                     inputTextLength={this.state.inputTextLength}/>
-                <CharComponent inputText={this.state.inputText}/>
+                <CharComponent
+                    removeChar = {this.removeChar}
+                    letters={this.state.letters}/>
             </div>
         );
     }
