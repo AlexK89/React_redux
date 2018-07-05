@@ -6,7 +6,6 @@ import './App.scss';
 class App extends Component {
     state = {
         inputText: '',
-        inputTextLength: 0,
         letters: []
     }
 
@@ -17,7 +16,6 @@ class App extends Component {
         }
         this.setState({
             inputText,
-            inputTextLength: inputText.length,
             letters
         });
     }
@@ -36,7 +34,6 @@ class App extends Component {
     }
 
     render() {
-        console.log(this.state.inputText);
         return (
             <div className="App">
                 <div className="input_group">
@@ -49,7 +46,7 @@ class App extends Component {
                     />
                 </div>
                 <Validation
-                    inputTextLength={this.state.inputTextLength}/>
+                    inputTextLength={this.state.inputText.length}/>
                 <CharComponent
                     removeChar = {this.removeChar}
                     letters={this.state.letters}/>
