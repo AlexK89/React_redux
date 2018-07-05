@@ -45,11 +45,13 @@ class App extends Component {
     }
 
     render() {
+        const buttonColour = this.state.showPerson ? 'btn_colour_red' : 'btn_colour_green';
+
         return (
             <div className="App">
                 <h1>React app</h1>
                 <p>This is works</p>
-                <button onClick={this.toggleVisibilityHandler}>Change name</button>
+                <button className={`btn ${buttonColour}`} onClick={this.toggleVisibilityHandler}>Change name</button>
 
                 {
                     this.state.showPerson &&

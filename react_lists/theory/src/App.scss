@@ -1,3 +1,17 @@
 .App {
   text-align: center;
 }
+
+.btn {
+  border: 1px solid #000;
+  padding: 1em;
+  color: #fff;
+
+  &_colour_red {
+    background-color: #f00;
+  }
+
+  &_colour_green {
+    background-color: #0d8015;
+  }
+}
