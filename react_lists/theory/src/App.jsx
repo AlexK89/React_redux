@@ -60,7 +60,8 @@ class App extends Component {
                             <Person
                                 key={person.id}
                                 personId={person.id}
-                                click={() => this.deletePersonHandler(person.id)}
+                                index = {index}
+                                click={this.deletePersonHandler}
                                 switchNameHandler={this.switchNameHandler}
                                 name={person.name}
                                 age={person.age} />
