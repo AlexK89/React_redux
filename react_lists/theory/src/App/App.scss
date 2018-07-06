@@ -19,5 +19,9 @@
 
   &_colour_green {
     background-color: #0d8015;
+
+    @media screen and (max-width: 700px) {
+      background-color: rgb(15,211,235);
+    }
   }
 }
