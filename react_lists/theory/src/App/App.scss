@@ -6,6 +6,12 @@
   border: 1px solid #000;
   padding: 1em;
   color: #fff;
+  transition: .3s;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.8;
+  }
 
   &_colour_red {
     background-color: #f00;
