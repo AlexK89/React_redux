@@ -9,6 +9,7 @@ const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
 const WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeModulesPlugin');
 const eslintFormatter = require('react-dev-utils/eslintFormatter');
 const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const getClientEnvironment = require('./env');
 const paths = require('./paths');
 
@@ -104,36 +105,6 @@ module.exports = {
     module: {
         strictExportPresence: true,
         rules: [
-            //SCSS loader
-            {
-                test: /\.scss$/,
-                use: [
-                    require.resolve('style-loader'), {
-                        loader: require.resolve('css-loader'),
-                        options: {
-                            importLoaders: 1
-                        }
-                    }, {
-                        loader: require.resolve('sass-loader')
-                    }, {
-                        loader: require.resolve('postcss-loader'),
-                        options: {
-                            // Necessary for external CSS imports to work
-                            // https://github.com/facebookincubator/create-react-app/issues/2677
-                            ident: 'postcss',
-                            plugins: () => [
-                                require('postcss-flexbugs-fixes'),
-                                autoprefixer({
-                                    browsers: [
-                                        '>1%', 'last 4 versions', 'Firefox ESR', 'not ie < 9', // React doesn't support IE8 anyway
-                                    ],
-                                    flexbox: 'no-2009'
-                                })
-                            ]
-                        }
-                    }
-                ]
-            },
             // TODO: Disable require.ensure as it's not a standard language feature.
             // We are waiting for https://github.com/facebookincubator/create-react-app/issues/2176.
             // { parser: { requireEnsure: false } },
@@ -195,7 +166,10 @@ module.exports = {
                             require.resolve('style-loader'), {
                                 loader: require.resolve('css-loader'),
                                 options: {
-                                    importLoaders: 1
+                                    importLoaders: 1,
+                                    // make your css files modular
+                                    modules: true,
+                                    localIdentName: '[name]__[local]__[hash:base64:5]'
                                 }
                             }, {
                                 loader: require.resolve('postcss-loader'),
@@ -216,6 +190,24 @@ module.exports = {
                             }
                         ]
                     },
+                    {
+                        test: /\.scss$/,
+                        use: ExtractTextPlugin.extract({
+                            fallback: 'style-loader',
+                            use: [
+                                {
+                                    loader: 'css-loader',
+                                    options: {
+                                        modules: true,
+                                        sourceMap: true,
+                                        importLoaders: 2,
+                                        localIdentName: '[name]__[local]__[hash:base64:5]'
+                                    }
+                                },
+                                'sass-loader'
+                            ]
+                        })
+                    },
                     // "file" loader makes sure those assets get served by WebpackDevServer.
                     // When you `import` an asset, you get its (virtual) filename.
                     // In production, they would get copied to the `build` folder.
@@ -227,7 +219,10 @@ module.exports = {
                         // Also exclude `html` and `json` extensions so they get processed
                         // by webpacks internal loaders.
                         exclude: [
-                            /\.(js|jsx|mjs)$/, /\.html$/, /\.json$/, /\.scss$/
+                            /\.(js|jsx|mjs)$/,
+                             /\.html$/,
+                             /\.json$/,
+                             /\.scss$/
                         ],
                         loader: require.resolve('file-loader'),
                         options: {
@@ -269,7 +264,8 @@ module.exports = {
         // solution that requires the user to opt into importing specific locales.
         // https://github.com/jmblog/how-to-optimize-momentjs-with-webpack
         // You can remove this if you don't use Moment.js:
-        new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
+        new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+        new ExtractTextPlugin({filename: 'styles.css', allChunks: true})
     ],
     // Some libraries import Node modules but don't use them in the browser.
     // Tell Webpack to provide empty mocks for them so importing them works.

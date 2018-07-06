@@ -1,9 +1,9 @@
 import React from 'react';
-import './Person.scss';
+import styles from './Person.scss';
 
 export const Person = (props) => {
     return (
-        <div className='Person'>
+        <div className={styles.Person}>
             <p>{props.personId}</p>
             <p onClick = {() => props.click(props.index)}>I am a {props.name}! I am {props.age} years old</p>
             {/* Rendering nested HTML from parrent component */}
