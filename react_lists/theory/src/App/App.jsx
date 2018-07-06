@@ -45,9 +45,8 @@ class App extends Component {
     }
 
     render() {
-
         const buttonColour = this.state.showPerson ? styles.btn_colour_red : styles.btn_colour_green;
-        console.log(buttonColour);
+
         return (
             <div className={styles.App}>
                 <h1>React app</h1>
