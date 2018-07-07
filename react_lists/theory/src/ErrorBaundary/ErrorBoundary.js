@@ -1,9 +1,20 @@
 import React from 'react';
 
 export class ErrorBoundary extends React.Component {
+    state = {
+        hasError: false,
+        errorMessage: ''
+    }
+
+    componentDidCatch = (error, info) => {
+        this.setState({hasError: true, errorMessage: error})
+    }
+
     render() {
-        return (
-            <h1>Error</h1>
-        )
+        if (this.state.hasError) {
+            return <h1>{this.state.errorMessage}</h1>
+        } else {
+            return this.props.children
+        }
     }
 }
