@@ -14,7 +14,6 @@ printNumbers(...numbers, ...newNumbers);
 const users = {
     name: 'Alex',
     age: 20,
-
 };
 
 const newUsers = {

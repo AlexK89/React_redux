@@ -5,7 +5,7 @@ export const Person = (props) => {
     return (
         <div className={styles.Person}>
             <p>{props.personId}</p>
-            <p onClick = {() => props.click(props.index)}>I am a {props.name}! I am {props.age} years old</p>
+            <p onClick = {() => props.deletePersonHandler(props.index)}>I am a {props.name}! I am {props.age} years old</p>
             {/* Rendering nested HTML from parrent component */}
             <p>{props.children}</p>
             <input
