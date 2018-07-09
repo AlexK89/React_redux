@@ -1,5 +1,5 @@
 import React from 'react';
-import {ErrorBoundary} from '../ErrorBaundary/ErrorBoundary';
+import {ErrorBoundary} from '../../ErrorBaundary/ErrorBoundary';
 import {Person} from './Person/Person.jsx';
 
 export const Persons = (props) => {

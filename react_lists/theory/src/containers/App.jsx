@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import {Persons} from '../Persons/Persons.jsx';
+import {Persons} from '../components/Persons/Persons.jsx';
+import {Header} from '../components/Header/Header.jsx';
 import styles from './App.scss';
 
 class App extends Component {
@@ -45,14 +46,12 @@ class App extends Component {
 	};
 
 	render() {
-		const buttonColour = this.state.showPerson ? styles.btn_colour_red : styles.btn_colour_green;
-
 		return (
 			<div className={styles.App}>
-				<h1>React app</h1>
-				<p>This is works</p>
-				<button className={`${styles.btn} ${buttonColour}`} onClick={this.toggleVisibilityHandler}>Change name
-				</button>
+
+				<Header
+					showPerson = {this.state.showPerson}
+					toggleVisibilityHandler = {this.toggleVisibilityHandler} />
 
 				{
 					this.state.showPerson &&
