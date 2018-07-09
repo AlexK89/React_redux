@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../../containers/App.scss';
+import styles from './Header.scss';
 
 export const Header = (props) => {
 	const buttonColour = props.showPerson ? styles.btn_colour_red : styles.btn_colour_green;
