@@ -4,6 +4,7 @@ import {Header} from '../components/Header/Header.jsx';
 import styles from './App.scss';
 
 class App extends Component {
+	// NEW version of initialization State
 	state = {
 		persons: [
 			{id: 1, name: 'Alex', age: 29},
@@ -11,6 +12,29 @@ class App extends Component {
 		],
 		showPerson: false
 	};
+
+	constructor(props) {
+		super(props);
+
+		// Old version of initialization State
+		// this.state = {
+		// 	persons: [
+		// 		{id: 1, name: 'Alex', age: 29},
+		// 		{id: 2, name: 'Khrystyna', age: 30},
+		// 	],
+		// 	showPerson: false
+		// };
+
+		console.log('App.js:Consctructor', props);
+	}
+
+	componentWillMount() {
+		console.log('App.js:ComponentWillMount');
+	}
+
+	componentDidMount() {
+		console.log('App.js:ComponentDidMount');
+	}
 
 	switchNameHandler = (name, id) => {
 		// Getting person with selected id and save this person into new variable
@@ -46,6 +70,7 @@ class App extends Component {
 	};
 
 	render() {
+		console.log('App.js:Render');
 		return (
 			<div className={styles.App}>
 
