@@ -17,6 +17,10 @@ export class Persons extends React.Component {
 		console.log('Persons.js:ComponentDidMount');
 	}
 
+	componentWillUnmount() {
+		console.log('Persons.js:ComponentWillUnmount');
+	}
+
 	render() {
 		console.log('Persons.js:Render');
 		return (
