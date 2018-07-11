@@ -13,6 +13,11 @@ class App extends Component {
 		showPerson: false
 	};
 
+	// =========================
+	// React component CREATE Lifecycle hooks
+	// =========================
+
+	// #1
 	constructor(props) {
 		super(props);
 
@@ -25,16 +30,44 @@ class App extends Component {
 		// 	showPerson: false
 		// };
 
-		console.log('App.js:Consctructor', props);
+		console.log('#1 [CREATE App.js]:Consctructor', props);
 	}
 
+	// #2
 	componentWillMount() {
-		console.log('App.js:ComponentWillMount');
+		console.log('#2 [CREATE App.js]:ComponentWillMount');
 	}
 
+	// #3
 	componentDidMount() {
-		console.log('App.js:ComponentDidMount');
+		console.log('#4 [CREATE App.js]:ComponentDidMount');
 	}
+
+
+	// =========================
+	// React component UPDATE Lifecycle hooks INTERNAL/STATE update
+	// =========================
+
+	// #4
+	shouldComponentUpdate(nextProps, nextState) {
+		console.log('#5 [UPDATE App.js]:shouldComponentUpdate', nextProps, nextState);
+
+		// MUST RETURN TRUE || FALSE
+		return true;
+	}
+
+	// #5
+	componentWillUpdate(nextProps, nextState) {
+		console.log('#6 [UPDATE App.js]:componentWillUpdate', nextProps, nextState);
+	}
+
+	// #6
+	componentDidUpdate(nextProps, nextState) {
+		console.log('#7 [UPDATE App.js]:componentDidUpdate', nextProps, nextState);
+	}
+
+
+
 
 	switchNameHandler = (name, id) => {
 		// Getting person with selected id and save this person into new variable
@@ -70,7 +103,7 @@ class App extends Component {
 	};
 
 	render() {
-		console.log('App.js:Render');
+		console.log('#3 [CREATE App.js] AND #8 [UPDATE App.js].js:Render');
 		return (
 			<div className={styles.App}>
 
