@@ -110,7 +110,7 @@ class App extends Component {
 				<Header
 					showPerson = {this.state.showPerson}
 					toggleVisibilityHandler = {this.toggleVisibilityHandler} />
-
+				<button className={`${styles.btn} ${styles.btn_colour_green}`} onClick={() => this.setState({showPerson: true}) }>Show persons</button>
 				{
 					this.state.showPerson &&
 						<Persons
