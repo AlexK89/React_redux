@@ -2,7 +2,7 @@ import React from 'react';
 import {ErrorBoundary} from '../../ErrorBaundary/ErrorBoundary';
 import {Person} from './Person/Person.jsx';
 
-export class Persons extends React.Component {
+export class Persons extends React.PureComponent {
 	// =========================
 	// React component CREATE Lifecycle hooks
 	// =========================
@@ -38,12 +38,12 @@ export class Persons extends React.Component {
 	}
 
 	// #2
-	shouldComponentUpdate(nextProps, nextState) {
-		console.log('#2 [UPDATE Persons.js]:shouldComponentUpdate', nextProps, nextState);
-		return nextProps.persons !== this.props.persons;
-		// MUST RETURN TRUE || FALSE
-		// return true;
-	}
+	// shouldComponentUpdate(nextProps, nextState) {
+	// 	console.log('#2 [UPDATE Persons.js]:shouldComponentUpdate', nextProps, nextState);
+	// 	return nextProps.persons !== this.props.persons;
+	// 	// MUST RETURN TRUE || FALSE
+	// 	// return true;
+	// }
 
 	// #3
 	componentWillUpdate(nextProps, nextState) {

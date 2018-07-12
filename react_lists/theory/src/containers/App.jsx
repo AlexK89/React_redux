@@ -1,9 +1,15 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import {Persons} from '../components/Persons/Persons.jsx';
 import {Header} from '../components/Header/Header.jsx';
 import styles from './App.scss';
 
-class App extends Component {
+// =============================
+// !!! We can import PureComponent from React which has
+// pre-build shouldComponentUpdate with check for similarity
+// =============================
+
+
+class App extends PureComponent {
 	// NEW version of initialization State
 	state = {
 		persons: [
@@ -49,12 +55,12 @@ class App extends Component {
 	// =========================
 
 	// #4
-	shouldComponentUpdate(nextProps, nextState) {
-		console.log('#5 [UPDATE App.js]:shouldComponentUpdate', nextProps, nextState);
-		// MUST RETURN TRUE || FALSE
-		return 	nextState.persons !== this.state.persons ||
-				nextState.showPerson !== this.state.showPerson;
-	}
+	// shouldComponentUpdate(nextProps, nextState) {
+	// 	console.log('#5 [UPDATE App.js]:shouldComponentUpdate', nextProps, nextState);
+	// 	// MUST RETURN TRUE || FALSE
+	// 	return 	nextState.persons !== this.state.persons ||
+	// 			nextState.showPerson !== this.state.showPerson;
+	// }
 
 	// #5
 	componentWillUpdate(nextProps, nextState) {
