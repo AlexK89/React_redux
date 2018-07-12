@@ -51,9 +51,9 @@ class App extends Component {
 	// #4
 	shouldComponentUpdate(nextProps, nextState) {
 		console.log('#5 [UPDATE App.js]:shouldComponentUpdate', nextProps, nextState);
-
 		// MUST RETURN TRUE || FALSE
-		return true;
+		return 	nextState.persons !== this.state.persons ||
+				nextState.showPerson !== this.state.showPerson;
 	}
 
 	// #5

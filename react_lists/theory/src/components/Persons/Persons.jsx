@@ -40,9 +40,9 @@ export class Persons extends React.Component {
 	// #2
 	shouldComponentUpdate(nextProps, nextState) {
 		console.log('#2 [UPDATE Persons.js]:shouldComponentUpdate', nextProps, nextState);
-
+		return nextProps.persons !== this.props.persons;
 		// MUST RETURN TRUE || FALSE
-		return true;
+		// return true;
 	}
 
 	// #3
