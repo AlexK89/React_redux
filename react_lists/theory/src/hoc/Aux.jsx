@@ -1,5 +1,5 @@
 import React from 'react';
 
-export const aux = (props) => {
+export const Aux = (props) => {
 	return props.children;
 };
