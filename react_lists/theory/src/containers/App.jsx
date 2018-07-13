@@ -1,7 +1,8 @@
 import React, {PureComponent} from 'react';
 import {Persons} from '../components/Persons/Persons.jsx';
 import {Header} from '../components/Header/Header.jsx';
-import WithClass from '../hoc/WithClass.jsx';
+import Aux from '../hoc/Aux.jsx';
+import withClass from '../hoc/withClass.jsx';
 import styles from './App.scss';
 
 // =============================
@@ -112,8 +113,7 @@ class App extends PureComponent {
 	render() {
 		console.log('#3 [CREATE App.js] AND #8 [UPDATE App.js].js:Render');
 		return (
-			<WithClass className={styles.App}>
-
+			<Aux>
 				<Header
 					showPerson = {this.state.showPerson}
 					toggleVisibilityHandler = {this.toggleVisibilityHandler} />
@@ -126,10 +126,9 @@ class App extends PureComponent {
 							switchNameHandler = {this.switchNameHandler}
 						/>
 				}
-
-			</WithClass>
+			</Aux>
 		);
 	}
 }
 
-export default App;
+export default withClass(App, styles.App);

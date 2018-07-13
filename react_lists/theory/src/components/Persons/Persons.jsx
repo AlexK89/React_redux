@@ -1,6 +1,6 @@
 import React from 'react';
 import {ErrorBoundary} from '../../ErrorBaundary/ErrorBoundary';
-import {Person} from './Person/Person.jsx';
+import Person from './Person/Person.jsx';
 
 export class Persons extends React.PureComponent {
 	// =========================

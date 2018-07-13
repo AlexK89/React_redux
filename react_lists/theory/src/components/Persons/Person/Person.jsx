@@ -1,10 +1,11 @@
 import React from 'react';
-import WithClass from '../../../hoc/WithClass.jsx';
+import Aux from '../../../hoc/Aux.jsx';
+import withClass from '../../../hoc/withClass.jsx';
 import styles from './Person.scss';
 
 export const Person = (props) => {
 	return (
-		<WithClass className={styles.Person}>
+		<Aux>
 			<p>{props.personId}</p>
 			<p onClick={() => props.deletePersonHandler(props.index)}>I am a {props.name}! I am {props.age} years
 				old</p>
@@ -15,6 +16,8 @@ export const Person = (props) => {
 				type="text"
 				placeholder='name'
 			/>
-		</WithClass>
+		</Aux>
 	)
 };
+
+export default withClass(Person, styles.Person);
