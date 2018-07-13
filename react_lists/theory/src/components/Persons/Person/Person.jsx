@@ -4,21 +4,33 @@ import Aux from '../../../hoc/Aux.jsx';
 import withClass from '../../../hoc/withClass.jsx';
 import styles from './Person.scss';
 
-export const Person = (props) => {
-	return (
-		<Aux>
-			<p>{props.personId}</p>
-			<p onClick={() => props.deletePersonHandler(props.index)}>I am a {props.name}! I am {props.age} years
-				old</p>
-			{/* Rendering nested HTML from parent component */}
-			<p>{props.children}</p>
-			<input
-				onChange={(event) => props.switchNameHandler(event.target.value, props.personId)}
-				type="text"
-				placeholder='name'
-			/>
-		</Aux>
-	)
+export class Person extends React.Component {
+	constructor(props) {
+		super(props);
+		this.inputElement = React.createRef();
+	}
+	componentDidMount() {
+		// Focus on first input
+		(this.props.personId === 1) && this.inputElement.current.focus();
+	}
+
+	render() {
+		return (
+			<Aux>
+				<p>{this.props.personId}</p>
+				<p onClick={() => this.props.deletePersonHandler(this.props.index)}>I am a {this.props.name}! I am {this.props.age} years
+					old</p>
+				{/* Rendering nested HTML from parent component */}
+				<p>{this.props.children}</p>
+				<input
+					ref={this.inputElement}
+					onChange={(event) => this.props.switchNameHandler(event.target.value, this.props.personId)}
+					type="text"
+					placeholder='name'
+				/>
+			</Aux>
+		)
+	}
 };
 
 Person.propTypes = {
