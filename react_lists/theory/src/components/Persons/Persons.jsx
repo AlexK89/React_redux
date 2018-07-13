@@ -10,7 +10,7 @@ export class Persons extends React.PureComponent {
 	// #1
 	constructor(props) {
 		super(props);
-
+		this.lastPersonRef = React.createRef();
 		console.log('#1 [CREATE Persons.js]:Consctructor', props);
 	}
 
@@ -22,6 +22,7 @@ export class Persons extends React.PureComponent {
 	// #4
 	componentDidMount() {
 		console.log('#4 [CREATE Persons.js]:ComponentDidMount');
+		(this.props.index === 0) && this.inputElement.current.focus();
 	}
 
 	// #5
@@ -65,6 +66,7 @@ export class Persons extends React.PureComponent {
 						<Person
 							personId={person.id}
 							index={index}
+							ref={this.lastPersonRef}
 							deletePersonHandler={this.props.deletePersonHandler}
 							switchNameHandler={this.props.switchNameHandler}
 							name={person.name}

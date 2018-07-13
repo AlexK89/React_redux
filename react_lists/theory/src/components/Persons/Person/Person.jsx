@@ -9,9 +9,14 @@ export class Person extends React.Component {
 		super(props);
 		this.inputElement = React.createRef();
 	}
+
+	focus() {
+		this.inputElement.current.focus();
+	}
+
 	componentDidMount() {
 		// Focus on first input
-		(this.props.personId === 1) && this.inputElement.current.focus();
+		// (this.props.index === 0) && this.inputElement.current.focus();
 	}
 
 	render() {
