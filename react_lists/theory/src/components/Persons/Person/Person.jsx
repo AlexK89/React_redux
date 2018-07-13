@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Aux from '../../../hoc/Aux.jsx';
 import withClass from '../../../hoc/withClass.jsx';
 import styles from './Person.scss';
@@ -20,4 +21,10 @@ export const Person = (props) => {
 	)
 };
 
+Person.propTypes = {
+	click: PropTypes.func,
+	name: PropTypes.string,
+	age: PropTypes.number,
+	changed: PropTypes.func
+};
 export default withClass(Person, styles.Person);

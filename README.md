@@ -1,6 +1,8 @@
 # React_redux
 React dummy apps
 
+Useful packages: 
+prop-types - check props values type
 
 # Useful links
 
@@ -16,3 +18,6 @@ Error Handling
 
 Error Boundaries - https://reactjs.org/docs/error-boundaries.html
 Chrome Devtool Debugging - https://developers.google.com/web/tools/chrome-devtools/javascript/
+
+
+Checking props type - https://reactjs.org/docs/typechecking-with-proptypes.html
