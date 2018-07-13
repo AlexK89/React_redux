@@ -13,6 +13,9 @@ export const Header = (props) => {
 			<p>This is works</p>
 			<button className={`${sharedStyles.btn} ${buttonColour}`} onClick={props.toggleVisibilityHandler}>Change name
 			</button>
+			<button
+				className={`${sharedStyles.btn} ${sharedStyles.btn_colour_green}`}
+				onClick={props.login}>Log in</button>
 		</Aux>
 	)
 };

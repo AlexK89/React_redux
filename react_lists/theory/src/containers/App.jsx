@@ -10,6 +10,7 @@ import styles from './App.scss';
 // pre-build shouldComponentUpdate with check for similarity
 // =============================
 
+export const AuthContext = React.createContext(false);
 
 class App extends PureComponent {
 	// NEW version of initialization State
@@ -19,7 +20,8 @@ class App extends PureComponent {
 			{id: 2, name: 'Khrystyna', age: 30},
 		],
 		showPerson: false,
-		toggleCounter: 0
+		toggleCounter: 0,
+		authenticated: false
 	};
 
 	// =========================
@@ -76,8 +78,6 @@ class App extends PureComponent {
 	}
 
 
-
-
 	switchNameHandler = (name, id) => {
 		// Getting person with selected id and save this person into new variable
 		const personIndex = this.state.persons.findIndex(person => person.id === id);
@@ -115,22 +115,33 @@ class App extends PureComponent {
 		})
 	};
 
+	loginHandler = () => {
+		this.setState({
+			authenticated: !this.state.authenticated
+		})
+	};
+
 	render() {
 		console.log('#3 [CREATE App.js] AND #8 [UPDATE App.js].js:Render');
 		return (
 			<Aux>
 				<Header
-					showPerson = {this.state.showPerson}
-					toggleVisibilityHandler = {this.toggleVisibilityHandler} />
-				<button className={`${styles.btn} ${styles.btn_colour_green}`} onClick={() => this.setState({showPerson: true}) }>Show persons</button>
-				{
-					this.state.showPerson &&
+					login={this.loginHandler}
+					showPerson={this.state.showPerson}
+					toggleVisibilityHandler={this.toggleVisibilityHandler}/>
+				<button className={`${styles.btn} ${styles.btn_colour_green}`}
+						onClick={() => this.setState({showPerson: true})}>Show persons
+				</button>
+				<AuthContext.Provider value={this.state.authenticated}>
+					{
+						this.state.showPerson &&
 						<Persons
-							persons = {this.state.persons}
-							deletePersonHandler = {this.deletePersonHandler}
-							switchNameHandler = {this.switchNameHandler}
+							persons={this.state.persons}
+							deletePersonHandler={this.deletePersonHandler}
+							switchNameHandler={this.switchNameHandler}
 						/>
-				}
+					}
+				</AuthContext.Provider>
 			</Aux>
 		);
 	}

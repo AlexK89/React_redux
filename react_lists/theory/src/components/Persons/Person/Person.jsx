@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {AuthContext} from '../../../containers/App.jsx';
 import Aux from '../../../hoc/Aux.jsx';
 import withClass from '../../../hoc/withClass.jsx';
 import styles from './Person.scss';
@@ -22,8 +23,17 @@ export class Person extends React.Component {
 	render() {
 		return (
 			<Aux>
+				<AuthContext.Consumer>
+					{auth => {
+						return (
+							<h2>{(auth) ? 'Authenticated' : 'Unauthenticated'}</h2>
+						)
+					}
+					}
+				</AuthContext.Consumer>
 				<p>{this.props.personId}</p>
-				<p onClick={() => this.props.deletePersonHandler(this.props.index)}>I am a {this.props.name}! I am {this.props.age} years
+				<p onClick={() => this.props.deletePersonHandler(this.props.index)}>I am a {this.props.name}! I
+					am {this.props.age} years
 					old</p>
 				{/* Rendering nested HTML from parent component */}
 				<p>{this.props.children}</p>
