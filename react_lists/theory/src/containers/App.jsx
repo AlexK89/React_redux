@@ -44,10 +44,10 @@ class App extends PureComponent {
 		console.log('#1 [CREATE App.js]:Consctructor', props);
 	}
 
-	// #2
-	componentWillMount() {
-		console.log('#2 [CREATE App.js]:ComponentWillMount');
-	}
+	// // #2
+	// componentWillMount() {
+	// 	console.log('#2 [CREATE App.js]:ComponentWillMount');
+	// }
 
 	// #3
 	componentDidMount() {
@@ -67,9 +67,20 @@ class App extends PureComponent {
 	// 			nextState.showPerson !== this.state.showPerson;
 	// }
 
-	// #5
-	componentWillUpdate(nextProps, nextState) {
-		console.log('#6 [UPDATE App.js]:componentWillUpdate', nextProps, nextState);
+	// // #5
+	// componentWillUpdate(nextProps, nextState) {
+	// 	console.log('#6 [UPDATE App.js]:componentWillUpdate', nextProps, nextState);
+	// }
+
+	//New hook for new React 16.3
+	static getDerivedStateFromProps(nextProps, prevState) {
+		console.log('[UPDATE App.js]:getDerivedStateFromProps', nextProps, prevState);
+		return prevState;
+	}
+
+	getSnapshotBeforeUpdate() {
+		//Useful for saving scrolling position
+		console.log('[UPDATE App.js]:getSnapshotBeforeUpdate');
 	}
 
 	// #6
