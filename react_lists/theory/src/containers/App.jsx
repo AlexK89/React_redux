@@ -18,7 +18,8 @@ class App extends PureComponent {
 			{id: 1, name: 'Alex', age: 29},
 			{id: 2, name: 'Khrystyna', age: 30},
 		],
-		showPerson: false
+		showPerson: false,
+		toggleCounter: 0
 	};
 
 	// =========================
@@ -105,8 +106,12 @@ class App extends PureComponent {
 	};
 
 	toggleVisibilityHandler = () => {
-		this.setState({
-			showPerson: !this.state.showPerson
+		//Right way to update state || Use prevState
+		this.setState((prevState, props) => {
+			return {
+				showPerson: !this.state.showPerson,
+				toggleCounter: prevState.toggleCounter + 1
+			}
 		})
 	};
 
