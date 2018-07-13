@@ -1,6 +1,7 @@
 import React, {PureComponent} from 'react';
 import {Persons} from '../components/Persons/Persons.jsx';
 import {Header} from '../components/Header/Header.jsx';
+import WithClass from '../hoc/WithClass.jsx';
 import styles from './App.scss';
 
 // =============================
@@ -111,7 +112,7 @@ class App extends PureComponent {
 	render() {
 		console.log('#3 [CREATE App.js] AND #8 [UPDATE App.js].js:Render');
 		return (
-			<div className={styles.App}>
+			<WithClass className={styles.App}>
 
 				<Header
 					showPerson = {this.state.showPerson}
@@ -126,7 +127,7 @@ class App extends PureComponent {
 						/>
 				}
 
-			</div>
+			</WithClass>
 		);
 	}
 }

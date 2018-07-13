@@ -1,6 +1,6 @@
 import React from 'react';
 import sharedStyles from '../../containers/App.scss';
-import { Aux } from '../../hoc/Aux.jsx';
+import Aux from '../../hoc/Aux.jsx';
 import styles from './Header.scss';
 
 export const Header = (props) => {
