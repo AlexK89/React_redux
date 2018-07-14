@@ -41,17 +41,17 @@ class App extends PureComponent {
 		// 	showPerson: false
 		// };
 
-		console.log('#1 [CREATE App.js]:Consctructor', props);
+		console.log('#1 [CREATE App.jsx]:Consctructor', props);
 	}
 
 	// // #2
 	// componentWillMount() {
-	// 	console.log('#2 [CREATE App.js]:ComponentWillMount');
+	// 	console.log('#2 [CREATE App.jsx]:ComponentWillMount');
 	// }
 
 	// #3
 	componentDidMount() {
-		console.log('#4 [CREATE App.js]:ComponentDidMount');
+		console.log('#4 [CREATE App.jsx]:ComponentDidMount');
 	}
 
 
@@ -61,7 +61,7 @@ class App extends PureComponent {
 
 	// #4
 	// shouldComponentUpdate(nextProps, nextState) {
-	// 	console.log('#5 [UPDATE App.js]:shouldComponentUpdate', nextProps, nextState);
+	// 	console.log('#5 [UPDATE App.jsx]:shouldComponentUpdate', nextProps, nextState);
 	// 	// MUST RETURN TRUE || FALSE
 	// 	return 	nextState.persons !== this.state.persons ||
 	// 			nextState.showPerson !== this.state.showPerson;
@@ -69,23 +69,23 @@ class App extends PureComponent {
 
 	// // #5
 	// componentWillUpdate(nextProps, nextState) {
-	// 	console.log('#6 [UPDATE App.js]:componentWillUpdate', nextProps, nextState);
+	// 	console.log('#6 [UPDATE App.jsx]:componentWillUpdate', nextProps, nextState);
 	// }
 
 	//New hook for new React 16.3
 	static getDerivedStateFromProps(nextProps, prevState) {
-		console.log('[UPDATE App.js]:getDerivedStateFromProps', nextProps, prevState);
+		console.log('[UPDATE App.jsx]:getDerivedStateFromProps', nextProps, prevState);
 		return prevState;
 	}
 
 	getSnapshotBeforeUpdate() {
 		//Useful for saving scrolling position
-		console.log('[UPDATE App.js]:getSnapshotBeforeUpdate');
+		console.log('[UPDATE App.jsx]:getSnapshotBeforeUpdate');
 	}
 
 	// #6
 	componentDidUpdate(nextProps, nextState) {
-		console.log('#7 [UPDATE App.js]:componentDidUpdate', nextProps, nextState);
+		console.log('#7 [UPDATE App.jsx]:componentDidUpdate', nextProps, nextState);
 	}
 
 
@@ -133,7 +133,7 @@ class App extends PureComponent {
 	};
 
 	render() {
-		console.log('#3 [CREATE App.js] AND #8 [UPDATE App.js].js:Render');
+		console.log('#3 [CREATE App.jsx] AND #8 [UPDATE App.jsx].js:Render');
 		return (
 			<Aux>
 				<Header
