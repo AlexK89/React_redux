@@ -10,5 +10,5 @@ class App extends Component {
     );
   }
 }
-
+// TEST
 export default App;
