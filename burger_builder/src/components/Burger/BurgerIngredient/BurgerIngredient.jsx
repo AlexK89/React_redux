@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styles from './Burgeringredient.scss';
+import styles from './BurgerIngredient.scss';
 
 export class BurgerIngredient extends React.Component {
     render() {
@@ -8,33 +8,33 @@ export class BurgerIngredient extends React.Component {
 
         switch (this.props.type) {
             case ('bread-bottom'):
-                this.ingredient = <div className={styles.BreadBottom}>BreadBottom</div>;
+                ingredient = <div className={styles.BreadBottom}></div>;
                 break;
             case ('bread-top'):
-                this.ingredient = (
+                ingredient = (
                     <div className={styles.BreadTop}>
-                        <div className={styles.Seeds1}>Seeds1</div>
-                        <div className={styles.Seeds2}>Seeds2</div>
+                        <div className={styles.Seeds1}></div>
+                        <div className={styles.Seeds2}></div>
                     </div>
                 );
                 break;
             case ('meat'):
-                this.ingredient = <div className={styles.Meat}>Meat</div>;
+                ingredient = <div className={styles.Meat}></div>;
                 break;
             case ('cheese'):
-                this.ingredient = <div className={styles.Cheese}>Cheese</div>;
+                ingredient = <div className={styles.Cheese}></div>;
                 break;
             case ('salad'):
-                this.ingredient = <div className={styles.Salad}>Salad</div>;
+                ingredient = <div className={styles.Salad}></div>;
                 break;
             case ('bacon'):
-                this.ingredient = <div className={styles.Bacon}>Bacon</div>;
+                ingredient = <div className={styles.Bacon}></div>;
                 break;
             default:
-                this.ingredient = null;
+                ingredient = null;
         }
 
-        return this.ingredient;
+        return ingredient;
     }
 }
 
