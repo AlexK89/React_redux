@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from 'BuildControl.scss';
+import styles from './BuildControl.scss';
 
 const buildControl = (props) => {
     return (
