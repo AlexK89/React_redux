@@ -44,7 +44,9 @@ class BurgerBuilder extends React.Component {
     };
 
     removeIngredientHandler = (type) => {
-        
+        if (this.state.ingredients[type] > 0 ) {
+            this.changeIngredientsQuantity(type, -1);
+        }
     };
 
     render() {
