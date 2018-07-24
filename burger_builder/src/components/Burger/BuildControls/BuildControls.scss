@@ -4,5 +4,39 @@
   flex-direction: column;
   align-items: center;
   box-shadow: 0 2px 1px #ccc;
-  padding: 0 10px;
+  padding: 3em 10px;
+
+  .checkout {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    color: rgba(255, 255, 255, 0.8);
+
+    &Price {
+      line-height: 40px;
+      margin: 0 1em;
+    }
+
+    &Button {
+      width: 150px;
+      height: 40px;
+      background-color: #0d8015;
+      box-shadow: 0 4px 3px rgba(0,0,0, 0.4);
+      border: none;
+      color: rgba(255, 255, 255, 0.82);
+      cursor: pointer;
+      transition: .3s;
+      font-size: 1.2em;
+
+      &:not([disabled]):hover {
+        transform: scale(0.97);
+        box-shadow: 0 2px 1px rgba(0,0,0, 0.4);
+      }
+
+      &:disabled {
+        background-color: #a7a7a7;
+        cursor: not-allowed;
+      }
+    }
+  }
 }
