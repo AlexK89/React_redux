@@ -22,9 +22,11 @@ class BurgerBuilder extends React.Component {
             meat: 0,
         },
         totalPrice: 4,
-        purchasable: false
+        purchasable: false,
+        purchasing: false,
     };
 
+    // Change ingredients in your burger (Add/Remove)
     changeIngredientsQuantity = (type, count) => {
         const updatedIngredients = {
             ...this.state.ingredients
@@ -43,16 +45,19 @@ class BurgerBuilder extends React.Component {
         });
     };
 
+    // Add ingredient to burger
     addIngredientHandler = (type) => {
         this.changeIngredientsQuantity(type, 1);
     };
 
+    // Remove ingredient from burger
     removeIngredientHandler = (type) => {
         if (this.state.ingredients[type] > 0 ) {
             this.changeIngredientsQuantity(type, -1);
         }
     };
 
+    // Check for enough ingredients to make a purchase
     updatePurchaseState = () => {
         const ingredients = {
             ...this.state.ingredients
@@ -62,14 +67,21 @@ class BurgerBuilder extends React.Component {
         this.setState({purchasable: sum > 0})
     };
 
+    // Hide/Show purchase list
+    parchaseHandler = () => {
+        this.setState({purchasing: !this.state.purchasing})
+    };
+
     render() {
         return (
             <Aux>
-                <Modal>
+
+                <Modal show = {this.state.purchasing}>
                     <OrderSummary ingredients = {this.state.ingredients}/>
                 </Modal>
                 <Burger ingredients = {this.state.ingredients}/>
                 <BurgerControls
+                    ordered = {this.parchaseHandler}
                     totalPrice = {this.state.totalPrice}
                     ingredients = {this.state.ingredients}
                     purchasable={this.state.purchasable}
