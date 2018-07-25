@@ -83,7 +83,9 @@ class BurgerBuilder extends React.Component {
                 <Modal
                     modalClosed = {this.parchesCancelHandler}
                     show = {this.state.purchasing}>
-                    <OrderSummary ingredients = {this.state.ingredients}/>
+                    <OrderSummary
+                        modalClosed = {this.parchesCancelHandler}
+                        ingredients = {this.state.ingredients}/>
                 </Modal>
                 <Burger ingredients = {this.state.ingredients}/>
                 <BurgerControls

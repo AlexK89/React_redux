@@ -1,6 +1,7 @@
 import React from 'react';
 import Aux from '../../../hoc/Aux.jsx';
 import styles from './OrderSummary.scss';
+import Button from '../../UI/Button/Button.jsx';
 
 const OrderSummary = (props) => {
     const ingredientsSummary = Object.keys(props.ingredients).map(ingredient => {
@@ -10,7 +11,6 @@ const OrderSummary = (props) => {
             </li>
         )
     });
-    console.log('hello');
     return (
         <Aux>
             <h3>Your order:</h3>
@@ -19,6 +19,14 @@ const OrderSummary = (props) => {
                 {ingredientsSummary}
                 <p>Continue to Checkout?</p>
             </ul>
+            <div className={styles.order_buttons}>
+                <Button
+                    btnType={'danger'}
+                    click={props.modalClosed}>
+                    Cancel
+                </Button>
+                <Button btnType={'success'}>Continue</Button>
+            </div>
         </Aux>
     )
 };

@@ -1,0 +1,36 @@
+.btn {
+  width: 150px;
+  height: 40px;
+  box-shadow: 0 4px 3px rgba(0,0,0, 0.4);
+  border: none;
+  color: rgba(255, 255, 255, 0.82);
+  cursor: pointer;
+  transition: .3s;
+  font-size: 1.2em;
+  margin: 0 1em;
+
+  &:not([disabled]):hover {
+    transform: scale(0.97);
+    box-shadow: 0 2px 1px rgba(0,0,0, 0.4);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+
+  &.success {
+    background-color: #0d8015;
+
+    &:disabled {
+      background-color: #a7a7a7;
+    }
+  }
+
+  &.danger {
+    background-color: #bb3e30;
+
+    &:disabled {
+      background-color: #a7a7a7;
+    }
+  }
+}

@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './BuildControls.scss';
 import BuildControl from './BuildControl/BuildControl.jsx';
+import Button from '../../UI/Button/Button';
 
 const controls = [
     { label: 'Salad', type: 'salad' },
@@ -14,12 +15,12 @@ const buildControls = (props) => {
         <div className={styles.BuildControls}>
             <div className={styles.checkout}>
                 <h2 className={styles.checkoutPrice}>Current price: {props.totalPrice.toFixed(2)}$</h2>
-                <button
-                    onClick={props.ordered}
-                    className={styles.checkoutButton}
+                <Button
+                    click={props.ordered}
+                    btnType={'success'}
                     disabled={!props.purchasable}>
                     Order now
-                </button>
+                </Button>
             </div>
             {
                 controls.map((control) => {
