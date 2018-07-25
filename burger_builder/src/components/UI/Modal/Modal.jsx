@@ -1,14 +1,17 @@
 import React from 'react';
 import styles from './Modal.scss';
+import Aux from '../../../hoc/Aux.jsx';
+import Backdrop from '../Backdrop/Backdrop.jsx';
 
 const Modal = (props) => {
-    console.log(props.show);
+    console.log(props.children);
     return (
-        <div
-            className={`${styles.Modal} ${props.show ? styles.list_visible : ''}`}
-        >
-            {props.children}
-        </div>
+        <Aux>
+            <Backdrop show = {props.show} clicked = {props.modalClosed} />
+                <div className={`${styles.Modal} ${props.show ? styles.list_visible : '  '}`} >
+                    {props.children}
+                </div>
+        </Aux>
     )
 };
 

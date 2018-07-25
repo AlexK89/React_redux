@@ -63,25 +63,31 @@ class BurgerBuilder extends React.Component {
             ...this.state.ingredients
         };
         const sum = Object.values(ingredients).reduce((a, b) => a + b, 0);
-        console.log(sum > 0);
+
         this.setState({purchasable: sum > 0})
     };
 
-    // Hide/Show purchase list
-    parchaseHandler = () => {
-        this.setState({purchasing: !this.state.purchasing})
+    // Show purchase list
+    parchesHandler = () => {
+        this.setState({purchasing: true})
+    };
+
+    // Hide purchase list
+    parchesCancelHandler = () => {
+        this.setState({purchasing: false})
     };
 
     render() {
         return (
             <Aux>
-
-                <Modal show = {this.state.purchasing}>
+                <Modal
+                    modalClosed = {this.parchesCancelHandler}
+                    show = {this.state.purchasing}>
                     <OrderSummary ingredients = {this.state.ingredients}/>
                 </Modal>
                 <Burger ingredients = {this.state.ingredients}/>
                 <BurgerControls
-                    ordered = {this.parchaseHandler}
+                    ordered = {this.parchesHandler}
                     totalPrice = {this.state.totalPrice}
                     ingredients = {this.state.ingredients}
                     purchasable={this.state.purchasable}
