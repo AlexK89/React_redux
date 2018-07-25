@@ -77,6 +77,11 @@ class BurgerBuilder extends React.Component {
         this.setState({purchasing: false})
     };
 
+    // Continue purchase list
+    parchesContinueHandler = () => {
+        alert('Continue....');
+    };
+
     render() {
         return (
             <Aux>
@@ -84,6 +89,7 @@ class BurgerBuilder extends React.Component {
                     modalClosed = {this.parchesCancelHandler}
                     show = {this.state.purchasing}>
                     <OrderSummary
+                        modalContinue = {this.parchesContinueHandler}
                         modalClosed = {this.parchesCancelHandler}
                         ingredients = {this.state.ingredients}/>
                 </Modal>

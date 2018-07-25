@@ -25,7 +25,11 @@ const OrderSummary = (props) => {
                     click={props.modalClosed}>
                     Cancel
                 </Button>
-                <Button btnType={'success'}>Continue</Button>
+                <Button
+                    click={props.modalContinue}
+                    btnType={'success'}>
+                    Continue
+                </Button>
             </div>
         </Aux>
     )

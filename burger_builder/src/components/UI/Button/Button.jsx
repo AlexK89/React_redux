@@ -5,7 +5,7 @@ const button = (props) => {
     const btnClasses = (props.btnType).split(' ').map(btnClass => {
         return styles[btnClass];
     });
-    
+
     return (
         <button
             className={[styles.btn, ...btnClasses].join(' ')}
