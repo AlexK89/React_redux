@@ -1,6 +1,6 @@
-import 'rc-slider/assets/index.scss';
 import React from 'react';
 import Slider from 'rc-slider';
+import 'rc-slider/assets/index.css';
 
 export class RangeSlider extends React.Component {
     handleChange = (priceLimits) => {
