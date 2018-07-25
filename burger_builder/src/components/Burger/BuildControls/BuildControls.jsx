@@ -14,7 +14,7 @@ const buildControls = (props) => {
     return (
         <div className={styles.BuildControls}>
             <div className={styles.checkout}>
-                <h2 className={styles.checkoutPrice}>Current price: {props.totalPrice.toFixed(2)}$</h2>
+                <h2 className={styles.checkoutPrice}>Current price: {props.totalPrice}$</h2>
                 <Button
                     click={props.ordered}
                     btnType={'success'}

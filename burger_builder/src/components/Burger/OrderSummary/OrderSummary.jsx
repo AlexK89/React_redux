@@ -17,6 +17,7 @@ const OrderSummary = (props) => {
             <p>A delicious burger with following components</p>
             <ul className={styles.order_list}>
                 {ingredientsSummary}
+                <p><strong>Total Price: {props.totalPrice}$</strong></p>
                 <p>Continue to Checkout?</p>
             </ul>
             <div className={styles.order_buttons}>

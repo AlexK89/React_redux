@@ -35,7 +35,7 @@ class BurgerBuilder extends React.Component {
         updatedIngredients[type] += count;
 
         const priceChange = INGREDIANT_PRICES[type];
-        const newPrice = this.state.totalPrice + priceChange * count;
+        const newPrice = (parseFloat(this.state.totalPrice) + priceChange * count).toFixed(2);
 
         this.setState({
             totalPrice: newPrice,
@@ -89,6 +89,7 @@ class BurgerBuilder extends React.Component {
                     modalClosed = {this.parchesCancelHandler}
                     show = {this.state.purchasing}>
                     <OrderSummary
+                        totalPrice = {this.state.totalPrice}
                         modalContinue = {this.parchesContinueHandler}
                         modalClosed = {this.parchesCancelHandler}
                         ingredients = {this.state.ingredients}/>
