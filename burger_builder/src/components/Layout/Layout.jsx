@@ -15,13 +15,11 @@ export class Layout extends React.Component {
 
     sideDrawerToggleHandler = () => {
         this.setState((prevState) => {
-            console.log(prevState);
             return {showSideDrawer: !prevState.showSideDrawer}
         });
     };
 
     render() {
-        console.log('this.state.showSideDrawer: ', this.state.showSideDrawer);
         return (
             <Aux>
                 <Toolbar className={styles.Toolbar} drawerToggleClicked={this.sideDrawerToggleHandler}/>
