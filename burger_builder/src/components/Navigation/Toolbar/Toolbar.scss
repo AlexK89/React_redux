@@ -13,9 +13,17 @@
   z-index: 90;
   color: #fff;
 
+  .logo {
+    padding: .5em;
+    height: 100%;
+    width: calc(100% - 40px);
+    position: absolute;
+    display: flex;
+    justify-content: center;
+  }
+
   &_nav {
     color: rgba(255, 255, 255, 0.8);
     margin: 0;
-
   }
 }

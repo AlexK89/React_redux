@@ -4,9 +4,7 @@ import styles from './Logo.scss';
 
 const logo = (props) => {
     return (
-        <div className={styles.Logo}>
-            <img src={burgerLogo} alt="Logo"/>
-        </div>
+        <img src={burgerLogo} className={styles.logo_img} alt="Logo"/>
     )
 };
 
