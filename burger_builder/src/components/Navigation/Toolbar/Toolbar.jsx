@@ -10,7 +10,7 @@ const toolbar = (props) => {
             <div className={styles.logo}>
                 <Logo />
             </div>
-            <nav className={styles.Toolbar_nav}>
+            <nav className={[styles.Toolbar_nav, styles.onlyForDesktop].join(' ')}>
                 <Navigation />
             </nav>
         </header>

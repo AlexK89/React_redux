@@ -1,21 +1,40 @@
 .NavigationItem {
-  margin: 0;
-  display: flex;
-  height: 100%;
-  align-items: center;
+  margin: 10px 0;
+  display: block;
+  width: 100%;
 
   a {
-    color: #fff;
+    color: #8F5C2C;
     text-decoration: none;
-    padding: 1em 0.6em;
-    border-bottom: 4px solid transparent;
+    width: 100%;
     transition: .3s;
 
     &:hover,
     &:active,
     &.active {
-      background-color: #8F5C2C;
-      border-color: #40A4C8;
+      color: #40A4C8;
+    }
+  }
+
+  @media screen and (min-width: 500px){
+    margin: 0;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: auto;
+
+    a {
+      color: #fff;
+      padding: 1em 0.6em;
+      border-bottom: 4px solid transparent;
+      width: auto;
+
+      &:hover,
+      &:active,
+      &.active {
+        background-color: #8F5C2C;
+        border-color: #40A4C8;
+      }
     }
   }
 }
