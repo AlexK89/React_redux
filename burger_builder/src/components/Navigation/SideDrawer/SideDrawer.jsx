@@ -8,8 +8,8 @@ import styles from './SideDrawer.scss';
 const sideDrawer = (props) => {
     return (
         <Aux>
-            <Backdrop show={props.open} clicked={props.closed}/>
-            <div className={[styles.SideDrawer, (props.open ? styles.open : styles.close)].join(' ')}>
+            <Backdrop show={props.openStatus} clicked={props.closed}/>
+            <div className={[styles.SideDrawer, (props.openStatus ? styles.open : styles.close)].join(' ')}>
                 <div className={styles.logo}>
                     <Logo/>
                 </div>

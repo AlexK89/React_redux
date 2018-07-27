@@ -6,18 +6,26 @@ import styles from './Layout.scss';
 
 export class Layout extends React.Component {
     state = {
-        showSideDrawer: true
+        showSideDrawer: false
     };
 
     sideDrawerClosedHandler = () => {
         this.setState({showSideDrawer: false});
     };
 
+    sideDrawerToggleHandler = () => {
+        this.setState((prevState) => {
+            console.log(prevState);
+            return {showSideDrawer: !prevState.showSideDrawer}
+        });
+    };
+
     render() {
+        console.log('this.state.showSideDrawer: ', this.state.showSideDrawer);
         return (
             <Aux>
-                <Toolbar className={styles.Toolbar}/>
-                <SideDrawer open={this.state.showSideDrawer} closed={this.sideDrawerClosedHandler}/>
+                <Toolbar className={styles.Toolbar} drawerToggleClicked={this.sideDrawerToggleHandler}/>
+                <SideDrawer openStatus={this.state.showSideDrawer} closed={this.sideDrawerClosedHandler}/>
                 <main className={styles.content}>
                     {this.props.children}
                 </main>
