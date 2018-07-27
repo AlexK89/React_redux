@@ -4,8 +4,9 @@ import styles from './NavigationItems.scss';
 
 const navigationItems = (props) => {
     return (
-        <ul>
-
+        <ul className={styles.NavigationItem}>
+            <NavigationItem link={'/'} active>Burger builder</NavigationItem>
+            <NavigationItem link={'/'}>Checkout</NavigationItem>
         </ul>
     )
 };

@@ -1,6 +1,10 @@
 .Logo {
   padding: .5em;
   height: 100%;
+  width: calc(100% - 40px);
+  position: absolute;
+  display: flex;
+  justify-content: center;
 
   img {
     height: 100%;
