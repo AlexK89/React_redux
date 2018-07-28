@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import styles from './App.scss';
-import Layout from '../components/Layout/Layout.jsx';
+import Layout from './Layout/Layout.jsx';
 import BurgerBuilder from '../containers/BurgerBuilder/BurgerBuilder.jsx';
 
 class App extends Component {

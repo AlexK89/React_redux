@@ -8,10 +8,6 @@ export class Modal extends React.Component {
         return nextProps.show !== this.props.show;
     }
 
-    componentWillUpdate() {
-        console.log('modal will update');
-    }
-
     render() {
         return (
             <Aux>

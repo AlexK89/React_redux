@@ -4,10 +4,6 @@ import styles from './OrderSummary.scss';
 import Button from '../../UI/Button/Button.jsx';
 
 export class OrderSummary extends React.Component {
-    componentWillUpdate() {
-        console.log('order summery');
-    }
-
     render() {
         const ingredientsSummary = Object.keys(this.props.ingredients).map(ingredient => {
             return (
