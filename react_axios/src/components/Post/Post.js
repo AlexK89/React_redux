@@ -1,12 +1,12 @@
 import React from 'react';
 
-import './Post.css';
+import styles from  './Post.scss';
 
 const post = (props) => (
-    <article className="Post">
+    <article className={styles.Post}>
         <h1>Title</h1>
-        <div className="Info">
-            <div className="Author">Author</div>
+        <div className={styles.Info}>
+            <div className={styles.Author}>Author</div>
         </div>
     </article>
 );
