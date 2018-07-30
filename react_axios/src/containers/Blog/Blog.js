@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import axios from 'axios';
 
 import Post from '../../components/Post/Post';
@@ -14,27 +14,30 @@ class Blog extends Component {
     componentDidMount() {
         axios.get('https://jsonplaceholder.typicode.com/posts')
             .then(response => {
-                // this.setState({posts: response.data})
                 if (response.status === 200) {
-                    console.log('response: ', response.data);
+                    console.log(response.data);
+                    this.setState({posts: response.data})
                 }
 
             });
     }
 
-    render () {
+    render() {
+        const posts = (
+            this.state.posts) ? this.state.posts.map(post => {
+                return <Post key = {post.id} post = {post}/>
+            }) : null;
+
         return (
             <div>
                 <section className={styles.Posts}>
-                    <Post />
-                    <Post />
-                    <Post />
+                    {posts}
                 </section>
                 <section>
-                    <FullPost />
+                    <FullPost/>
                 </section>
                 <section>
-                    <NewPost />
+                    <NewPost/>
                 </section>
             </div>
         );

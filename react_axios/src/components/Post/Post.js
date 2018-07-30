@@ -4,9 +4,9 @@ import styles from  './Post.scss';
 
 const post = (props) => (
     <article className={styles.Post}>
-        <h1>Title</h1>
+        <h1>{props.post.title}</h1>
         <div className={styles.Info}>
-            <div className={styles.Author}>Author</div>
+            <div className={styles.Author}>{props.post.userId}</div>
         </div>
     </article>
 );
