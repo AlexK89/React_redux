@@ -33,7 +33,6 @@ class Blog extends Component {
                 }
             })
             .catch(error => {
-                console.log('Blog error handler: ', error);
                 this.setState({queryingError: true});
             });
     }
