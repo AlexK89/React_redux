@@ -5,6 +5,12 @@ import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
+// Create shared URL for all requests
+axios.defaults.baseURL = 'https://jsonplaceholder.typicode.com';
+
+// We can adjust headers for requests
+axios.defaults.headers.common['Authorization'] = 'Auth Token';
+axios.defaults.headers.post['Content-Type'] = 'application/json';
 
 // For requests
 axios.interceptors.request.use(request => {
