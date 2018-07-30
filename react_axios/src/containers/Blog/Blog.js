@@ -9,7 +9,8 @@ import styles from './Blog.scss';
 class Blog extends Component {
     state = {
         posts: null,
-        selectedPostId: null
+        selectedPostId: null,
+        queryingError: false
     };
 
     componentDidMount() {
@@ -25,9 +26,15 @@ class Blog extends Component {
                     });
                     console.log(updatedPosts);
 
-                    this.setState({posts: updatedPosts})
+                    this.setState({
+                        posts: updatedPosts,
+                        queryingError: false
+                    })
                 }
-
+            })
+            .catch(error => {
+                console.log('Blog error handler: ', error);
+                this.setState({queryingError: true});
             });
     }
 
@@ -36,8 +43,8 @@ class Blog extends Component {
     };
 
     render() {
-        const posts = (
-            this.state.posts) ? this.state.posts.map(post => {
+        const posts =
+            this.state.posts ? this.state.posts.map(post => {
             return (
                 <Post
                     selected={() => this.postSelectedHandler(post.id)}
@@ -48,9 +55,15 @@ class Blog extends Component {
 
         return (
             <div>
-                <section className={styles.Posts}>
-                    {posts}
-                </section>
+                {
+                    this.state.queryingError ?
+                        <h2>SOMETHING WENT WRONG</h2>
+                        :
+                        <section className={styles.Posts}>
+                            {posts}
+                        </section>
+                }
+
                 <section>
                     <FullPost id={this.state.selectedPostId}/>
                 </section>
