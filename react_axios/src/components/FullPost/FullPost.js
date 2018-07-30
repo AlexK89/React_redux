@@ -7,7 +7,7 @@ class FullPost extends Component {
     state = {
       post: null
     };
-    
+
     componentDidUpdate() {
         if (this.props.id && (!this.state.post || this.state.post.id !== this.props.id)) {
             axios.get(`https://jsonplaceholder.typicode.com/posts/${this.props.id}`)
@@ -17,6 +17,8 @@ class FullPost extends Component {
                 });
         }
     }
+
+
 
     render () {
         let post = <p className={styles.post_not_selected}>Please select a Post!</p>;
