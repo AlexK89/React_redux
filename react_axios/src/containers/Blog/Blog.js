@@ -8,7 +8,8 @@ import styles from './Blog.scss';
 
 class Blog extends Component {
     state = {
-        posts: null
+        posts: null,
+        selectedPostId: null
     };
 
     componentDidMount() {
@@ -17,10 +18,10 @@ class Blog extends Component {
                 if (response.status === 200) {
                     const posts = response.data.slice(0, 3);
                     const updatedPosts = posts.map(post => {
-                       return {
-                           ...post,
-                           author: 'Alex'
-                       }
+                        return {
+                            ...post,
+                            author: 'Alex'
+                        }
                     });
                     console.log(updatedPosts);
 
@@ -30,11 +31,20 @@ class Blog extends Component {
             });
     }
 
+    postSelectedHandler = (selectedPostId) => {
+        this.setState({selectedPostId});
+    };
+
     render() {
         const posts = (
             this.state.posts) ? this.state.posts.map(post => {
-                return <Post key = {post.id} post = {post}/>
-            }) : null;
+            return (
+                <Post
+                    selected={() => this.postSelectedHandler(post.id)}
+                    key={post.id}
+                    post={post}/>
+            )
+        }) : null;
 
         return (
             <div>
@@ -42,7 +52,7 @@ class Blog extends Component {
                     {posts}
                 </section>
                 <section>
-                    <FullPost/>
+                    <FullPost id={this.state.selectedPostId}/>
                 </section>
                 <section>
                     <NewPost/>

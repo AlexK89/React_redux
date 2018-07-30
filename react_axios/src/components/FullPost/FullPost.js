@@ -4,7 +4,12 @@ import styles from './FullPost.scss';
 
 class FullPost extends Component {
     render () {
-        let post = <p>Please select a Post!</p>;
+        let post = <p className={styles.post_not_selected}>Please select a Post!</p>;
+        if (!this.props.id) {
+            return post;
+        }
+
+
         post = (
             <div className={styles.FullPost}>
                 <h1>Title</h1>
