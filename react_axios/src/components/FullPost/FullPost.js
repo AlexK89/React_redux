@@ -1,25 +1,45 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 import styles from './FullPost.scss';
 
 class FullPost extends Component {
+    state = {
+      post: null
+    };
+    componentDidUpdate() {
+        if (this.props.id) {
+            axios.get(`https://jsonplaceholder.typicode.com/posts/${this.props.id}`)
+                .then(response => response.data)
+                .then(post => {
+                    this.setState((prevState) => {
+                        if (!this.state.post || prevState.post.id !== post.id) {
+                            return {post}
+                        }
+                    })
+                });
+        }
+    }
+
     render () {
         let post = <p className={styles.post_not_selected}>Please select a Post!</p>;
-        if (!this.props.id) {
-            return post;
+
+        if (this.props.id) {
+            post = <p className={styles.post_not_selected}>Loading...</p>;
         }
 
-
-        post = (
-            <div className={styles.FullPost}>
-                <h1>Title</h1>
-                <p>Content</p>
-                <div className={styles.Edit}>
-                    <button className={styles.Delete}>Delete</button>
+        if (this.state.post) {
+            post = (
+                <div className={styles.FullPost}>
+                    <h1>{this.state.post.title}</h1>
+                    <p>{this.state.post.body}</p>
+                    <div className={styles.Edit}>
+                        <button className={styles.Delete}>Delete</button>
+                    </div>
                 </div>
-            </div>
 
-        );
+            );
+        }
         return post;
     }
 }
