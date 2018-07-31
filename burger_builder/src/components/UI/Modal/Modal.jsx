@@ -4,8 +4,8 @@ import Aux from '../../../hoc/Aux.jsx';
 import Backdrop from '../Backdrop/Backdrop.jsx';
 
 export class Modal extends React.Component {
-    shouldComponentUpdate(nextProps, nestState) {
-        return nextProps.show !== this.props.show;
+    shouldComponentUpdate(nextProps, nextState) {
+        return nextProps.show !== this.props.show || nextProps.children !== this.props.children;
     }
 
     render() {

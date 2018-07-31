@@ -1,6 +1,7 @@
 import React from 'react';
 import Aux from '../../hoc/Aux.jsx';
 import Burger from "../../components/Burger/Burger.jsx";
+import Spinner from '../../components/UI/Spinner/Spinner.jsx';
 import axiosInstance from '../../hoc/axios-orders';
 import BurgerControls from '../../components/Burger/BuildControls/BuildControls.jsx';
 import Modal from '../../components/UI/Modal/Modal.jsx';
@@ -25,6 +26,7 @@ class BurgerBuilder extends React.Component {
         totalPrice: 4,
         purchasable: false,
         purchasing: false,
+        loading: false,
     };
 
     // Change ingredients in your burger (Add/Remove)
@@ -95,26 +97,42 @@ class BurgerBuilder extends React.Component {
             deliveryMethod: 'fastest'
         };
 
+        this.setState({loading: true});
+
         axiosInstance.post('/orders.json', order)
             .then(response => {
                 console.log('Place order response: ', response);
+                this.setState({
+                    loading: false,
+                    purchasing: false
+                });
             })
             .catch(error => {
                 console.log('Place order response: ', error);
+                this.setState({
+                    loading: false,
+                    purchasing: false
+                });
             });
     };
 
     render() {
+        let orderSummary = <OrderSummary
+            totalPrice={this.state.totalPrice}
+            modalContinue={this.parchesContinueHandler}
+            modalClosed={this.parchesCancelHandler}
+            ingredients={this.state.ingredients}/>;
+
+        if (this.state.loading) {
+            orderSummary = <Spinner />
+        }
+
         return (
             <Aux>
                 <Modal
                     modalClosed={this.parchesCancelHandler}
                     show={this.state.purchasing}>
-                    <OrderSummary
-                        totalPrice={this.state.totalPrice}
-                        modalContinue={this.parchesContinueHandler}
-                        modalClosed={this.parchesCancelHandler}
-                        ingredients={this.state.ingredients}/>
+                    {orderSummary}
                 </Modal>
                 <Burger ingredients={this.state.ingredients}/>
                 <BurgerControls
