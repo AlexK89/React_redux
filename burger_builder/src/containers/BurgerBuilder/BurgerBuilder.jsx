@@ -1,6 +1,7 @@
 import React from 'react';
 import Aux from '../../hoc/Aux.jsx';
 import Burger from "../../components/Burger/Burger.jsx";
+import axiosInstance from '../../hoc/axios-orders';
 import BurgerControls from '../../components/Burger/BuildControls/BuildControls.jsx';
 import Modal from '../../components/UI/Modal/Modal.jsx';
 import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary.jsx';
@@ -52,7 +53,7 @@ class BurgerBuilder extends React.Component {
 
     // Remove ingredient from burger
     removeIngredientHandler = (type) => {
-        if (this.state.ingredients[type] > 0 ) {
+        if (this.state.ingredients[type] > 0) {
             this.changeIngredientsQuantity(type, -1);
         }
     };
@@ -79,29 +80,50 @@ class BurgerBuilder extends React.Component {
 
     // Continue purchase list
     parchesContinueHandler = () => {
-        alert('Continue....');
+        const order = {
+            ingredients: this.state.ingredients,
+            totalPrice: this.state.totalPrice,
+            customer: {
+                name: 'Alex',
+                address: {
+                    street: 'Bristol Road',
+                    zipCode: '2342342',
+                    country: 'England'
+                },
+                emailAddress: 'test@test.com'
+            },
+            deliveryMethod: 'fastest'
+        };
+
+        axiosInstance.post('/orders.json', order)
+            .then(response => {
+                console.log('Place order response: ', response);
+            })
+            .catch(error => {
+                console.log('Place order response: ', error);
+            });
     };
 
     render() {
         return (
             <Aux>
                 <Modal
-                    modalClosed = {this.parchesCancelHandler}
-                    show = {this.state.purchasing}>
+                    modalClosed={this.parchesCancelHandler}
+                    show={this.state.purchasing}>
                     <OrderSummary
-                        totalPrice = {this.state.totalPrice}
-                        modalContinue = {this.parchesContinueHandler}
-                        modalClosed = {this.parchesCancelHandler}
-                        ingredients = {this.state.ingredients}/>
+                        totalPrice={this.state.totalPrice}
+                        modalContinue={this.parchesContinueHandler}
+                        modalClosed={this.parchesCancelHandler}
+                        ingredients={this.state.ingredients}/>
                 </Modal>
-                <Burger ingredients = {this.state.ingredients}/>
+                <Burger ingredients={this.state.ingredients}/>
                 <BurgerControls
-                    ordered = {this.parchesHandler}
-                    totalPrice = {this.state.totalPrice}
-                    ingredients = {this.state.ingredients}
+                    ordered={this.parchesHandler}
+                    totalPrice={this.state.totalPrice}
+                    ingredients={this.state.ingredients}
                     purchasable={this.state.purchasable}
-                    addIngredient = {this.addIngredientHandler}
-                    removeIngredient = {this.removeIngredientHandler}
+                    addIngredient={this.addIngredientHandler}
+                    removeIngredient={this.removeIngredientHandler}
                 />
             </Aux>
         )
