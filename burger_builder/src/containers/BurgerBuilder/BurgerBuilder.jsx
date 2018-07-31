@@ -1,5 +1,6 @@
 import React from 'react';
 import Aux from '../../hoc/Aux.jsx';
+import withErrorHandler from '../../hoc/withErrorHandler/WithErrorHandler.jsx';
 import Burger from "../../components/Burger/Burger.jsx";
 import Spinner from '../../components/UI/Spinner/Spinner.jsx';
 import axiosInstance from '../../hoc/axios-orders';
@@ -99,16 +100,14 @@ class BurgerBuilder extends React.Component {
 
         this.setState({loading: true});
 
-        axiosInstance.post('/orders.json', order)
+        axiosInstance.post('/orders', order)
             .then(response => {
-                console.log('Place order response: ', response);
                 this.setState({
                     loading: false,
                     purchasing: false
                 });
             })
             .catch(error => {
-                console.log('Place order response: ', error);
                 this.setState({
                     loading: false,
                     purchasing: false
@@ -148,4 +147,4 @@ class BurgerBuilder extends React.Component {
     }
 }
 
-export default BurgerBuilder;
+export default withErrorHandler(BurgerBuilder, axiosInstance);
