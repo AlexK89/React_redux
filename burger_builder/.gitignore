@@ -2,6 +2,7 @@
 
 # dependencies
 /node_modules
+/src/databaseUrl.js
 
 # testing
 /coverage
