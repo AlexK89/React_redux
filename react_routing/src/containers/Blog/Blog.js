@@ -53,12 +53,24 @@ class Blog extends Component {
         }) : null;
 
         return (
-            <div>
+            <div className={styles.Blog}>
+                <header className={styles.Blog__header}>
+                    <nav className={styles.Blog__header__nav_menu}>
+                        <ul className={styles.Blog__header__nav_menu__list}>
+                            <li className={styles.Blog__header__nav_menu__list__item}>
+                                <a href="/">Home</a>
+                            </li>
+                            <li className={styles.Blog__header__nav_menu__list__item}>
+                                <a href="/new-post">New Post</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </header>
                 {
                     this.state.queryingError ?
                         <h2>SOMETHING WENT WRONG</h2>
                         :
-                        <section className={styles.Posts}>
+                        <section className={styles.posts}>
                             {posts}
                         </section>
                 }
