@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Posts from '../Posts/Posts.jsx';
 import newPosts from '../NewPost/NewPost';
-import { Route } from 'react-router-dom';
+import { Route, Link } from 'react-router-dom';
 
 import styles from './Blog.scss';
 
@@ -13,10 +13,10 @@ class Blog extends Component {
                     <nav className={styles.Blog__header__nav_menu}>
                         <ul className={styles.Blog__header__nav_menu__list}>
                             <li className={styles.Blog__header__nav_menu__list__item}>
-                                <a href="/">Home</a>
+                                <Link to="/">Home</Link>
                             </li>
                             <li className={styles.Blog__header__nav_menu__list__item}>
-                                <a href="/new-post">New Post</a>
+                                <Link to="/new-post">New Post</Link>
                             </li>
                         </ul>
                     </nav>
