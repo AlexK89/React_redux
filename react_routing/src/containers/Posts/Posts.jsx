@@ -12,6 +12,7 @@ export class Posts extends React.Component {
     };
 
     componentDidMount() {
+        console.log('Posts: ', this.props);
         axios.get('/posts')
             .then(response => {
                 if (response.status === 200) {
@@ -38,7 +39,6 @@ export class Posts extends React.Component {
     postSelectedHandler = (selectedPostId) => {
         this.setState({selectedPostId});
     };
-
 
     render() {
         const posts =
