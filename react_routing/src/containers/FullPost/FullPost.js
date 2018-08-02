@@ -8,9 +8,9 @@ class FullPost extends Component {
       post: null
     };
 
-    componentDidUpdate() {
-        if (this.props.id && (!this.state.post || this.state.post.id !== this.props.id)) {
-            axios.get(`/posts/${this.props.id}`)
+    componentDidMount() {
+        if (this.props.match.params.id && (!this.state.post || this.state.post.id !== this.props.match.params.id)) {
+            axios.get(`/posts/${this.props.match.params.id}`)
                 .then(response => response.data)
                 .then(post => {
                     this.setState({post})
@@ -19,16 +19,17 @@ class FullPost extends Component {
     }
 
     postDeleteHandler = () => {
-        axios.delete(`/posts/${this.props.id}`)
+        axios.delete(`/posts/${this.props.match.params.id}`)
             .then(response => {
                 console.log('Delete response: ', response);
             });
     };
 
     render () {
+        console.log(this.props);
         let post = <p className={styles.post_not_selected}>Please select a Post!</p>;
 
-        if (this.props.id) {
+        if (this.props.match.params.id) {
             post = <p className={styles.post_not_selected}>Loading...</p>;
         }
 
