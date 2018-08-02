@@ -1,7 +1,8 @@
 import React from 'react';
 import Post from '../../components/Post/Post';
-import { Link } from 'react-router-dom';
-import axios from "../../axios";
+import { Route, Link, Switch } from 'react-router-dom';
+import FullPosts from '../../containers/FullPost/FullPost';
+import axios from '../../axios';
 
 import styles from './Posts.scss';
 
@@ -48,7 +49,7 @@ export class Posts extends React.Component {
                     <Link
                         key={post.id}
                         className={styles.Posts_post}
-                        to={`/${post.id}`}>
+                        to={`${this.props.match.url}/${post.id}`}>
                         <Post
                             selected={() => this.postSelectedHandler(post.id)}
                             post={post}/>
@@ -60,9 +61,12 @@ export class Posts extends React.Component {
             this.state.queryingError ?
                 <h2>SOMETHING WENT WRONG</h2>
                 :
-                <section className={styles.Posts}>
-                    {posts}
-                </section>
+                <div>
+                    <section className={styles.Posts}>
+                        {posts}
+                    </section>
+                    <Route path={`${this.props.match.url}/:id`} component={FullPosts}/>
+                </div>
         )
     }
 }

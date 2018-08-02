@@ -26,7 +26,6 @@ class FullPost extends Component {
     };
 
     render () {
-        console.log(this.props);
         let post = <p className={styles.post_not_selected}>Please select a Post!</p>;
 
         if (this.props.match.params.id) {
