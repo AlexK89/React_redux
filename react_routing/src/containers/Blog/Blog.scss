@@ -34,6 +34,12 @@
                 box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
               }
             }
+
+            &.my-active {
+              color: #fff;
+              background-color: #8678ff;
+              box-shadow: 0 2px 4px rgba(255, 255, 255, 0.3);
+            }
           }
         }
       }

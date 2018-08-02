@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Posts from '../Posts/Posts.jsx';
 import newPosts from '../NewPost/NewPost';
-import { Route, Link } from 'react-router-dom';
+import { Route, NavLink } from 'react-router-dom';
 
 import styles from './Blog.scss';
 
@@ -13,10 +13,13 @@ class Blog extends Component {
                     <nav className={styles.Blog__header__nav_menu}>
                         <ul className={styles.Blog__header__nav_menu__list}>
                             <li className={styles.Blog__header__nav_menu__list__item}>
-                                <Link to="/">Home</Link>
+                                <NavLink
+                                    activeClassName = "my-active"
+                                    to="/"
+                                    exact>Home</NavLink>
                             </li>
                             <li className={styles.Blog__header__nav_menu__list__item}>
-                                <Link to="/new-post">New Post</Link>
+                                <NavLink activeClassName = "my-active" to="/new-post">New Post</NavLink>
                             </li>
                         </ul>
                     </nav>
