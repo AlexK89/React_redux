@@ -1,5 +1,6 @@
 import React from 'react';
 import Post from '../../components/Post/Post';
+import { Link } from 'react-router-dom';
 import axios from "../../axios";
 
 import styles from './Posts.scss';
@@ -44,10 +45,14 @@ export class Posts extends React.Component {
         const posts =
             this.state.posts ? this.state.posts.map(post => {
                 return (
-                    <Post
-                        selected={() => this.postSelectedHandler(post.id)}
+                    <Link
                         key={post.id}
-                        post={post}/>
+                        className={styles.Posts_post}
+                        to={`/${post.id}`}>
+                        <Post
+                            selected={() => this.postSelectedHandler(post.id)}
+                            post={post}/>
+                    </Link>
                 )
             }) : null;
 

@@ -4,4 +4,10 @@
   justify-content: center;
   width: 80%;
   margin: auto;
+  
+  &_post {
+    display: flex;
+    text-decoration: none;
+    color: #000;
+  }
 }
