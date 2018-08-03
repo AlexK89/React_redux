@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Posts from '../Posts/Posts.jsx';
 import newPosts from '../NewPost/NewPost';
-import { Route, NavLink, Switch } from 'react-router-dom';
+import { Route, NavLink, Switch, Redirect } from 'react-router-dom';
 
 import styles from './Blog.scss';
 
@@ -14,11 +14,16 @@ class Blog extends Component {
                         <ul className={styles.Blog__header__nav_menu__list}>
                             <li className={styles.Blog__header__nav_menu__list__item}>
                                 <NavLink
-                                    to="/posts"
+                                    to="/"
                                     exact>Home</NavLink>
                             </li>
                             <li className={styles.Blog__header__nav_menu__list__item}>
                                 <NavLink activeClassName = "my-active" to="/new-post">New Post</NavLink>
+                            </li>
+                            <li className={styles.Blog__header__nav_menu__list__item}>
+                                <NavLink
+                                    to="/posts"
+                                    exact>Posts</NavLink>
                             </li>
                         </ul>
                     </nav>
@@ -27,6 +32,7 @@ class Blog extends Component {
                 <Switch>
                     <Route path="/new-post"  component={newPosts}/>
                     <Route path="/posts" component={Posts}/>
+                    <Redirect from={"*"} to={"/"} />
                 </Switch>
             </div>
         );
