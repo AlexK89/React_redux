@@ -9,7 +9,7 @@ class NewPost extends Component {
         title: '',
         content: '',
         author: 'Vasile',
-        redirect: false
+        // redirect: false
     };
 
     componentDidMount() {
@@ -26,19 +26,21 @@ class NewPost extends Component {
         axios.post('/posts', post)
             .then(response => {
                 console.log('Post response:', response);
-                this.setState({redirect: true});
+                // Alternative for conditional redirection
+                this.props.history.push('/posts');
+                // this.setState({redirect: true});
             });
     };
 
     render () {
-        let redirection = null;
-        if (this.state.redirect) {
-            redirection = <Redirect to="/posts" />;
-        }
+        // let redirection = null;
+        // if (this.state.redirect) {
+        //     redirection = <Redirect to="/posts" />;
+        // }
 
         return (
             <div className={styles.NewPost}>
-                {redirection}
+                {/*{redirection}*/}
                 <h1>Add a Post</h1>
                 <label>Title</label>
                 <input type="text" value={this.state.title} onChange={(event) => this.setState({title: event.target.value})} />
