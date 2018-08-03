@@ -13,11 +13,6 @@ class Blog extends Component {
                     <nav className={styles.Blog__header__nav_menu}>
                         <ul className={styles.Blog__header__nav_menu__list}>
                             <li className={styles.Blog__header__nav_menu__list__item}>
-                                <NavLink
-                                    to="/"
-                                    exact>Home</NavLink>
-                            </li>
-                            <li className={styles.Blog__header__nav_menu__list__item}>
                                 <NavLink activeClassName = "my-active" to="/new-post">New Post</NavLink>
                             </li>
                             <li className={styles.Blog__header__nav_menu__list__item}>
@@ -32,7 +27,8 @@ class Blog extends Component {
                 <Switch>
                     <Route path="/new-post"  component={newPosts}/>
                     <Route path="/posts" component={Posts}/>
-                    <Redirect from={"/*"} to={"/"} />
+                    <Redirect from="/" exact to="/posts" />
+                    <Route render={() => <h1>Not found</h1>}/>
                 </Switch>
             </div>
         );
