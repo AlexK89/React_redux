@@ -4,7 +4,7 @@ const asyncComponent = (importComponent) => {
     return class extends React.Component {
         state = {
             component: null
-        }
+        };
 
         componentDidMount() {
             importComponent()

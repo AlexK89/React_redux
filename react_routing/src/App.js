@@ -6,7 +6,8 @@ import Blog from './containers/Blog/Blog';
 class App extends Component {
     render() {
         return (
-            <BrowserRouter>
+            // We can use basename property to set default starting point for routing
+            <BrowserRouter basename="/startPointAddress">
                 <div className="App">
                     <Blog/>
                 </div>
