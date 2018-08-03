@@ -1,9 +1,18 @@
 import React, {Component} from 'react';
-import Posts from '../Posts/Posts.jsx';
-import newPosts from '../NewPost/NewPost';
+// import Posts from '../Posts/Posts.jsx';
+// import newPosts from '../NewPost/NewPost';
 import { Route, NavLink, Switch, Redirect } from 'react-router-dom';
-
 import styles from './Blog.scss';
+
+// Lazy loading
+import asyncComponent from '../../hoc/AsyncComponent.jsx';
+
+const AsyncNewPost = asyncComponent(() => {
+    return import('../NewPost/NewPost');
+});
+const AsyncPosts = asyncComponent(() => {
+    return import('../Posts/Posts.jsx');
+});
 
 class Blog extends Component {
     render() {
@@ -25,8 +34,8 @@ class Blog extends Component {
                 </header>
                 {/*Render only first matched route(works like || , looking for first true)*/}
                 <Switch>
-                    <Route path="/new-post"  component={newPosts}/>
-                    <Route path="/posts" component={Posts}/>
+                    <Route path="/new-post"  component={AsyncNewPost}/>
+                    <Route path="/posts" component={AsyncPosts}/>
                     <Redirect from="/" exact to="/posts" />
                     <Route render={() => <h1>Not found</h1>}/>
                 </Switch>
