@@ -12,18 +12,12 @@ class App extends Component {
                 <div className="App">
                     <Route path="/" component={Navigation}/>
                     <Switch>
+                        <Route path="/" exact render={() => <h1>Hello</h1>}/>
                         <Route path="/courses" component={Courses}/>
                         <Route path="/users" component={Users}/>
                         <Redirect from="/all-courses" to="courses"/>
                         <Route render={() => <h1>Not found</h1>}/>
                     </Switch>
-
-                    <ol style={{textAlign: 'left'}}>
-                        <li>Pass the course title to the "Course" page - pass it as a param or score bonus points by
-                            passing
-                            it as query params (you need to manually parse them though!)
-                        </li>
-                    </ol>
                 </div>
             </BrowserRouter>
         );
