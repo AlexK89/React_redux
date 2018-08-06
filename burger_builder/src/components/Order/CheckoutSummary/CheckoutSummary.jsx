@@ -8,7 +8,7 @@ const checkoutSummary = (props) => {
         <div className={styles.checkout_summary}>
             <h1>checkoutSummary</h1>
             <div>
-                <Burger ingrediants={props.ingrediants}/>
+                <Burger ingredients={props.ingredients}/>
             </div>
             <Buttons btnType="danger small">Cancel</Buttons>
             <Buttons btnType="success small">Order</Buttons>
