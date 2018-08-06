@@ -90,36 +90,50 @@ class BurgerBuilder extends React.Component {
 
     // Continue purchase list
     parchesContinueHandler = () => {
-        const order = {
-            ingredients: this.state.ingredients,
-            totalPrice: this.state.totalPrice,
-            customer: {
-                name: 'Alex',
-                address: {
-                    street: 'Bristol Road',
-                    zipCode: '2342342',
-                    country: 'England'
-                },
-                emailAddress: 'test@test.com'
-            },
-            deliveryMethod: 'fastest'
-        };
+        // const order = {
+        //     ingredients: this.state.ingredients,
+        //     totalPrice: this.state.totalPrice,
+        //     customer: {
+        //         name: 'Alex',
+        //         address: {
+        //             street: 'Bristol Road',
+        //             zipCode: '2342342',
+        //             country: 'England'
+        //         },
+        //         emailAddress: 'test@test.com'
+        //     },
+        //     deliveryMethod: 'fastest'
+        // };
+        //
+        // this.setState({loading: true});
+        //
+        // axiosInstance.post('/orders.json', order)
+        //     .then(response => {
+        //         this.setState({
+        //             loading: false,
+        //             purchasing: false
+        //         });
+        //     })
+        //     .catch(error => {
+        //         this.setState({
+        //             loading: false,
+        //             purchasing: false
+        //         });
+        //     });
 
-        this.setState({loading: true});
 
-        axiosInstance.post('/orders.json', order)
-            .then(response => {
-                this.setState({
-                    loading: false,
-                    purchasing: false
-                });
-            })
-            .catch(error => {
-                this.setState({
-                    loading: false,
-                    purchasing: false
-                });
-            });
+        // Pass ingredients using URL
+        let queryParams = [];
+
+        for (let item in this.state.ingredients) {
+            queryParams.push(`${encodeURIComponent(item)}=${encodeURIComponent(this.state.ingredients[item])}`);
+        }
+
+        let queryString = queryParams.join('&');
+        this.props.history.push({
+            pathname:'/checkout',
+            search: `?${queryString}`
+        });
     };
 
     render() {
