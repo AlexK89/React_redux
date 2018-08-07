@@ -1,5 +1,4 @@
 import React from 'react';
-// import axios from 'axios';
 import axiosInstance from '../../../hoc/axios-orders';
 import Button from '../../../components/UI/Button/Button.jsx';
 import Spinner from '../../../components/UI/Spinner/Spinner.jsx';

@@ -18,8 +18,9 @@ class Checkout extends React.Component {
         for (let item of query.entries()) {
             if (item[0] === 'price') {
                 price = item[1]
+            } else {
+                ingredients[item[0]] = parseInt(item[1]);
             }
-            ingredients[item[0]] = parseInt(item[1]);
         }
         this.setState({ingredients, totalPrice: price});
     }
@@ -45,7 +46,7 @@ class Checkout extends React.Component {
                     ingredients={this.state.ingredients}/>
                 <Route path={`${this.props.match.path}/order_form`}
                        render={(props) => <ContactData {...props} ingredients={this.state.ingredients}
-                                                  price={this.state.totalPrice}/>}/>
+                                                       totalPrice={this.state.totalPrice}/>}/>
             </Aux>
         )
     }
