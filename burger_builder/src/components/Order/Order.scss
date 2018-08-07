@@ -9,9 +9,9 @@
   &__ingredients {
     list-style: none;
     text-align: left;
-    
-    &__ingredient {
 
+    &__ingredient {
+      text-transform: capitalize;
     }
   }
 }

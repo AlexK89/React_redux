@@ -44,28 +44,34 @@ class ContactData extends React.Component {
             });
     };
 
+
+
     render() {
-        console.log("contact data", this.props);
+        console.log("contact data", this.state.customer);
         let form = (this.state.loading) ?
             <Spinner/> :
             <form>
                 <div className={styles.form__name}>
                     <label htmlFor="name">Name</label>
-                    <input type="text" id='name' placeholder={"Name"}/>
+                    <input type="text" id='name' name="name"
+                           placeholder={"Name"}/>
                 </div>
                 <div className={styles.form__email}>
                     <label htmlFor="email">Email</label>
-                    <input type="email" id='email' placeholder={"Email"}/>
+                    <input type="email" id='email' name="email"
+                           placeholder={"Email"}/>
                 </div>
                 <p>Address</p>
                 <div className={styles.form__address}>
                     <div className={styles.form__address__street}>
                         <label htmlFor="street">Street</label>
-                        <input type="text" id='street' placeholder={"Street"}/>
+                        <input type="text" id='street' name="street"
+                               placeholder={"Street"}/>
                     </div>
                     <div className={styles.form__address__postcode}>
                         <label htmlFor="postcode">Postcode</label>
-                        <input type="text" id='postcode' placeholder={"Post code"}/>
+                        <input type="text" id="postcode" name="postcode"
+                               placeholder={"Post code"}/>
                     </div>
                 </div>
                 <Button type="submit" btnType="success small" click={this.saveOrderHandler}>Submit</Button>

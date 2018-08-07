@@ -7,8 +7,7 @@ const order = (props) => {
         <ul className={styles.order__ingredients}>
             {
                 Object.entries(props.order.ingredients).map((ingredient, key) => {
-                    console.log(ingredient);
-                    return <li className={styles.order__ingredients__ingredient} key={key}>{ingredient[0]} {ingredient[1]}; </li>
+                    return <li className={styles.order__ingredients__ingredient} key={key}>{ingredient[0]} {ingredient[1]};</li>
                 })
             }
         </ul>
