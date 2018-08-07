@@ -1,5 +1,6 @@
 import React from 'react';
 
+// Lazy loader component
 const asyncComponent = (importComponent) => {
     return class extends React.Component {
         state = {

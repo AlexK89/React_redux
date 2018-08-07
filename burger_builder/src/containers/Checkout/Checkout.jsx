@@ -6,18 +6,24 @@ import ContactData from './ContactData/ContactData.jsx';
 
 class Checkout extends React.Component {
     state = {
-        ingredients: null
+        ingredients: null,
+        totalPrice: 0
     };
 
     componentDidMount() {
         const query = new URLSearchParams(this.props.location.search);
         let ingredients = {};
+        let price = 0;
 
         for (let item of query.entries()) {
+            if (item[0] === 'price') {
+                price = item[1]
+            }
             ingredients[item[0]] = parseInt(item[1]);
         }
-        this.setState({ingredients});
+        this.setState({ingredients, totalPrice: price});
     }
+
     // shouldComponentUpdate(nextProps) {
     //     return nextProps.match.location.pathname !== prevProps.match.location.pathname
     // }
@@ -38,7 +44,8 @@ class Checkout extends React.Component {
                         checkoutCancelled={this.checkoutCancelledHandler}
                         checkoutContinued={this.checkoutContinuedHandler}
                         ingredients={this.state.ingredients}/>
-                    <Route path={`${this.props.match.path}/order_form`} component={ContactData}/>
+                    <Route path={`${this.props.match.path}/order_form`}
+                           render={() =><ContactData ingredients={this.state.ingredients} price={this.state.totalPrice}/>}/>
                 </Aux>
                 : ''
         )
