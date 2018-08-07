@@ -5,7 +5,7 @@ import styles from './NavigationItem.scss';
 const navigationItem = (props) => {
     return (
         <li className={styles.NavigationItem}>
-            <NavLink to={props.link} className={props.active ? styles.active : null}>{props.children}</NavLink>
+            <NavLink to={props.link} exact activeClassName={styles.active}>{props.children}</NavLink>
         </li>
     )
 };
