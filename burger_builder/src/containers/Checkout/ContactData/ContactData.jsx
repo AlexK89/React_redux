@@ -2,28 +2,68 @@ import React from 'react';
 import axiosInstance from '../../../hoc/axios-orders';
 import Button from '../../../components/UI/Button/Button.jsx';
 import Spinner from '../../../components/UI/Spinner/Spinner.jsx';
+import FormInput from '../../../components/Order/Form/FormInput.jsx';
 import styles from './ContactData.scss';
 
 class ContactData extends React.Component {
     state = {
-        customer: {
-            name: '',
-            email: '',
-            street: '',
-            postcode: ''
+        customerForm: {
+            name: {
+                elementType: 'input',
+                elementConfig: {
+                    type: 'text',
+                    placeholder: 'Your Name'
+                },
+                value: ''
+            },
+            email: {
+                elementType: 'input',
+                elementConfig: {
+                    type: 'email',
+                    placeholder: 'Your Email'
+                },
+                value: ''
+            },
+            street: {
+                elementType: 'input',
+                elementConfig: {
+                    type: 'text',
+                    placeholder: 'Your Street'
+                },
+                value: ''
+            },
+            postcode: {
+                elementType: 'input',
+                elementConfig: {
+                    type: 'text',
+                    placeholder: 'Your Postcode'
+                },
+                value: ''
+            },
+            deliveryMethod: {
+                elementType: 'select',
+                elementConfig: {
+                    type: 'select',
+                    options: [
+                        {value: 'fastest', displayValue: 'Fastest'},
+                        {value: 'cheapest', displayValue: 'Cheapest'}
+                    ]
+                },
+                value: ''
+            }
         },
         loading: false
     };
 
     saveOrderHandler = (event) => {
         event.preventDefault();
-        console.log('customer: ', this.state.customer);
+        console.log('customer: ', this.state.customerForm);
 
         const order = {
             ingredients: this.props.ingredients,
             totalPrice: this.props.totalPrice,
-            customer: {
-                ...this.state.customer
+            customerForm: {
+                ...this.state.customerForm
             },
             deliveryMethod: 'fastest'
         };
@@ -46,8 +86,7 @@ class ContactData extends React.Component {
 
     submitFormHandler = (event) => {
         const newState = JSON.parse(JSON.stringify(this.state));
-        const propertyName = event.target.name;
-        newState['customer'][propertyName] = event.target.value;
+        newState['customerForm'][event.target.name] = event.target.value;
 
         this.setState({
             ...newState
@@ -55,38 +94,32 @@ class ContactData extends React.Component {
     };
 
     render() {
+        const formInput = [];
+
+        for (let key in this.state.customerForm) {
+            formInput.push({
+                id: key,
+                config: this.state.customerForm[key]
+            });
+        }
+
         let form = (this.state.loading) ?
             <Spinner/> :
             <form onSubmit={this.saveOrderHandler}>
-                <div className={styles.form__name}>
-                    <label htmlFor="name">Name</label>
-                    <input type="text" id='name' name="name"
-                           onChange={(event) => this.submitFormHandler(event)}
-                           placeholder={"Name"}/>
-                </div>
-                <div className={styles.form__email}>
-                    <label htmlFor="email">Email</label>
-                    <input type="email" id='email' name="email"
-                           onChange={(event) => this.submitFormHandler(event)}
-                           placeholder={"Email"}/>
-                </div>
-                <p>Address</p>
-                <div className={styles.form__address}>
-                    <div className={styles.form__address__street}>
-                        <label htmlFor="street">Street</label>
-                        <input type="text" id='street' name="street"
-                               onChange={(event) => this.submitFormHandler(event)}
-                               placeholder={"Street"}/>
-                    </div>
-                    <div className={styles.form__address__postcode}>
-                        <label htmlFor="postcode">Postcode</label>
-                        <input type="text" id="postcode" name="postcode"
-                               onChange={(event) => this.submitFormHandler(event)}
-                               placeholder={"Post code"}/>
-                    </div>
-                </div>
-                <Button type="submit" btnType="success small">Submit</Button>
+                {
+                    formInput.map((item) => {
+                        return (
+                            <FormInput
+                                key={item.id}
+                                elementType={item.config.elementType}
+                                elementConfig={item.config.elementConfig}
+                                value={item.config.elementConfig.value}/>
+                        )
+                    })
+                }
+                <Button type="submit" btnType="success small"> Submit </Button>
             </form>;
+
         return (
             <div className={styles.form}>
                 <h3>Enter your contact details</h3>
