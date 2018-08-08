@@ -57,7 +57,7 @@ class ContactData extends React.Component {
     render() {
         let form = (this.state.loading) ?
             <Spinner/> :
-            <form>
+            <form onSubmit={this.saveOrderHandler}>
                 <div className={styles.form__name}>
                     <label htmlFor="name">Name</label>
                     <input type="text" id='name' name="name"
@@ -85,7 +85,7 @@ class ContactData extends React.Component {
                                placeholder={"Post code"}/>
                     </div>
                 </div>
-                <Button type="submit" btnType="success small" click={this.saveOrderHandler}>Submit</Button>
+                <Button type="submit" btnType="success small">Submit</Button>
             </form>;
         return (
             <div className={styles.form}>
