@@ -19,7 +19,7 @@ class Checkout extends React.Component {
             if (item[0] === 'price') {
                 price = item[1]
             } else {
-                ingredients[item[0]] = parseInt(item[1]);
+                ingredients[item[0]] = parseInt(item[1], 2);
             }
         }
         this.setState({ingredients, totalPrice: price});
