@@ -11,30 +11,43 @@ class ContactData extends React.Component {
             name: {
                 elementType: 'input',
                 elementConfig: {
+                    name: 'name',
                     type: 'text',
                     placeholder: 'Your Name'
+                },
+                validation: {
+                    required: true
                 },
                 value: ''
             },
             email: {
                 elementType: 'input',
                 elementConfig: {
+                    name: 'email',
                     type: 'email',
                     placeholder: 'Your Email'
+                },
+                validation: {
+                    required: true
                 },
                 value: ''
             },
             street: {
                 elementType: 'input',
                 elementConfig: {
+                    name: 'street',
                     type: 'text',
                     placeholder: 'Your Street'
+                },
+                validation: {
+                    required: true
                 },
                 value: ''
             },
             postcode: {
                 elementType: 'input',
                 elementConfig: {
+                    name: 'postcode',
                     type: 'text',
                     placeholder: 'Your Postcode'
                 },
@@ -49,29 +62,35 @@ class ContactData extends React.Component {
                         {value: 'cheapest', displayValue: 'Cheapest'}
                     ]
                 },
-                value: ''
+                value: 'fastest'
             }
         },
-        loading: false
+        loading: false,
+        submitForm: true
     };
 
     saveOrderHandler = (event) => {
         event.preventDefault();
-        console.log('customer: ', this.state.customerForm);
+        let customerData = {};
+
+        for (let value in this.state.customerForm) {
+            customerData[value] = this.state.customerForm[value].value
+        }
+
+        console.log('customer: ', customerData);
 
         const order = {
             ingredients: this.props.ingredients,
             totalPrice: this.props.totalPrice,
             customerForm: {
                 ...this.state.customerForm
-            },
-            deliveryMethod: 'fastest'
+            }
         };
 
         this.setState({loading: true});
 
         axiosInstance.post('/orders.json', order)
-            .then(response => {
+            .then(() => {
                 this.setState({
                     loading: false
                 });
@@ -84,9 +103,11 @@ class ContactData extends React.Component {
             });
     };
 
-    submitFormHandler = (event) => {
+    updateStateInputValues = (event, id) => {
         const newState = JSON.parse(JSON.stringify(this.state));
-        newState['customerForm'][event.target.name] = event.target.value;
+        if (event.target.value) {
+            newState['customerForm'][id]['value'] = event.target.value;
+        }
 
         this.setState({
             ...newState
@@ -95,8 +116,8 @@ class ContactData extends React.Component {
 
     render() {
         const formInput = [];
-
         for (let key in this.state.customerForm) {
+
             formInput.push({
                 id: key,
                 config: this.state.customerForm[key]
@@ -110,6 +131,7 @@ class ContactData extends React.Component {
                     formInput.map((item) => {
                         return (
                             <FormInput
+                                updateStateInputValues={(event) => this.updateStateInputValues(event, item.id)}
                                 key={item.id}
                                 elementType={item.config.elementType}
                                 elementConfig={item.config.elementConfig}
@@ -117,7 +139,7 @@ class ContactData extends React.Component {
                         )
                     })
                 }
-                <Button type="submit" btnType="success small"> Submit </Button>
+                <Button type="submit" btnType="success small" disabled={!this.state.submitForm}> Submit </Button>
             </form>;
 
         return (

@@ -6,11 +6,13 @@ const formInput = (props) => {
 
     switch (props.elementType) {
         case 'textarea':
-            inputField = <textarea {...props.elementConfig} value={props.value}/>;
+            inputField = <textarea {...props.elementConfig} value={props.value} onChange={(event) => props.updateStateInputValues(event)}/>;
             break;
         case 'select':
             inputField = (
-                <select>
+                <select
+                    value={props.value}
+                    onChange={(event) => props.updateStateInputValues(event)}>
                     {
                         props.elementConfig.options.map(option => {
                             return (
@@ -22,7 +24,10 @@ const formInput = (props) => {
             );
             break;
         default:
-            inputField = <input {...props.elementConfig} value={props.value}/>;
+            inputField = <input
+                {...props.elementConfig}
+                value={props.value}
+                onChange={(event) => props.updateStateInputValues(event)}/>;
     }
 
     return (
