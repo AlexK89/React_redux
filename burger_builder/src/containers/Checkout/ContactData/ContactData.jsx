@@ -16,7 +16,8 @@ class ContactData extends React.Component {
                     placeholder: 'Your Name'
                 },
                 validation: {
-                    required: true
+                    required: true,
+                    valid: false
                 },
                 value: ''
             },
@@ -28,7 +29,8 @@ class ContactData extends React.Component {
                     placeholder: 'Your Email'
                 },
                 validation: {
-                    required: true
+                    required: true,
+                    valid: false
                 },
                 value: ''
             },
@@ -40,7 +42,8 @@ class ContactData extends React.Component {
                     placeholder: 'Your Street'
                 },
                 validation: {
-                    required: true
+                    required: true,
+                    valid: false
                 },
                 value: ''
             },
@@ -50,6 +53,10 @@ class ContactData extends React.Component {
                     name: 'postcode',
                     type: 'text',
                     placeholder: 'Your Postcode'
+                },
+                validation: {
+                    required: true,
+                    valid: false
                 },
                 value: ''
             },
@@ -62,11 +69,23 @@ class ContactData extends React.Component {
                         {value: 'cheapest', displayValue: 'Cheapest'}
                     ]
                 },
+                validation: {
+                    required: false,
+                    valid: true
+                },
                 value: 'fastest'
             }
         },
         loading: false,
-        submitForm: true
+        allowSubmitForm: false
+    };
+
+    checkValidity = (value, rules) => {
+        let isValid = false;
+
+        (rules.required) && (isValid = value.trim() !== '');
+
+        return isValid;
     };
 
     saveOrderHandler = (event) => {
@@ -109,15 +128,27 @@ class ContactData extends React.Component {
             newState['customerForm'][id]['value'] = event.target.value;
         }
 
+        newState['customerForm'][id].validation.valid = this.checkValidity(event.target.value, newState['customerForm'][id].validation);
         this.setState({
             ...newState
-        })
+        }, () => {
+            this.allowSubmitForm();
+        });
+    };
+
+    allowSubmitForm = () => {
+      for (let input in this.state.customerForm) {
+          if (!this.state.customerForm[input].validation.valid) {
+              return this.setState({allowSubmitForm: false});
+          } else {
+              this.setState({allowSubmitForm: true});
+          }
+      }
     };
 
     render() {
         const formInput = [];
         for (let key in this.state.customerForm) {
-
             formInput.push({
                 id: key,
                 config: this.state.customerForm[key]
@@ -139,7 +170,7 @@ class ContactData extends React.Component {
                         )
                     })
                 }
-                <Button type="submit" btnType="success small" disabled={!this.state.submitForm}> Submit </Button>
+                <Button type="submit" btnType="success small" disabled={!this.state.allowSubmitForm}> Submit </Button>
             </form>;
 
         return (
