@@ -5,25 +5,13 @@ import CounterControl from '../../components/CounterControl/CounterControl';
 import CounterOutput from '../../components/CounterOutput/CounterOutput';
 
 class Counter extends Component {
-
-    counterChangedHandler = ( action, value ) => {
-        switch ( action ) {
-            case 'inc':
-                this.setState( ( prevState ) => { return { counter: prevState.counter + 1 } } )
-                break;
-            case 'dec':
-                this.setState( ( prevState ) => { return { counter: prevState.counter - 1 } } )
-                break;
-            case 'add':
-                this.setState( ( prevState ) => { return { counter: prevState.counter + value } } )
-                break;
-            case 'sub':
-                this.setState( ( prevState ) => { return { counter: prevState.counter - value } } )
-                break;
-        }
-    }
-
     render () {
+        let results = (
+            <ul>
+                {this.props.results.map((item) => <li key={item.id} onClick={() => this.props.deleteResult(item.id)}>{item.value}</li>)}
+            </ul>
+        );
+
         return (
             <div>
                 <CounterOutput value={this.props.counter} />
@@ -32,6 +20,9 @@ class Counter extends Component {
                 <CounterControl label="Add 5" clicked={() => this.props.addCounter(5)}  />
                 <CounterControl label="Add 10" clicked={() => this.props.addCounter(10)}  />
                 <CounterControl label="Subtract 10" clicked={() => this.props.subtractCounter(10)}  />
+                <hr/>
+                <button onClick={this.props.storeResult}>Store result</button>
+                {results}
             </div>
         );
     }
@@ -51,6 +42,8 @@ const mapDispatchToProps = dispatch => {
         onDecrementCounter: () => dispatch({type: 'DEC_COUNTER'}),
         addCounter: (value) => dispatch({type: 'ADD_COUNTER', value: value}),
         subtractCounter: (value) => dispatch({type: 'SUBTRACT_COUNTER', value: value}),
+        storeResult: () => {dispatch({type: 'STORE_RESULT'})},
+        deleteResult: (id) => {dispatch({type: 'DELETE_RESULT', id: id})}
     }
 };
 
