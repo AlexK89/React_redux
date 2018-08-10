@@ -26,26 +26,31 @@ class Counter extends Component {
     render () {
         return (
             <div>
-                <CounterOutput value={this.props.ctr} />
+                <CounterOutput value={this.props.counter} />
                 <CounterControl label="Increment" clicked={this.props.onIncrementCounter} />
                 <CounterControl label="Decrement" clicked={this.props.onDecrementCounter}  />
-                <CounterControl label="Add 5" clicked={() => this.counterChangedHandler( 'add', 5 )}  />
-                <CounterControl label="Subtract 5" clicked={() => this.counterChangedHandler( 'sub', 5 )}  />
+                <CounterControl label="Add 5" clicked={() => this.props.addCounter(5)}  />
+                <CounterControl label="Add 10" clicked={() => this.props.addCounter(10)}  />
+                <CounterControl label="Subtract 10" clicked={() => this.props.subtractCounter(10)}  />
             </div>
         );
     }
 }
 
+// Make global state available in props
 const mapStateToProps = state => {
   return {
-      ctr: state.counter
+      ...state
   }
 };
 
+// Send changed values to global state
 const mapDispatchToProps = dispatch => {
     return {
         onIncrementCounter: () => dispatch({type: 'INC_COUNTER'}),
         onDecrementCounter: () => dispatch({type: 'DEC_COUNTER'}),
+        addCounter: (value) => dispatch({type: 'ADD_COUNTER', value: value}),
+        subtractCounter: (value) => dispatch({type: 'SUBTRACT_COUNTER', value: value}),
     }
 };
 
