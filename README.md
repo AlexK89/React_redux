@@ -37,3 +37,9 @@ react-validation package: https://www.npmjs.com/package/react-validation
 formsy-react package: https://github.com/formsy/formsy-react/
 
 Immutable Update Patterns on reduxjs.org - https://redux.js.org/recipes/structuringreducers/immutableupdatepatterns
+
+Redux Docs - http://redux.js.org/
+Core Concepts - http://redux.js.org/docs/introduction/CoreConcepts.html
+Actions - http://redux.js.org/docs/basics/Actions.html
+Reducers - http://redux.js.org/docs/basics/Reducers.html
+Redux FAQs - http://redux.js.org/docs/FAQ.html
