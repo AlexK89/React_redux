@@ -2,6 +2,7 @@ import React from 'react';
 import Aux from '../../hoc/Aux.jsx';
 import withErrorHandler from '../../hoc/withErrorHandler/WithErrorHandler.jsx';
 import Burger from "../../components/Burger/Burger.jsx";
+import { connect } from 'react-redux';
 import Spinner from '../../components/UI/Spinner/Spinner.jsx';
 import axiosInstance from '../../hoc/axios-orders';
 import BurgerControls from '../../components/Burger/BuildControls/BuildControls.jsx';
@@ -154,4 +155,16 @@ class BurgerBuilder extends React.Component {
     }
 }
 
-export default withErrorHandler(BurgerBuilder, axiosInstance);
+const mapStateToProps = state => {
+    return {
+        ...state
+    }
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(BurgerBuilder, axiosInstance));
