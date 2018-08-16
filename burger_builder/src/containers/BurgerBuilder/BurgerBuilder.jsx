@@ -3,6 +3,7 @@ import Aux from '../../hoc/Aux.jsx';
 import withErrorHandler from '../../hoc/withErrorHandler/WithErrorHandler.jsx';
 import Burger from "../../components/Burger/Burger.jsx";
 import { connect } from 'react-redux';
+import * as actions from '../../store/actions';
 import Spinner from '../../components/UI/Spinner/Spinner.jsx';
 import axiosInstance from '../../hoc/axios-orders';
 import BurgerControls from '../../components/Burger/BuildControls/BuildControls.jsx';
@@ -110,14 +111,14 @@ class BurgerBuilder extends React.Component {
         let orderSummary = <Spinner/>;
 
         // Checking do we have ingredients loaded
-        if (this.state.ingredients) {
+        if (this.props.ingredients) {
             burgerControls = (
                 <Aux>
-                    <Burger ingredients={this.state.ingredients}/>
+                    <Burger ingredients={this.props.ingredients}/>
                     <BurgerControls
                         ordered={this.parchesHandler}
                         totalPrice={this.state.totalPrice}
-                        ingredients={this.state.ingredients}
+                        ingredients={this.props.ingredients}
                         purchasable={this.state.purchasable}
                         addIngredient={this.addIngredientHandler}
                         removeIngredient={this.removeIngredientHandler}
@@ -130,7 +131,7 @@ class BurgerBuilder extends React.Component {
                     totalPrice={this.state.totalPrice}
                     modalContinue={this.parchesContinueHandler}
                     modalClosed={this.parchesCancelHandler}
-                    ingredients={this.state.ingredients}/>
+                    ingredients={this.props.ingredients}/>
             );
 
         }
@@ -163,7 +164,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-
+        onIngredientAdded: (ingredient) => dispatch({type: actions.ADD_INGREDIENT, ingredientName: ingredient}),
+        onIngredientRemove: (ingredient) => dispatch({type: actions.REMOVE_INGREDIENT, ingredientName: ingredient}),
     }
 };
 
