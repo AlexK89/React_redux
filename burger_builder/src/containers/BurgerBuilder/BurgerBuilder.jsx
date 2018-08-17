@@ -120,8 +120,8 @@ class BurgerBuilder extends React.Component {
                         totalPrice={this.state.totalPrice}
                         ingredients={this.props.ingredients}
                         purchasable={this.state.purchasable}
-                        addIngredient={this.addIngredientHandler}
-                        removeIngredient={this.removeIngredientHandler}
+                        addIngredient={this.props.onIngredientAdded}
+                        removeIngredient={this.props.onIngredientRemoved}
                     />
                 </Aux>
             );
@@ -165,7 +165,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         onIngredientAdded: (ingredient) => dispatch({type: actions.ADD_INGREDIENT, ingredientName: ingredient}),
-        onIngredientRemove: (ingredient) => dispatch({type: actions.REMOVE_INGREDIENT, ingredientName: ingredient}),
+        onIngredientRemoved: (ingredient) => dispatch({type: actions.REMOVE_INGREDIENT, ingredientName: ingredient}),
     }
 };
 
