@@ -76,7 +76,7 @@ class BurgerBuilder extends React.Component {
         //     ...this.state.ingredients
         // };
         const sum = Object.values((this.props.ingredients)).reduce((a, b) => a + b, 0);
-        
+
         return sum > 0;
     };
 
@@ -93,17 +93,18 @@ class BurgerBuilder extends React.Component {
     // Continue purchase list
     parchesContinueHandler = () => {
         // Pass ingredients using URL
-        let queryParams = [];
-
-        for (let item in this.state.ingredients) {
-            queryParams.push(`${encodeURIComponent(item)}=${encodeURIComponent(this.state.ingredients[item])}`);
-        }
-        queryParams.push(`price=${this.state.totalPrice}`);
-        let queryString = queryParams.join('&');
-        this.props.history.push({
-            pathname:'/checkout',
-            search: `?${queryString}`
-        });
+        // let queryParams = [];
+        //
+        // for (let item in this.state.ingredients) {
+        //     queryParams.push(`${encodeURIComponent(item)}=${encodeURIComponent(this.state.ingredients[item])}`);
+        // }
+        // queryParams.push(`price=${this.state.totalPrice}`);
+        // let queryString = queryParams.join('&');
+        // this.props.history.push({
+        //     pathname:'/checkout',
+        //     search: `?${queryString}`
+        // });
+        this.props.history.push('/checkout');
     };
 
     render() {

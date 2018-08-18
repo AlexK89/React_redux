@@ -4,6 +4,7 @@ import Button from '../../../components/UI/Button/Button.jsx';
 import Spinner from '../../../components/UI/Spinner/Spinner.jsx';
 import FormInput from '../../../components/Order/Form/FormInput.jsx';
 import styles from './ContactData.scss';
+import { connect } from 'react-redux';
 
 class ContactData extends React.Component {
     state = {
@@ -81,9 +82,9 @@ class ContactData extends React.Component {
     };
 
     checkValidity = (value, rules) => {
-        let isValid = false;
+        let isValid = true;
 
-        (rules.required) && (isValid = value.trim() !== '');
+        (rules.required) ? (isValid = value.trim() !== '') : false;
 
         return isValid;
     };
@@ -138,6 +139,7 @@ class ContactData extends React.Component {
 
     allowSubmitForm = () => {
       for (let input in this.state.customerForm) {
+          console.log(`${input}: ${this.state.customerForm[input].validation.valid}`);
           if (!this.state.customerForm[input].validation.valid) {
               return this.setState({allowSubmitForm: false});
           } else {
@@ -182,4 +184,10 @@ class ContactData extends React.Component {
     }
 }
 
-export default ContactData;
+const mapStateToProps = state => {
+  return {
+      ...state
+  }
+};
+
+export default connect(mapStateToProps)(ContactData);
