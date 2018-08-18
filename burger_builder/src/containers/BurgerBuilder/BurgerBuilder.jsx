@@ -10,10 +10,19 @@ import BurgerControls from '../../components/Burger/BuildControls/BuildControls.
 import Modal from '../../components/UI/Modal/Modal.jsx';
 import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary.jsx';
 
+
+// const INGREDIANT_PRICES = {
+//     salad: 0.3,
+//     bacon: 0.6,
+//     cheese: 0.5,
+//     meat: 1.7,
+// };
+
 class BurgerBuilder extends React.Component {
     state = {
-        ingredients: null,
-        purchasable: false,
+        // ingredients: null,
+        // totalPrice: 4,
+        // purchasable: false,
         purchasing: false,
         loading: false,
     };
@@ -30,14 +39,45 @@ class BurgerBuilder extends React.Component {
             })
     }
 
+    // Change ingredients in your burger (Add/Remove)
+    // changeIngredientsQuantity = (type, count) => {
+    //     const updatedIngredients = {
+    //         ...this.state.ingredients
+    //     };
+    //
+    //     updatedIngredients[type] += count;
+    //
+    //     const priceChange = INGREDIANT_PRICES[type];
+    //     const newPrice = (parseFloat(this.state.totalPrice) + priceChange * count).toFixed(2);
+    //
+    //     this.setState({
+    //         totalPrice: newPrice,
+    //         ingredients: updatedIngredients
+    //     }, () => {
+    //         this.updatePurchaseState();
+    //     });
+    // };
+
+    // Add ingredient to burger
+    // addIngredientHandler = (type) => {
+    //     this.changeIngredientsQuantity(type, 1);
+    // };
+
+    // Remove ingredient from burger
+    // removeIngredientHandler = (type) => {
+    //     if (this.state.ingredients[type] > 0) {
+    //         this.changeIngredientsQuantity(type, -1);
+    //     }
+    // };
+
     // Check for enough ingredients to make a purchase
     updatePurchaseState = () => {
-        const ingredients = {
-            ...this.state.ingredients
-        };
-        const sum = Object.values(ingredients).reduce((a, b) => a + b, 0);
-
-        this.setState({purchasable: sum > 0})
+        // const ingredients = {
+        //     ...this.state.ingredients
+        // };
+        const sum = Object.values((this.props.ingredients)).reduce((a, b) => a + b, 0);
+        
+        return sum > 0;
     };
 
     // Show purchase list
@@ -79,7 +119,7 @@ class BurgerBuilder extends React.Component {
                         ordered={this.parchesHandler}
                         totalPrice={this.props.totalPrice}
                         ingredients={this.props.ingredients}
-                        purchasable={this.state.purchasable}
+                        purchasable={this.updatePurchaseState()}
                         addIngredient={this.props.onIngredientAdded}
                         removeIngredient={this.props.onIngredientRemoved}
                     />
