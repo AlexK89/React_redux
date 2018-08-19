@@ -32,9 +32,10 @@ export const substrartCounter = (value) => {
 };
 
 export const storeResult = (value) => {
-    return {
-        type: STORE_RESULT,
-        counter: value
+    return dispatch => {
+        setTimeout(() => {
+            dispatch({type: STORE_RESULT, counter: value});
+        }, 2000);
     }
 };
 

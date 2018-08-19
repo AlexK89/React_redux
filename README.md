@@ -43,3 +43,7 @@ Core Concepts - http://redux.js.org/docs/introduction/CoreConcepts.html
 Actions - http://redux.js.org/docs/basics/Actions.html
 Reducers - http://redux.js.org/docs/basics/Reducers.html
 Redux FAQs - http://redux.js.org/docs/FAQ.html
+
+REDUX
+Dev tool for redux - https://github.com/zalmoxisus/redux-devtools-extension
+Thunk middleware for Redux - https://github.com/reduxjs/redux-thunk
