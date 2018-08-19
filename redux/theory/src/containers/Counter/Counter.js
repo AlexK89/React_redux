@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as actions from '../../store/actions';
+import * as actions from '../../store/actions/actions';
 
 import CounterControl from '../../components/CounterControl/CounterControl';
 import CounterOutput from '../../components/CounterOutput/CounterOutput';
@@ -39,12 +39,12 @@ const mapStateToProps = state => {
 // Send changed values to global state
 const mapDispatchToProps = dispatch => {
     return {
-        onIncrementCounter: () => dispatch({type: actions.INC_COUNTER}),
-        onDecrementCounter: () => dispatch({type: actions.DEC_COUNTER}),
-        addCounter: (value) => dispatch({type: actions.ADD_COUNTER, value: value}),
-        subtractCounter: (value) => dispatch({type: actions.SUBTRACT_COUNTER, value: value}),
-        storeResult: (value) => {dispatch({type: actions.STORE_RESULT, counter: value})},
-        deleteResult: (id) => {dispatch({type: actions.DELETE_RESULT, id: id})}
+        onIncrementCounter: () => dispatch(actions.incCounter()),
+        onDecrementCounter: () => dispatch(actions.decCounter()),
+        addCounter: (value) => dispatch(actions.addCounter(value)),
+        subtractCounter: (value) => dispatch(actions.substrartCounter(value)),
+        storeResult: (value) => {dispatch(actions.storeResult(value))},
+        deleteResult: (id) => {dispatch(actions.deleteResult(id))}
     }
 };
 
