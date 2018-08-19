@@ -139,7 +139,6 @@ class ContactData extends React.Component {
 
     allowSubmitForm = () => {
       for (let input in this.state.customerForm) {
-          console.log(`${input}: ${this.state.customerForm[input].validation.valid}`);
           if (!this.state.customerForm[input].validation.valid) {
               return this.setState({allowSubmitForm: false});
           } else {

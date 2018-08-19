@@ -1,6 +1,4 @@
 import * as actions from '../actions';
-import {ADD_INGREDIENT} from "../actions";
-import {REMOVE_INGREDIENT} from "../actions";
 
 const initialState = {
     ingredients: {
@@ -21,7 +19,7 @@ const INGREDIANT_PRICES = {
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
-        case ADD_INGREDIENT:
+        case actions.ADD_INGREDIENT:
             return {
                 ...state,
                 ingredients: {
@@ -30,7 +28,7 @@ const reducer = (state = initialState, action) => {
                 },
                 totalPrice: (parseFloat(state.totalPrice) + INGREDIANT_PRICES[action.ingredientName]).toFixed(2)
             };
-        case REMOVE_INGREDIENT:
+        case actions.REMOVE_INGREDIENT:
             if (state.ingredients[action.ingredientName]) {
                 return {
                     ...state,
