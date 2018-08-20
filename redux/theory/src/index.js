@@ -20,7 +20,6 @@ const logger = store => {
         };
     }
 };
-
 const rootReducer = combineReducers({
     globalCounter: counterReducer,
     globalResult: resultsReducer
