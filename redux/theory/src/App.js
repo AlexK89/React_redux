@@ -14,5 +14,3 @@ class App extends Component {
 }
 
 export default App;
-
-// Testing new machine
