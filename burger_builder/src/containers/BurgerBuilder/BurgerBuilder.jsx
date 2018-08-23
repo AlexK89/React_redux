@@ -3,7 +3,7 @@ import Aux from '../../hoc/Aux.jsx';
 import withErrorHandler from '../../hoc/withErrorHandler/WithErrorHandler.jsx';
 import Burger from "../../components/Burger/Burger.jsx";
 import { connect } from 'react-redux';
-import * as actions from '../../store/actions';
+import * as burgerBuilderActions from '../../store/actions/burgerBuilder';
 import Spinner from '../../components/UI/Spinner/Spinner.jsx';
 import axiosInstance from '../../hoc/axios-orders';
 import BurgerControls from '../../components/Burger/BuildControls/BuildControls.jsx';
@@ -165,8 +165,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onIngredientAdded: (ingredient) => dispatch({type: actions.ADD_INGREDIENT, ingredientName: ingredient}),
-        onIngredientRemoved: (ingredient) => dispatch({type: actions.REMOVE_INGREDIENT, ingredientName: ingredient}),
+        onIngredientAdded: (ingredient) => dispatch(burgerBuilderActions.addIngredient(ingredient)),
+        onIngredientRemoved: (ingredient) => dispatch(burgerBuilderActions.removeIngredient(ingredient)),
     }
 };
 
