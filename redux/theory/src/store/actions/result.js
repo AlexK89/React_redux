@@ -5,7 +5,8 @@ export const storeResult = (value) => {
         // getState - is a method which returns you a current state
         console.log('getState: ', getState());
         setTimeout(() => {
-            const oldCounter = getState().counter;
+            const oldCounter = getState().globalCounter.counter;
+            console.log('Old Counter: ', oldCounter);
             dispatch({type: result.STORE_RESULT, counter: value});
         }, 2000);
     }
