@@ -27,17 +27,17 @@ class BurgerBuilder extends React.Component {
         loading: false,
     };
 
-    componentDidMount(prevState, nextState) {
-        axiosInstance.get('/ingredients.json')
-            .then(response => {
-                    console.log(response);
-                    this.setState({ingredients: response.data})
-                }
-            )
-            .catch(error => {
-                console.log(error);
-            })
-    }
+    // componentDidMount(prevState, nextState) {
+        // axiosInstance.get('/ingredients.json')
+        //     .then(response => {
+        //             console.log(response);
+        //             this.setState({ingredients: response.data})
+        //         }
+        //     )
+        //     .catch(error => {
+        //         console.log(error);
+        //     })
+    // }
 
     // Change ingredients in your burger (Add/Remove)
     // changeIngredientsQuantity = (type, count) => {

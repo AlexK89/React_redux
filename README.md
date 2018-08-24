@@ -47,3 +47,4 @@ Redux FAQs - http://redux.js.org/docs/FAQ.html
 REDUX
 Dev tool for redux - https://github.com/zalmoxisus/redux-devtools-extension
 Thunk middleware for Redux - https://github.com/reduxjs/redux-thunk
+Async Actions - https://redux.js.org/advanced/asyncactions
