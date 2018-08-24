@@ -3,7 +3,7 @@ import Aux from '../../hoc/Aux.jsx';
 import withErrorHandler from '../../hoc/withErrorHandler/WithErrorHandler.jsx';
 import Burger from "../../components/Burger/Burger.jsx";
 import { connect } from 'react-redux';
-import * as burgerBuilderActions from '../../store/actions/burgerBuilder';
+import * as burgerBuilderActions from '../../store/actions/index';
 import Spinner from '../../components/UI/Spinner/Spinner.jsx';
 import axiosInstance from '../../hoc/axios-orders';
 import BurgerControls from '../../components/Burger/BuildControls/BuildControls.jsx';
