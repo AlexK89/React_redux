@@ -10,7 +10,6 @@ import BurgerControls from '../../components/Burger/BuildControls/BuildControls.
 import Modal from '../../components/UI/Modal/Modal.jsx';
 import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary.jsx';
 
-
 // const INGREDIANT_PRICES = {
 //     salad: 0.3,
 //     bacon: 0.6,
