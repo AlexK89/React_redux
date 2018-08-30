@@ -2,7 +2,7 @@ import React from 'react';
 import Aux from '../../hoc/Aux.jsx';
 import withErrorHandler from '../../hoc/withErrorHandler/WithErrorHandler.jsx';
 import Burger from "../../components/Burger/Burger.jsx";
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import * as burgerBuilderActions from '../../store/actions/index';
 import Spinner from '../../components/UI/Spinner/Spinner.jsx';
 import axiosInstance from '../../hoc/axios-orders';
@@ -26,17 +26,9 @@ class BurgerBuilder extends React.Component {
         loading: false,
     };
 
-    // componentDidMount(prevState, nextState) {
-        // axiosInstance.get('/ingredients.json')
-        //     .then(response => {
-        //             console.log(response);
-        //             this.setState({ingredients: response.data})
-        //         }
-        //     )
-        //     .catch(error => {
-        //         console.log(error);
-        //     })
-    // }
+    componentDidMount() {
+        this.props.onInitIngredients();
+    }
 
     // Change ingredients in your burger (Add/Remove)
     // changeIngredientsQuantity = (type, count) => {
@@ -109,12 +101,14 @@ class BurgerBuilder extends React.Component {
     render() {
         let burgerControls = <Spinner/>;
         let orderSummary = <Spinner/>;
+        let burger = this.props.error ? <h1>Ingredients can't be loaded</h1> :
+            <Burger ingredients={this.props.ingredients}/>;
 
         // Checking do we have ingredients loaded
         if (this.props.ingredients) {
             burgerControls = (
                 <Aux>
-                    <Burger ingredients={this.props.ingredients}/>
+                    {burger}
                     <BurgerControls
                         ordered={this.parchesHandler}
                         totalPrice={this.props.totalPrice}
@@ -166,6 +160,7 @@ const mapDispatchToProps = dispatch => {
     return {
         onIngredientAdded: (ingredient) => dispatch(burgerBuilderActions.addIngredient(ingredient)),
         onIngredientRemoved: (ingredient) => dispatch(burgerBuilderActions.removeIngredient(ingredient)),
+        onInitIngredients: () => dispatch(burgerBuilderActions.initIngredients()),
     }
 };
 
