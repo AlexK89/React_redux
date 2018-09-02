@@ -1,0 +1,13 @@
+.list {
+    padding-left: 15px;
+}
+
+.list_item {
+    padding: 0.5em;
+    cursor: pointer;
+    transition: .3s;
+}
+.list_item:hover {
+    background-color: #246fb6;
+    color: #fff;
+}
