@@ -7,10 +7,7 @@ open http://localhost:3000
 ```
 
 ### Task
-
-To test your programming skill, we'd like you to have a go at a small task.
-
-We have provided you with four JSON files (in /data). These files provide you with a table of contents (sections.json), questions (/[\d]+(,[\d]+)+/.json), and a list of view states (states.json). Your task is to use this data to produce a content view page.
+You have four JSON files (in /data). These files provide you with a table of contents (sections.json), questions (/[\d]+(,[\d]+)+/.json), and a list of view states (states.json). Your task is to use this data to produce a content view page.
 
 You should start with loading data from all four files. The view should display sections and questions altogether and the content tree hierarchy should be easy to read. All questions should remain collapsed unless their tocId is on expanded list.
 
