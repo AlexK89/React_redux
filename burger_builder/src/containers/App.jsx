@@ -16,7 +16,6 @@ class App extends React.Component {
                         <Route path="/orders" component={Orders}/>
                         <Route path="/" component={BurgerBuilder}/>
                     </Switch>
-
                 </Layout>
             </div>
         );
